@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blogs - Akeanti</title>
-    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <title>Sponsors - Akeanti</title>
+    <link rel="icon" href="pictures/web.ico" type="image/x-icon">
     <style>
         body {
             margin: 0;
@@ -65,50 +65,17 @@
             text-decoration: underline;
         }
 
-        .sidebar {
-            width: 200px;
-            background-color: rgba(0, 0, 0, 0.7);
-            position: fixed;
-            top: 60px; /* Below the top navigation */
-            left: 0;
-            bottom: 0;
-            padding: 20px;
-            overflow-y: auto;
-            z-index: 999; /* Ensure it's above other content */
+        a {
+            color: #23a6d5;
         }
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            display: block;
-            padding: 5px 0;
-        }
-
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .sidebar ul li ul {
-            list-style: none;
-            padding-left: 15px;
-            margin-top: 5px;
+        a:hover {
+            color: #00d9ff;
         }
 
         .content {
             padding: 20px;
             margin-top: 60px; /* Adjust based on header height */
-            margin-left: 220px; /* Adjust for sidebar width */
             text-align: center;
         }
 
@@ -116,6 +83,49 @@
             margin-top: 80px; /* Margin for spacing from the fixed nav */
             font-size: 2em;
             color: #fff;
+        }
+
+        .sponsors-section {
+            margin: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .sponsors-section h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .sponsors {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .sponsor {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        .sponsor img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .sponsor a {
+            color: #23a6d5;
+            text-decoration: none;
+        }
+
+        .sponsor a:hover {
+            color: #00d9ff;
         }
 
         /* Shooting Stars */
@@ -163,6 +173,7 @@
             overflow: hidden;
             z-index: 0; /* Make sure stars stay behind content */
         }
+
     </style>
 </head>
 <body>
@@ -180,34 +191,27 @@
             <li><a href="sponsors.html">Sponsors</a></li>
         </ul>
     </nav>
-    <div class="sidebar">
-        <ul>
-            <li><a href="#">Category 1</a>
-                <ul>
-                    <li><a href="#">Subcategory 1.1</a></li>
-                    <li><a href="#">Subcategory 1.2</a></li>
-                    <li><a href="#">Subcategory 1.3</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Category 2</a>
-                <ul>
-                    <li><a href="#">Subcategory 2.1</a></li>
-                    <li><a href="#">Subcategory 2.2</a></li>
-                    <li><a href="#">Subcategory 2.3</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Category 3</a>
-                <ul>
-                    <li><a href="#">Subcategory 3.1</a></li>
-                    <li><a href="#">Subcategory 3.2</a></li>
-                    <li><a href="#">Subcategory 3.3</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
     <div class="content">
-        <h1>Blogs</h1>
-        <p>Welcome to the Blogs page! Content will be added here.</p>
+        <h1>Our Sponsors</h1>
+        <div class="sponsors-section">
+            <h2>Thank You to Our Sponsors <br />
+                I love you guys.
+            </h2>
+            <div class="sponsors">
+                <div class="sponsor">
+                    <img src="pitures/akeanti.png" alt="GitHub Sponsors">
+                    <p><a href="https://github.com/sponsors/akeanti">Sponsor 1</a></p>
+                </div>
+                <div class="sponsor">
+                    <img src="pitures/akeanti.png" alt="Ko-fi">
+                    <p><a href="https://ko-fi.com/akeanti">Sponsor 2</a></p>
+                </div>
+                <div class="sponsor">
+                    <img src="pitures/akeanti.png" alt="PayPal">
+                    <p><a href="https://paypal.me/akeanti">Sponsor 3</a></p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Shooting Stars Container -->
