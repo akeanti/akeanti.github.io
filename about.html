@@ -4,131 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Akeanti</title>
-    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <link rel="icon" href="pictures/web.ico" type="image/x-icon">
     <style>
         body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    background: #000;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
-    scroll-behavior: smooth;
-}
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background: #000;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            scroll-behavior: smooth;
+        }
 
-nav {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-    height: 60px; /* Match height to the index file */
-}
+        nav {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            height: 60px;
+        }
 
-nav .logo {
-    margin-right: 20px; /* Space between logo and menu */
-    display: flex;
-    align-items: center;
-}
+        nav .logo {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
 
-nav .logo img {
-    height: 40px; /* Ensure logo size */
-}
+        nav .logo img {
+            height: 40px;
+        }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-}
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
 
-nav ul li {
-    margin: 0 15px;
-}
+        nav ul li {
+            margin: 0 15px;
+        }
 
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    display: flex;
-    align-items: center; /* Center text vertically */
-    height: 40px; /* Ensure link height matches logo */
-}
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
 
-nav ul li a:hover {
-    text-decoration: underline;
-}
-a {
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        a {
             color: #23a6d5;
         }
 
         a:hover {
             color: #00d9ff;
         }
-.content {
-    padding: 20px;
-    margin-top: 60px; /* Adjust based on header height */
-    text-align: center;
-}
 
-h1 {
-    margin-top: 80px; /* Margin for spacing from the fixed nav */
-    font-size: 2em;
-    color: #fff;
-}
+        .content {
+            padding: 20px;
+            margin-top: 60px;
+        }
 
-/* Shooting Stars */
-.star {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
-    animation: shoot linear infinite;
-    transition: box-shadow 0.5s;
-}
+        .about-container {
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center; /* Center items vertically */
+            gap: 20px; /* Space between image and text */
+        }
 
-@keyframes shoot {
-    from {
-        transform: translateY(0) translateX(0);
-        opacity: 1;
-        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
-    }
-    to {
-        transform: translateY(-1000px) translateX(1000px);
-        opacity: 0;
-        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    }
-}
+        .about-container img {
+            border-radius: 10px;
+            max-width: 300px;
+            max-height: 300px;
+            object-fit: cover;
+        }
 
-@keyframes moveStar {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    100% {
-        transform: translateY(calc(var(--y) * 1px)) translateX(calc(var(--x) * 1px));
-    }
-}
+        .about-container div {
+            max-width: 600px;
+            text-align: left;
+        }
 
-/* Stars Container */
-#stars-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0; /* Make sure stars stay behind content */
-}
+        .about-container h2 {
+            color: #fff;
+            margin-top: 0;
+            font-size: 1.5em;
+            border-bottom: 2px solid #23a6d5;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
 
+        .about-container p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Shooting Stars */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
+            animation: shoot linear infinite;
+            transition: box-shadow 0.5s;
+        }
+
+        @keyframes shoot {
+            from {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+                box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
+            }
+            to {
+                transform: translateY(-1000px) translateX(1000px);
+                opacity: 0;
+                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+        @keyframes moveStar {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                transform: translateY(calc(var(--y) * 1px)) translateX(calc(var(--x) * 1px));
+            }
+        }
+
+        /* Stars Container */
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
     </style>
 </head>
 <body>
@@ -147,8 +186,17 @@ h1 {
         </ul>
     </nav>
     <div class="content">
-        <h1>About Me</h1>
-        <p>Welcome to the About Me page! Content will be added here.</p>
+        <div class="about-container">
+            <img src="pitures/akeanti.png" alt="Profile Picture">
+            <div>
+                <h2>About Me</h2>
+                <p>Hi, I'm an 18-year-old gaming enthusiast and full stack developer. I run several popular Discord servers and have a wealth of experience in community management. I'm passionate about cats and bring a touch of feline charm to my digital world. I have a solid background in Arduino, Linux, Arch, TypeScript, and Vencord development, among other technologies.</p>
+                <h2>Discord Experience</h2>
+                <p>As a seasoned Discord server owner, I've grown my skills in bot development to enhance user engagement and automate tasks. I have experience moderating and creating new servers, and I'm adept at setting up anything for people who need help.</p>
+                <h2>Projects</h2>
+                <p>I'm currently focused on a open source dev project, leveraging Node.js and Discord bot development.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Shooting Stars Container -->
@@ -163,7 +211,7 @@ h1 {
             star.className = 'star';
             star.style.top = `${Math.random() * 100}vh`;
             star.style.left = `${Math.random() * 100}vw`;
-            star.style.animationDuration = `${Math.random() * 5 + 5}s`; // Faster movement
+            star.style.animationDuration = `${Math.random() * 5 + 5}s`;
             star.style.animationDelay = `${Math.random() * 10}s`;
             starsContainer.appendChild(star);
         }
@@ -171,11 +219,11 @@ h1 {
         document.addEventListener('mousemove', (e) => {
             const stars = document.querySelectorAll('.star');
             stars.forEach(star => {
-                const speedMultiplier = 10; // Increased sensitivity to mouse movement
+                const speedMultiplier = 10;
                 star.style.setProperty('--x', (e.clientX - window.innerWidth / 2) / (20 / speedMultiplier));
                 star.style.setProperty('--y', (e.clientY - window.innerHeight / 2) / (20 / speedMultiplier));
                 star.style.animationName = 'shoot, moveStar';
-                star.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.8)`; // Enhanced trail effect
+                star.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.8)`;
             });
         });
     </script>
