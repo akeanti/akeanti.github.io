@@ -27,17 +27,17 @@
             display: flex;
             align-items: center;
             z-index: 1000;
-            height: 60px; /* Match height to the index file */
+            height: 60px;
         }
 
         nav .logo {
-            margin-right: 20px; /* Space between logo and menu */
+            margin-right: 20px;
             display: flex;
             align-items: center;
         }
 
         nav .logo img {
-            height: 40px; /* Ensure logo size */
+            height: 40px;
         }
 
         nav ul {
@@ -57,8 +57,8 @@
             color: white;
             font-weight: bold;
             display: flex;
-            align-items: center; /* Center text vertically */
-            height: 40px; /* Ensure link height matches logo */
+            align-items: center;
+            height: 40px;
         }
 
         nav ul li a:hover {
@@ -69,12 +69,12 @@
             width: 200px;
             background-color: rgba(0, 0, 0, 0.7);
             position: fixed;
-            top: 60px; /* Below the top navigation */
+            top: 60px;
             left: 0;
             bottom: 0;
             padding: 20px;
             overflow-y: auto;
-            z-index: 999; /* Ensure it's above other content */
+            z-index: 999;
         }
 
         .sidebar ul {
@@ -93,6 +93,7 @@
             font-weight: bold;
             display: block;
             padding: 5px 0;
+            cursor: pointer;
         }
 
         .sidebar ul li a:hover {
@@ -103,19 +104,60 @@
             list-style: none;
             padding-left: 15px;
             margin-top: 5px;
+            display: none; /* Hide subcategories initially */
+        }
+
+        .sidebar ul li.active > ul {
+            display: block; /* Show subcategories when parent is active */
         }
 
         .content {
             padding: 20px;
-            margin-top: 60px; /* Adjust based on header height */
-            margin-left: 220px; /* Adjust for sidebar width */
+            margin-top: 60px;
+            margin-left: 220px;
             text-align: center;
+            position: relative;
         }
 
         h1 {
-            margin-top: 80px; /* Margin for spacing from the fixed nav */
+            margin-top: 80px;
             font-size: 2em;
             color: #fff;
+        }
+
+        /* Sidebar Widgets */
+        .sidebar-widget {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .sidebar-widget h2 {
+            color: #ffd700;
+        }
+
+        .popular-post,
+        .latest-update {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .popular-post h3,
+        .latest-update h3 {
+            margin-top: 0;
+            color: #ffd700;
+        }
+
+        .popular-post p,
+        .latest-update p {
+            line-height: 1.6;
         }
 
         /* Shooting Stars */
@@ -152,7 +194,6 @@
             }
         }
 
-        /* Stars Container */
         #stars-container {
             position: fixed;
             top: 0;
@@ -161,7 +202,7 @@
             height: 100%;
             pointer-events: none;
             overflow: hidden;
-            z-index: 0; /* Make sure stars stay behind content */
+            z-index: 0;
         }
     </style>
 </head>
@@ -182,21 +223,24 @@
     </nav>
     <div class="sidebar">
         <ul>
-            <li><a href="#">Category 1</a>
+            <li>
+                <a href="#">Category 1</a>
                 <ul>
                     <li><a href="#">Subcategory 1.1</a></li>
                     <li><a href="#">Subcategory 1.2</a></li>
                     <li><a href="#">Subcategory 1.3</a></li>
                 </ul>
             </li>
-            <li><a href="#">Category 2</a>
+            <li>
+                <a href="#">Category 2</a>
                 <ul>
                     <li><a href="#">Subcategory 2.1</a></li>
                     <li><a href="#">Subcategory 2.2</a></li>
                     <li><a href="#">Subcategory 2.3</a></li>
                 </ul>
             </li>
-            <li><a href="#">Category 3</a>
+            <li>
+                <a href="#">Category 3</a>
                 <ul>
                     <li><a href="#">Subcategory 3.1</a></li>
                     <li><a href="#">Subcategory 3.2</a></li>
@@ -207,7 +251,28 @@
     </div>
     <div class="content">
         <h1>Blogs</h1>
-        <p>Welcome to the Blogs page! Content will be added here.</p>
+
+        <!-- Most Popular Post -->
+        <div class="sidebar-widget">
+            <h2>Most Popular Post</h2>
+            <div class="popular-post">
+                <h3>Popular Post Title</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
+
+        <!-- Latest Updates -->
+        <div class="sidebar-widget">
+            <h2>Latest Updates</h2>
+            <div class="latest-update">
+                <h3>Update Title 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div class="latest-update">
+                <h3>Update Title 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Shooting Stars Container -->
@@ -222,7 +287,7 @@
             star.className = 'star';
             star.style.top = `${Math.random() * 100}vh`;
             star.style.left = `${Math.random() * 100}vw`;
-            star.style.animationDuration = `${Math.random() * 5 + 5}s`; // Faster movement
+            star.style.animationDuration = `${Math.random() * 5 + 5}s`;
             star.style.animationDelay = `${Math.random() * 10}s`;
             starsContainer.appendChild(star);
         }
@@ -230,11 +295,19 @@
         document.addEventListener('mousemove', (e) => {
             const stars = document.querySelectorAll('.star');
             stars.forEach(star => {
-                const speedMultiplier = 10; // Increased sensitivity to mouse movement
+                const speedMultiplier = 10;
                 star.style.setProperty('--x', (e.clientX - window.innerWidth / 2) / (20 / speedMultiplier));
                 star.style.setProperty('--y', (e.clientY - window.innerHeight / 2) / (20 / speedMultiplier));
                 star.style.animationName = 'shoot, moveStar';
-                star.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.8)`; // Enhanced trail effect
+                star.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.8)`;
+            });
+        });
+
+        // JavaScript for collapsible sidebar
+        document.querySelectorAll('.sidebar > ul > li > a').forEach(item => {
+            item.addEventListener('click', function() {
+                // Toggle active class on parent li
+                this.parentElement.classList.toggle('active');
             });
         });
     </script>
