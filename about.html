@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Akeanti's Page">
+    <meta property="og:description" content="This is the most satisfying dynamic page you will ever see :)">
+    <meta property="og:image" content="https://raw.githubusercontent.com/akeanti/akeanti.github.io/main/pitures/akeanti.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
     <title>About - Akeanti</title>
-    <link rel="icon" href="pictures/web.ico" type="image/x-icon">
+    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
     <style>
         body {
             margin: 0;
@@ -168,6 +173,16 @@
             overflow: hidden;
             z-index: 0;
         }
+        .credit-container {
+            background: rgba(0, 0, 0, 0.55);
+            margin-top: 100px;
+            padding: 10px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -225,5 +240,9 @@
             });
         });
     </script>
+    <footer class="credit-container">
+        <img src="pitures/button.png" width="150" height="50" border="2" alt="text describing the image" />
+        Akeanti's Credit
+    </footer>
 </body>
 </html>
