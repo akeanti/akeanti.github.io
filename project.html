@@ -79,6 +79,26 @@
             text-align: center;
         }
 
+        .portfolio-button {
+    display: inline-block;
+    padding: 15px 30px;
+    margin-top: 20px;
+    background: linear-gradient(45deg, #ff0080, #ff8c00);
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, background 0.3s;
+}
+
+.portfolio-button:hover {
+    background: linear-gradient(45deg, #ff8c00, #ff0080);
+    transform: scale(1.1);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+}
+
+
         h1 {
             margin-top: 80px;
             font-size: 2em;
@@ -220,9 +240,10 @@
         </ul>
     </nav>
     <div class="content">
-        <h1>My Projects</h1>
-        <h2> My New Projects Portfolio is in : https://akeanti.github.io/portfolio </h2>
-        <div class="timeline">
+    <h1>My Projects</h1>
+    <h2>My New Projects Portfolio is in:</h2>
+    <a class="portfolio-button" href="https://akeanti.github.io/portfolio" target="_blank">Check Out My Portfolio</a>
+    <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
                     <img src="projects/DeBian.png" alt="Project 1">
