@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="Akeanti">
+    <meta property="og:title" content="Akeanti's Page">
     <meta property="og:description" content="This is the most satisfying dynamic page you will ever see :)">
     <meta property="og:image" content="https://raw.githubusercontent.com/akeanti/akeanti.github.io/main/pitures/akeanti.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,208 +10,7 @@
     <meta name="google-site-verification" content="xjUJtPjMptcQrCDQ3lY1sFIMZ5J9doUHCHDTlnXBBDg" />
     <title>Akeanti</title>
     <link rel="icon" href="pitures/web.ico" type="image/x-icon">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            background: #000;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
-            scroll-behavior: smooth;
-            padding-top: 60px; /* Add padding to avoid overlap */
-        }
-
-        nav {
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            position: fixed;
-            top: 0;
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            height: 60px; /* Match height to the index file */
-        }
-
-        nav .logo {
-            margin-right: 20px; /* Space between logo and menu */
-            display: flex;
-            align-items: center;
-        }
-
-        nav .logo img {
-            height: 40px; /* Ensure logo size */
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            align-items: center; /* Center text vertically */
-            height: 40px; /* Ensure link height matches logo */
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .container, .flex-center, .content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1, h6, p {
-            text-align: center;
-        }
-
-        p, h6, q {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 10px;
-            border-radius: 10px;
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        a {
-            color: #23a6d5;
-        }
-
-        a:hover {
-            color: #00d9ff;
-        }
-
-        details {
-            text-align: left;
-            margin: 20px;
-        }
-
-        iframe {
-            margin: 20px 0;
-        }
-
-        /* Shooting Stars */
-        .star {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
-            animation: shoot linear infinite;
-            transition: box-shadow 0.5s;
-        }
-
-        @keyframes shoot {
-            from {
-                transform: translateY(0) translateX(0);
-                opacity: 1;
-                box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.8);
-            }
-            to {
-                transform: translateY(-1000px) translateX(1000px);
-                opacity: 0;
-                box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-            }
-        }
-
-        @keyframes moveStar {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            100% {
-                transform: translateY(calc(var(--y) * 1px)) translateX(calc(var(--x) * 1px));
-            }
-        }
-
-        /* Stars Container */
-        #stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0; /* Make sure stars stay behind content */
-        }
-
-        /* Button Styles */
-        .button-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px;
-        }
-
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            height: 50px;
-            padding: 0 20px;
-            border-radius: 25px;
-            background: #333;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: background 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .button:hover {
-            background: #444;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-        }
-
-        .button img {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-
-        .button.kofi {
-            background: #ffd04e;
-            border-color: #ffd04e;
-        }
-
-        .button.github {
-            background: #333;
-            border-color: #333;
-        }
-
-        .button.instagram {
-            background: #e3637b;
-            border-color: #e3637b;
-        }
-
-        .button.youtube {
-            background: #fa6060;
-            border-color: #fa6060;
-        }
-
-        .button.reddit {
-            background: #fb7747;
-            border-color: #fb7747;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <nav>
@@ -227,6 +26,12 @@
             <li><a href="cat.html">Cat Test</a></li>
             <li><a href="sponsors.html">Sponsors</a></li>
         </ul>
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
     </nav>
     <div class="container">
         <h1>Akeanti's Page</h1>
@@ -294,11 +99,14 @@
                 star.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.8)`; // Enhanced trail effect
             });
         });
+        const body = document.body;
+        const nav = document.querySelector("nav");
+        const themeToggle = document.getElementById("theme-toggle");
+
+        themeToggle.addEventListener("change", () => {
+            body.classList.toggle("light-mode");
+            nav.classList.toggle("light-mode");
+        });
     </script>
-    <footer>
-        <center>
-            
-        </center>
-    </footer>
 </body>
 </html>

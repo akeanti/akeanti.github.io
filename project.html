@@ -5,80 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Akeanti</title>
     <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/styles.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            color: #fff;
-            background: #000;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
-            scroll-behavior: smooth;
-        }
-
-        nav {
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            position: fixed;
-            top: 0;
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            height: 60px;
-        }
-
-        nav .logo {
-            margin-right: 20px;
-            display: flex;
-            align-items: center;
-        }
-
-        nav .logo img {
-            height: 40px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        nav ul li {
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            height: 40px;
-        }
-
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        a {
-            color: #23a6d5;
-        }
-
-        a:hover {
-            color: #00d9ff;
-        }
-
-        .content {
-            padding: 20px;
-            margin-top: 60px;
-            text-align: center;
-        }
-
         .portfolio-button {
     display: inline-block;
     padding: 15px 30px;
@@ -238,11 +166,13 @@
             <li><a href="cat.html">Cat Test</a></li>
             <li><a href="sponsors.html">Sponsors</a></li>
         </ul>
+        <div class="toggle-container">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
     </nav>
-    <div class="content">
-    <h1>My Projects</h1>
-    <h2>My New Projects Portfolio is in:</h2>
-    <a class="portfolio-button" href="https://akeanti.github.io/Portfolio/" target="_blank">Check Out My Portfolio</a>
     <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
@@ -301,6 +231,15 @@
                 star.style.animationName = 'shoot, moveStar';
                 star.style.boxShadow = `0 0 20px 10px rgba(255, 255, 255, 0.8)`;
             });
+        });
+
+        const body = document.body;
+        const nav = document.querySelector("nav");
+        const themeToggle = document.getElementById("theme-toggle");
+
+        themeToggle.addEventListener("change", () => {
+            body.classList.toggle("light-mode");
+            nav.classList.toggle("light-mode");
         });
     </script>
 </body>
