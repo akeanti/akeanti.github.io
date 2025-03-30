@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Information - Akeanti</title>
+    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        :root {
+            --bg-color: #0a0e17;
+            --text: #e0e0e0;
+            --card-bg: rgba(17, 22, 38, 0.6);
+            --shadow-color: rgba(0, 0, 0, 0.25);
+            --accent-color: #406ff3;
+            --tooltip-bg: rgba(10, 14, 23, 0.95);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --side-margin: 160px;
+        }
+
+        * {
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Open Sans', 'Roboto Mono', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+            margin: 0 var(--side-margin);
+        }
+
+        .about-card {
+    width: 90%;
+    max-width: 800px;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px var(--shadow-color);
+    padding: 2.5rem;
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+        .about-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .about-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .legal-section {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .legal-section h2 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .legal-section h2 i {
+            margin-right: 0.5rem;
+        }
+
+        .legal-section ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .legal-section li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .legal-section li:before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 0.5rem;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .changelog-section {
+            margin-top: 2rem;
+        }
+
+        .changelog-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .changelog-item h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .changelog-item h3 i {
+            margin-right: 0.5rem;
+        }
+
+        .changelog-item ul {
+            padding-left: 1.5rem;
+        }
+
+        .license-section {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .license-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .license-header i {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        .license-content {
+            font-family: 'Roboto Mono', monospace;
+            white-space: pre-wrap;
+            line-height: 1.5;
+            padding: 0.5rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-toggle i {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar__menu {
+                gap: 1rem;
+            }
+            
+            .about-card {
+                width: 100%;
+                padding: 1.5rem;
+            }
+            
+            .about-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background">
+        <div class="star-field"></div>
+        <div class="nebula" id="nebula1"></div>
+        <div class="nebula" id="nebula2"></div>
+        <div class="comet" id="comet1"></div>
+        <div class="asteroid" id="asteroid1"></div>
+        <div class="asteroid" id="asteroid2"></div>
+    </div>
+    
+    <nav class="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="index.html" class="navbar__link" data-content="Home"><i data-feather="home"></i></a>
+            </li>
+            <li class="navbar__item">
+                <a href="discord.html" class="navbar__link" data-content="Discord"><i data-feather="message-square"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="portfolio.html" class="navbar__link" data-content="Portfolio"><i data-feather="briefcase"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="blog.html" class="navbar__link" data-content="Blogs"><i data-feather="edit"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="camera.html" class="navbar__link" data-content="Camera"><i data-feather="camera"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="about.html" class="navbar__link" data-content="Help"><i data-feather="help-circle"></i></a>        
+            </li>
+        </ul>
+    </nav>
+
+    <main class="about-container">
+        <div class="about-card">
+            <div class="about-header">
+                <h1>Legal Information</h1>
+                <p>Terms, policies, and important information about akeanti.com</p>
+            </div>
+            
+            <div class="about-content">
+                <section class="legal-section">
+                    <h2><i data-feather="file-text"></i> Terms of Service</h2>
+                    <p>Welcome to akeanti.com. By accessing or using this website, you agree to comply with and be bound by the following terms and conditions.</p>
+                    <ul>
+                        <li>Use of this website is at your own risk.</li>
+                        <li>All content is provided "as is" without warranty of any kind.</li>
+                        <li>You may not use this website for illegal purposes.</li>
+                        <li>We reserve the right to modify or discontinue the website at any time.</li>
+                    </ul>
+                </section>
+                
+                <section class="legal-section">
+                    <h2><i data-feather="lock"></i> Privacy Policy</h2>
+                    <p>This website respects your privacy and does not collect personal information without your consent.</p>
+                    <ul>
+                        <li>We do not track user activity.</li>
+                        <li>We do not share any data with third parties.</li>
+                        <li>We use cookies only for basic functionality.</li>
+                    </ul>
+                </section>
+                
+                <section class="changelog-section">
+                    <h2><i data-feather="clock"></i> Changelog</h2>
+                    <div class="changelog-item">
+                        <h3><i data-feather="zap"></i> Version 1.2.0 (2023-11-15)</h3>
+                        <ul>
+                            <li>Added interactive badge system</li>
+                            <li>Implemented particle animation effects</li>
+                            <li>Improved mobile responsiveness</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="changelog-item">
+                        <h3><i data-feather="zap"></i> Version 1.1.0 (2023-10-20)</h3>
+                        <ul>
+                            <li>Added skill progress bars</li>
+                            <li>Implemented theme toggle functionality</li>
+                            <li>Added comet and asteroid animations</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="changelog-item">
+                        <h3><i data-feather="zap"></i> Version 1.0.0 (2023-09-10)</h3>
+                        <ul>
+                            <li>Initial release of akeanti.com</li>
+                            <li>Implemented responsive design</li>
+                            <li>Added interactive navigation with tooltips</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <section class="license-section">
+                    <div class="license-header">
+                        <i data-feather="file-text"></i>
+                        <h2>License</h2>
+                    </div>
+                    <div class="license-content">
+MIT License
+Copyright (c) 2023 Akeanti
+                       
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+                        
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+                        
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="theme-toggle">
+        <i data-feather="moon"></i>
+    </div>
+
+    <script>
+        feather.replace();
+        
+        // Create star field
+        function createStarField() {
+            const starField = document.querySelector('.star-field');
+            const numberOfStars = 200;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 1.5 + 0.5}px`;
+                star.style.height = star.style.width;
+                star.style.opacity = Math.random() * 0.7;
+                star.style.animationDelay = `${Math.random() * 8}s`;
+                
+                const colors = ['#ffffff', '#e6e6ff', '#f0f8ff', '#d3d3d3', '#f8f8ff'];
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                starField.appendChild(star);
+            }
+        }
+        
+        // Theme toggle
+        function setupThemeToggle() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            let isDarkMode = true;
+            
+            themeToggle.addEventListener('click', () => {
+                if (isDarkMode) {
+                    document.documentElement.style.setProperty('--bg-color', '#f0f0f0');
+                    document.documentElement.style.setProperty('--text', '#333333');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.8)');
+                    document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.15)');
+                    document.documentElement.style.setProperty('--accent-color', '#406ff3');
+                    document.documentElement.style.setProperty('--tooltip-bg', 'rgba(255, 255, 255, 0.95)');
+                    themeToggle.querySelector('i').innerHTML = feather.icons.sun.toSvg();
+                } else {
+                    document.documentElement.style.setProperty('--bg-color', '#0a0e17');
+                    document.documentElement.style.setProperty('--text', '#e0e0e0');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(17, 22, 38, 0.6)');
+                    document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.25)');
+                    document.documentElement.style.setProperty('--accent-color', '#406ff3');
+                    document.documentElement.style.setProperty('--tooltip-bg', 'rgba(10, 14, 23, 0.95)');
+                    themeToggle.querySelector('i').innerHTML = feather.icons.moon.toSvg();
+                }
+                isDarkMode = !isDarkMode;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            createStarField();
+            setupThemeToggle();
+        });
+    </script>
+</body>
+</html>

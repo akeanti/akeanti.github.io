@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="Akeanti's Gallery">
+    <meta property="og:description" content="A dynamic gallery showcasing tech and space-themed artwork">
+    <meta property="og:image" content="https://raw.githubusercontent.com/akeanti/akeanti.github.io/main/pitures/akeanti.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Akeanti's Gallery</title>
+    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Gallery Styles */
+        main {
+            padding-top: 100px;
+            padding-bottom: 50px;
+            padding-left: 80px;
+        }
+
+        .gallery-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text);
+            text-shadow: 0 0 10px var(--glow);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            cursor: pointer;
+            aspect-ratio: 1/1;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px var(--shadow-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: filter var(--transition-speed) ease;
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(0.9);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-title {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .gallery-item-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .gallery-item-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-speed) ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            box-shadow: 0 15px 50px var(--shadow-color);
+        }
+
+        .modal-image-container {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .zoom-controls {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .zoom-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        .zoom-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-text {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .modal-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .modal-metadata {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .modal-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+            cursor: pointer;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .modal-action:hover {
+            transform: scale(1.05);
+        }
+
+        .modal-action-count {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .share-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .share-button:hover {
+            transform: scale(1.1);
+        }
+
+        .share-twitter {
+            background-color: #1DA1F2;
+        }
+
+        .share-facebook {
+            background-color: #4267B2;
+        }
+
+        .share-instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            transition: background-color var(--transition-speed) ease;
+        }
+
+        .tag:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .modal-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-text {
+                order: 2;
+            }
+            
+            .modal-image-container {
+                order: 1;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="space-background">
+        <div class="star-field"></div>
+        <div class="nebula" id="nebula1"></div>
+        <div class="nebula" id="nebula2"></div>
+        <div class="comet" id="comet1"></div>
+        <div class="asteroid" id="asteroid1"></div>
+        <div class="asteroid" id="asteroid2"></div>
+    </div>
+    
+    <nav class="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="index.html" class="navbar__link" data-content="Home"><i data-feather="home"></i></a>
+            </li>
+            <li class="navbar__item">
+                <a href="discord.html" class="navbar__link" data-content="Discord"><i data-feather="message-square"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="portfolio.html" class="navbar__link" data-content="Portfolio"><i data-feather="briefcase"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="blog.html" class="navbar__link" data-content="Blogs"><i data-feather="edit"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="camera.html" class="navbar__link" data-content="Camera"><i data-feather="camera"></i></a>        
+            </li>
+            <li class="navbar__item">
+                <a href="about.html" class="navbar__link" data-content="Help"><i data-feather="help-circle"></i></a>        
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <h2 class="gallery-title">Akeanti's Gallery</h2>
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Gallery items will be added here dynamically -->
+        </div>
+    </main>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal"><i data-feather="x"></i></button>
+            <div class="modal-image-container">
+                <div class="loading-spinner"></div>
+                <img src="" alt="Gallery Image" class="modal-image" id="modal-image">
+                <div class="zoom-controls">
+                    <button class="zoom-button" id="zoom-in"><i data-feather="plus"></i></button>
+                    <button class="zoom-button" id="zoom-out"><i data-feather="minus"></i></button>
+                </div>
+            </div>
+            <div class="modal-text">
+                <h3 class="modal-title" id="modal-title"></h3>
+                <p class="modal-description" id="modal-description"></p>
+                <div class="modal-metadata">
+                    <div class="modal-meta-item">
+                        <i data-feather="calendar"></i>
+                        <span>Published: <span id="publish-date"></span></span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <i data-feather="camera"></i>
+                        <span>Resolution: <span id="image-resolution"></span></span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <i data-feather="file-text"></i>
+                        <span>File Size: <span id="file-size"></span></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <div class="modal-action">
+                        <i data-feather="heart"></i>
+                        <span>Like</span>
+                        <span class="modal-action-count" id="like-count">0</span>
+                    </div>
+                    <div class="modal-action">
+                        <i data-feather="share-2"></i>
+                        <span>Share</span>
+                    </div>
+                </div>
+                <div class="share-buttons">
+                    <div class="share-button share-twitter"><i data-feather="twitter"></i></div>
+                    <div class="share-button share-facebook"><i data-feather="facebook"></i></div>
+                    <div class="share-button share-instagram"><i data-feather="instagram"></i></div>
+                </div>
+                <div class="tag-cloud" id="tag-cloud">
+                    <!-- Tags will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="theme-toggle" id="theme-toggle">
+        <i data-feather="moon"></i>
+    </div>
+
+    <script>
+        feather.replace();
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createStarField();
+            setupNavbarAnimations();
+            setupThemeToggle();
+            initializeGallery();
+        });
+
+        // Gallery Data
+        const galleryItems = [
+            {
+                id: 1,
+                title: "Cat Visit",
+                images: [
+                    "pictures/cat.jpg",
+                ],
+                description: "A cat visited me,",
+                likes: 142,
+                publishDate: "2025-03-01",
+                resolution: "4096x2304",
+                fileSize: "3.2 MB",
+                tags: ["Cat", "Cute", "Animals"]
+            },
+            {
+                id: 2,
+                title: "CPGE's robotic club",
+                images: [
+                    "pictures/club.jpg",
+                ],
+                description: "As the president of the club, I was using the material for some experiments.",
+                likes: 98,
+                publishDate: "2024-11-03",
+                resolution: "3840x2160",
+                fileSize: "4.5 MB",
+                tags: ["Cyberpunk", "Future", "Technology", "City"]
+            },
+            {
+                id: 3,
+                title: "TAERIS | Meknes",
+                images: [
+                    "pictures/anime.jpg"
+                ],
+                description: "After the surgery, I visited a manga coffee :).",
+                likes: 125,
+                publishDate: "2025-01-30",
+                resolution: "2560x1440",
+                fileSize: "2.8 MB",
+                tags: ["Programming", "Code", "Interface", "Technology"]
+            },
+            {
+                id: 4,
+                title: "Road To Meknes",
+                images: [
+                    "pictures/road.jpg"
+                ],
+                description: "Very relaxing pic, I love the sky.",
+                likes: 76,
+                publishDate: "2023-08-05",
+                resolution: "3200x1800",
+                fileSize: "3.7 MB",
+                tags: ["Quantum", "Physics", "Computing", "Science"]
+            },
+            {
+                id: 5,
+                title: "AI Evolution",
+                images: [
+                    "pictures/mycat.jpg"
+                ],
+                description: "The fascinating journey of artificial intelligence development.",
+                likes: 167,
+                publishDate: "2023-09-18",
+                resolution: "3840x2160",
+                fileSize: "4.1 MB",
+                tags: ["AI", "Artificial Intelligence", "Machine Learning", "Deep Learning"]
+            },
+            {
+                id: 6,
+                title: "Cybersecurity",
+                images: [
+                    "pictures/meknes station.jpg"
+                ],
+                description: "The art of protecting digital assets in an increasingly connected world.",
+                likes: 89,
+                publishDate: "2023-10-03",
+                resolution: "2560x1440",
+                fileSize: "2.9 MB",
+                tags: ["Security", "Cybersecurity", "Privacy", "Protection"]
+            },
+            {
+                id: 7,
+                title: "Blockchain Revolution",
+                images: [
+                    "pictures/win7.jpg"
+                ],
+                description: "The decentralized future of finance and technology.",
+                likes: 112,
+                publishDate: "2023-11-12",
+                resolution: "3840x2160",
+                fileSize: "3.5 MB",
+                tags: ["Blockchain", "Finance", "Technology", "Decentralized"]
+            },
+            {
+                id: 8,
+                title: "VR Experience",
+                images: [
+                    "pictures/ted.jpg"
+                ],
+                description: "Stepping into virtual worlds that feel incredibly real.",
+                likes: 93,
+                publishDate: "2023-12-05",
+                resolution: "4096x2160",
+                fileSize: "5.2 MB",
+                tags: ["VR", "Virtual Reality", "Immersive", "Experience"]
+            },
+            {
+                id: 9,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/school.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 10,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/riz.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 11,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/reading.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 12,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/green.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 13,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/coding.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 14,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/boat.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 15,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/old days.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 9,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/ch.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 16,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/coffee.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 17,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/farm.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 18,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/tp.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 19,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/wave.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            },
+            {
+                id: 9,
+                title: "Robotics Lab",
+                images: [
+                    "pictures/rabat.jpg"
+                ],
+                description: "Building the machines of tomorrow in today's laboratories.",
+                likes: 134,
+                publishDate: "2024-01-15",
+                resolution: "3200x1800",
+                fileSize: "3.9 MB",
+                tags: ["Robotics", "Engineering", "Innovation", "Technology"]
+            }
+
+        ];
+
+        // Initialize Gallery
+        function initializeGallery() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            
+            galleryItems.forEach(item => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.dataset.id = item.id;
+                
+                // Use the first image for the thumbnail
+                galleryItem.innerHTML = `
+                    <img src="${item.images[0]}" alt="${item.title}">
+                    <div class="gallery-item-overlay">
+                        <h3 class="gallery-item-title">${item.title}</h3>
+                        <div class="gallery-item-stats">
+                            <div class="gallery-item-stat">
+                                <i data-feather="heart"></i>
+                                <span>${item.likes}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                galleryItem.addEventListener('click', () => openModal(item));
+                galleryGrid.appendChild(galleryItem);
+            });
+        }
+
+        // Open Modal
+        function openModal(item) {
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const likeCount = document.getElementById('like-count');
+            const publishDate = document.getElementById('publish-date');
+            const imageResolution = document.getElementById('image-resolution');
+            const fileSize = document.getElementById('file-size');
+            const tagCloud = document.getElementById('tag-cloud');
+            
+            modalTitle.textContent = item.title;
+            modalDescription.textContent = item.description;
+            likeCount.textContent = item.likes;
+            publishDate.textContent = item.publishDate;
+            imageResolution.textContent = item.resolution;
+            fileSize.textContent = item.fileSize;
+            
+            // Show loading spinner
+            document.querySelector('.loading-spinner').style.display = 'block';
+            modalImage.style.display = 'none';
+            
+            // Load the first image
+            modalImage.src = item.images[0];
+            
+            // Hide spinner and show image when loaded
+            modalImage.onload = function() {
+                document.querySelector('.loading-spinner').style.display = 'none';
+                modalImage.style.display = 'block';
+            };
+            
+            // Populate tags
+            tagCloud.innerHTML = '';
+            item.tags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.className = 'tag';
+                tagElement.textContent = tag;
+                tagCloud.appendChild(tagElement);
+            });
+            
+            modalOverlay.classList.add('active');
+        }
+
+        // Close Modal
+        function closeModal() {
+            const modalOverlay = document.getElementById('modal-overlay');
+            modalOverlay.classList.remove('active');
+        }
+
+        // Close Modal Event Listeners
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+        document.getElementById('modal-overlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeModal();
+            }
+        });
+
+        // Create Star Field
+        function createStarField() {
+            const starField = document.querySelector('.star-field');
+            const numberOfStars = 300;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.width = `${Math.random() * 2 + 1}px`;
+                star.style.height = star.style.width;
+                star.style.opacity = Math.random() * 0.7;
+                star.style.animationDelay = `${Math.random() * 8}s`;
+                
+                const colors = ['#ffffff', '#e6e6ff', '#f0f8ff', '#d3d3d3', '#f8f8ff'];
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                starField.appendChild(star);
+            }
+        }
+
+        // Setup Navbar Animations
+        function setupNavbarAnimations() {
+            const navbarItems = document.querySelectorAll('.navbar__item');
+            
+            navbarItems.forEach(item => {
+                const link = item.querySelector('.navbar__link');
+                
+                link.addEventListener('mouseenter', () => {
+                    item.style.transform = 'scale(1.15)';
+                    item.style.transition = 'transform var(--transition-speed) ease';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    item.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Setup Theme Toggle
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('theme-toggle');
+            let isDarkMode = true;
+            
+            themeToggle.addEventListener('click', () => {
+                if (isDarkMode) {
+                    document.documentElement.style.setProperty('--bg-color', '#f0f0f0');
+                    document.documentElement.style.setProperty('--text', '#333333');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.8)');
+                    document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.15)');
+                    document.documentElement.style.setProperty('--glow', 'rgba(64, 111, 243, 0.1)');
+                    document.documentElement.style.setProperty('--tooltip-bg', 'rgba(255, 255, 255, 0.95)');
+                    themeToggle.querySelector('i').innerHTML = feather.icons.sun.toSvg();
+                } else {
+                    document.documentElement.style.setProperty('--bg-color', '#0a0e17');
+                    document.documentElement.style.setProperty('--text', '#e0e0e0');
+                    document.documentElement.style.setProperty('--card-bg', 'rgba(17, 22, 38, 0.6)');
+                    document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.25)');
+                    document.documentElement.style.setProperty('--glow', 'rgba(64, 111, 243, 0.2)');
+                    document.documentElement.style.setProperty('--tooltip-bg', 'rgba(10, 14, 23, 0.95)');
+                    themeToggle.querySelector('i').innerHTML = feather.icons.moon.toSvg();
+                }
+                isDarkMode = !isDarkMode;
+            });
+        }
+
+        // Add Feather Icons
+        document.querySelectorAll('[data-feather]').forEach(element => {
+            const icon = feather.icons[element.getAttribute('data-feather')].toSvg();
+            element.innerHTML = icon;
+        });
+
+        // Image Zoom Functionality
+        let currentZoom = 1;
+        const maxZoom = 3;
+        const minZoom = 0.5;
+        const zoomStep = 0.2;
+
+        document.getElementById('zoom-in').addEventListener('click', () => {
+            if (currentZoom < maxZoom) {
+                currentZoom += zoomStep;
+                document.getElementById('modal-image').style.transform = `scale(${currentZoom})`;
+            }
+        });
+
+        document.getElementById('zoom-out').addEventListener('click', () => {
+            if (currentZoom > minZoom) {
+                currentZoom -= zoomStep;
+                document.getElementById('modal-image').style.transform = `scale(${currentZoom})`;
+            }
+        });
+
+        // Like Button Functionality
+        document.querySelector('.modal-action').addEventListener('click', () => {
+            const likeCount = document.getElementById('like-count');
+            let currentLikes = parseInt(likeCount.textContent);
+            likeCount.textContent = currentLikes + 1;
+        });
+
+        // Share Button Functionality
+        document.querySelectorAll('.share-button').forEach(button => {
+            button.addEventListener('click', () => {
+                // Simulate share functionality
+                alert('Share functionality would be implemented here');
+            });
+        });
+
+        // Tag Hover Effect
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tag')) {
+                e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                setTimeout(() => {
+                    e.target.style.backgroundColor = '';
+                }, 300);
+            }
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('modal-overlay').classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
