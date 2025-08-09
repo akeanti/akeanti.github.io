@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="Akeanti's Page">
+    <meta property="og:description" content="Akeanti, the webpage of a small tech lover and content creator. This is the most satisfying dynamic page you will ever see :)">
+    <meta property="og:image" content="https://raw.githubusercontent.com/akeanti/akeanti.github.io/main/pitures/akeanti.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Akeanti</title>
+    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .profile-container {
+            margin-left: calc(var(--spacer) * 5.5);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: var(--borderRadius);
+            box-shadow: 0 8px 25px var(--shadow-color);
+            width: 100%;
+            max-width: 900px;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: visible;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: var(--glow);
+            border-radius: calc(var(--borderRadius) + 8px);
+            z-index: -1;
+            opacity: 0.15;
+            animation: pulse 2.5s infinite;
+        }
+
+        .profile-content {
+            display: flex;
+            padding: 1.5rem;
+            gap: 1.5rem;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .certifications-header {
+            text-align: center;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .certifications-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .certifications-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent2));
+            border-radius: 2px;
+        }
+
+        .certifications-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .certifications-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            padding: 0 1.5rem;
+            position: relative;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .filter-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(64, 111, 243, 0.4);
+        }
+
+        .filter-btn.active i, .filter-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 0 1.5rem;
+        }
+
+        .skill-badge {
+            background: rgba(64, 111, 243, 0.15);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .skill-badge:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(64, 111, 243, 0.3);
+        }
+
+        .skill-badge:hover::before {
+            opacity: 1;
+        }
+
+        .skill-badge.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 1.5rem;
+        }
+
+        .certification-card {
+            background: var(--transparent-bg);
+            border-radius: var(--borderRadius);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: translateZ(0);
+            backdrop-filter: blur(8px);
+        }
+
+        .certification-card:hover {
+            transform: translateY(-8px) rotateX(5deg) rotateY(5deg) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px var(--glow);
+        }
+
+        .certification-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent3), var(--accent2));
+            border-radius: calc(var(--borderRadius) + 2px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .certification-card:hover::before {
+            opacity: 1;
+        }
+
+        .certification-badge {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .certification-badge img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.8s ease;
+            transform-origin: center center;
+        }
+
+        .certification-card:hover .certification-badge img {
+            transform: scale(1.08) rotate(1deg);
+        }
+
+        .certification-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent2));
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-tag {
+            background: linear-gradient(45deg, var(--accent1), var(--primary));
+        }
+
+        .certification-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .certification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .certification-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            flex-grow: 1;
+            position: relative;
+            display: inline-block;
+        }
+
+        .certification-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+            transition: width 0.3s ease;
+        }
+
+        .certification-card:hover .certification-title::after {
+            width: 70px;
+        }
+
+        .certification-links {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .certification-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certification-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .certification-link i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .certification-link:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(64, 111, 243, 0.3);
+        }
+
+        .certification-link:hover::before {
+            opacity: 1;
+        }
+
+        .certification-link:hover i {
+            transform: scale(1.2);
+            color: white;
+        }
+
+        .certification-details {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .certification-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .skill-item {
+            background: rgba(64, 111, 243, 0.15);
+            color: var(--primary);
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            transform: translateZ(0);
+        }
+
+        .certification-card:hover .skill-item {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .certification-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Featured certification enhancements */
+        .featured-certification {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .featured-certification .certification-badge {
+            height: 100%;
+            border-radius: var(--borderRadius);
+            overflow: hidden;
+        }
+
+        .featured-certification .certification-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-certification .certification-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-certification .certification-details {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Education Section */
+        .education-section {
+            padding: 2rem;
+        }
+
+        .education-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .education-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent2));
+            border-radius: 2px;
+        }
+
+        .education-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .education-timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: rgba(64, 111, 243, 0.3);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+            border-radius: 2px;
+        }
+
+        .education-item {
+            padding: 1.5rem;
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--borderRadius);
+            margin-bottom: 2rem;
+            width: calc(50% - 2rem);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .education-item:nth-child(odd) {
+            left: 0;
+            margin-left: 0;
+        }
+
+        .education-item:nth-child(even) {
+            left: 50%;
+            margin-left: 0;
+        }
+
+        .education-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border: 4px solid var(--bg-color);
+            top: 1.5rem;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .education-item:nth-child(odd)::after {
+            right: -10px;
+        }
+
+        .education-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .education-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .education-institution {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .education-description {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Particle System */
+        .particle-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 1.5px;
+            height: 1.5px;
+            background: white;
+            border-radius: 50%;
+            animation: particleMove linear infinite;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--particleX), var(--particleY));
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                display: none;
+            }
+
+            .profile-container {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .certifications-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .featured-certification {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-certification .certification-badge {
+                height: 250px;
+            }
+
+            .mobile-navbar {
+                display: flex;
+            }
+
+            .mobile-nav-toggle {
+                display: flex;
+            }
+
+            .profile-container {
+                margin-top: var(--mobile-nav-height);
+                padding-top: 1rem;
+            }
+
+            .skill-badges {
+                gap: 0.6rem;
+            }
+
+            .galaxy-info {
+                display: none;
+            }
+
+            .education-timeline::after {
+                left: 1rem;
+            }
+
+            .education-item {
+                width: calc(100% - 2rem);
+                margin-left: 2rem;
+            }
+
+            .education-item:nth-child(even) {
+                left: 0;
+            }
+
+            .education-item::after {
+                left: -16px !important;
+                right: auto !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-navbar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="space-background">
+    <div class="star-field"></div>
+    <div class="spiral-arm spiral-arm-1"></div>
+    <div class="spiral-arm spiral-arm-2"></div>
+    <div class="accretion-disk"></div>
+    <div class="galaxy-core"></div>
+    <div class="planet planet-1" style="--orbit-radius: 150px;"></div>
+    <div class="planet planet-2" style="--orbit-radius: 220px;"></div>
+    <div class="planet planet-3" style="--orbit-radius: 290px;"></div>
+</div>
+
+<div class="particle-system"></div>
+
+<nav class="mobile-navbar">
+    <div class="mobile-navbar__logo">
+        <i data-feather="star"></i>
+        <span>Akeanti</span>
+    </div>
+    <div class="mobile-nav-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <ul class="mobile-navbar__menu">
+        <li class="mobile-navbar__item">
+            <a href="index.html" class="mobile-navbar__link">
+                <i data-feather="home"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="mobile-navbar__item">
+            <a href="portfolio.html" class="mobile-navbar__link">
+                <i data-feather="code"></i>
+                <span>Projects</span>
+            </a>
+        </li>
+        <li class="mobile-navbar__item">
+            <a href="education.html" class="mobile-navbar__link">
+                <i data-feather="award"></i>
+                <span>Certifications</span>
+            </a>
+        </li>
+        <li class="mobile-navbar__item">
+            <a href="linktree.html" class="mobile-navbar__link">
+                <i data-feather="briefcase"></i>
+                <span>My LinkTree</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<nav class="navbar">
+    <ul class="navbar__menu">
+        <li class="navbar__item">
+            <a href="index.html" class="navbar__link" data-content="Home"><i data-feather="home"></i></a>
+        </li>
+        <li class="navbar__item">
+            <a href="portfolio.html" class="navbar__link active" data-content="Projects"><i data-feather="code"></i></a>
+        </li>
+        <li class="navbar__item">
+            <a href="education.html" class="navbar__link" data-content="Certifications"><i data-feather="award"></i></a>
+        </li>
+        <li class="navbar__item">
+            <a href="linktree.html" class="navbar__link" data-content="My LinkTree"><i data-feather="briefcase"></i></a>
+        </li>
+    </ul>
+</nav>
+
+<main class="profile-container">
+    <div class="profile-card">
+        <div class="certifications-header">
+            <h1>Certifications & Education</h1>
+            <p>Explore my academic achievements and professional certifications. Each badge represents knowledge gained and skills mastered.</p>
+        </div>
+
+        <div class="certifications-filter">
+            <button class="filter-btn active" data-filter="all">
+                <i data-feather="grid"></i> All
+            </button>
+            <button class="filter-btn" data-filter="development">
+                <i data-feather="code"></i> Development
+            </button>
+            <button class="filter-btn" data-filter="cloud">
+                <i data-feather="cloud"></i> Cloud
+            </button>
+            <button class="filter-btn" data-filter="security">
+                <i data-feather="shield"></i> Security
+            </button>
+            <button class="filter-btn" data-filter="ai">
+                <i data-feather="cpu"></i> AI/ML
+            </button>
+        </div>
+
+        <div class="skill-badges">
+            <div class="skill-badge"><i data-feather="check"></i> JavaScript</div>
+            <div class="skill-badge"><i data-feather="check"></i> Cybersecurity</div>
+            <div class="skill-badge"><i data-feather="check"></i> Python</div>
+            <div class="skill-badge"><i data-feather="check"></i> React</div>
+            <div class="skill-badge"><i data-feather="check"></i> Azure</div>
+        </div>
+
+        <div class="certifications-grid">
+            <div class="certification-card featured-certification" data-category="cloud">
+                <div class="certification-badge">
+                    <img src="https://cdn.shopify.com/s/files/1/0283/3914/2796/files/EHE_logo.png?v=1690923750" alt="ec council">
+                    <span class="certification-tag featured-tag">
+                            <i data-feather="award"></i> Featured Certification
+                        </span>
+                </div>
+                <div class="certification-content">
+                    <div class="certification-header">
+                        <h3 class="certification-title">Ethical Hacking Essentials (EHE)
+                        </h3>
+                        <div class="certification-links">
+                            <a href="https://www.coursera.org/account/accomplishments/certificate/RF8G8L5WRS69" class="certification-link" target="_blank">
+                                <i data-feather="external-link"></i>
+                            </a>
+                            <a href="https://www.coursera.org/account/accomplishments/certificate/RF8G8L5WRS69" class="certification-link">
+                                <i data-feather="file-text"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="certification-details">
+                        <strong>Issued by:</strong> Coursera<br>
+                        <strong>Date:</strong> August 2025<br>
+                        <strong>Credential ID:</strong> RF8G8L5WRS69<br>
+                        <strong>Validation:</strong> <a href="https://www.coursera.org/account/accomplishments/certificate/RF8G8L5WRS69">Verify Credential</a>
+                    </p>
+                    <div class="certification-skills">
+                        <span class="skill-item">Ec Council</span>
+                        <span class="skill-item">Hacking</span>
+                        <span class="skill-item">Security</span>
+                    </div>
+
+                    <div class="certification-info">
+                        <div class="info-item">
+                            <i data-feather="clock"></i> No expiration
+                        </div>
+                        <div class="info-item">
+                            <i data-feather="star" style="color: var(--gold);"></i> Junior Level
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-card" data-category="development">
+                <div class="certification-badge">
+                    <img src="https://owasp.org/assets/images/logo.png" alt="owasp">
+                    <span class="certification-tag">
+                            <i data-feather="code"></i> OWASP
+                        </span>
+                </div>
+                <div class="certification-content">
+                    <div class="certification-header">
+                        <h3 class="certification-title">OWASP Top 10
+                        </h3>
+                        <div class="certification-links">
+                            <a href="https://www.coursera.org/account/accomplishments/certificate/XL5E7A5XA1B5" class="certification-link" target="_blank">
+                                <i data-feather="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="certification-details">
+                        <strong>Issued by:</strong> Packt<br>
+                        <strong>Date:</strong> August 2025<br>
+                        <strong>Credential ID:</strong> XL5E7A5XA1B5 <br>
+                        <strong>Validation:</strong> <a href="https://www.coursera.org/account/accomplishments/certificate/XL5E7A5XA1B5">Verify Credential</a>
+                    </p>
+                    </p>
+                    <div class="certification-skills">
+                        <span class="skill-item">Packt</span>
+                        <span class="skill-item">Defencive Security</span>
+                        <span class="skill-item">Owasp</span>
+                    </div>
+
+                    <div class="certification-info">
+                        <div class="info-item">
+                            <i data-feather="clock"></i> No expiration
+                        </div>
+                        <div class="info-item">
+                            <i data-feather="star" style="color: var(--silver);"></i> Intermediate
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-card" data-category="security">
+                <div class="certification-badge">
+                    <img src="pictures/blob.png" alt="Cybersecurity Analyst">
+                    <span class="certification-tag">
+                            <i data-feather="shield"></i> Security
+                        </span>
+                </div>
+                <div class="certification-content">
+                    <div class="certification-header">
+                        <h3 class="certification-title">Penetration Testing, Threat Hunting, and Cryptography</h3>
+                        <div class="certification-links">
+                            <a href="https://www.credly.com/badges/19283746" class="certification-link" target="_blank">
+                                <i data-feather="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="certification-details">
+                        <strong>Issued by:</strong> IBM<br>
+                        <strong>Date:</strong> August 2025<br>
+                        <strong>Credential ID:</strong> In Progress <br>
+                        <strong>Validation:</strong> <a href="https://www.coursera.org/account/accomplishments/certificate/RF8G8L5WRS69">Verify Credential</a>
+                    </p>
+                    </p>
+                    <div class="certification-skills">
+                        <span class="skill-item">Security</span>
+                        <span class="skill-item">Threat Analysis</span>
+                        <span class="skill-item">Network Security</span>
+                    </div>
+
+                    <div class="certification-info">
+                        <div class="info-item">
+                            <i data-feather="clock"></i>  No expiration
+                        </div>
+                        <div class="info-item">
+                            <i data-feather="star" style="color: var(--bronze);"></i> Specialist
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="certification-card" data-category="ai">
+                <div class="certification-badge">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Codecademy_icon.svg/1200px-Codecademy_icon.svg.png" alt="Javascript">
+                    <span class="certification-tag">
+                            <i data-feather="cpu"></i> Javascript
+                        </span>
+                </div>
+                <div class="certification-content">
+                    <div class="certification-header">
+                        <h3 class="certification-title">Learn JavaScript Course
+                        </h3>
+                        <div class="certification-links">
+                            <a href="https://www.codecademy.com/profiles/ElmehdiEssamit/certificates/705dcb15de0da4dd9d9fc4f3274b430e" class="certification-link" target="_blank">
+                                <i data-feather="external-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="certification-details">
+                        <strong>Issued by:</strong> codecademy<br>
+                        <strong>Date:</strong> June 202<br>
+                        <strong>Credential ID:</strong> 2BABE541-7 <br>
+                        <strong>Validation:</strong> <a href="https://www.coursera.org/account/accomplishments/certificate/RF8G8L5WRS69">Verify Credential</a>
+                    </p>
+                    </p>
+                    <div class="certification-skills">
+                        <span class="skill-item">Javascript</span>
+                        <span class="skill-item">Intermediate</span>
+                    </div>
+
+                    <div class="certification-info">
+                        <div class="info-item">
+                            <i data-feather="clock"></i> No expiration
+                        </div>
+                        <div class="info-item">
+                            <i data-feather="star" style="color: var(--gold);"></i> Intermediate
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-card">
+        <div class="education-section">
+            <h2>Education & Academic Achievements</h2>
+
+            <div class="education-timeline">
+                <div class="education-item">
+                    <h3 class="education-title">Love from first sight</h3>
+                    <div class="education-institution">My first time lol</div>
+                    <div class="education-date">
+                        <i data-feather="calendar"></i> 2016
+                    </div>
+                    <p class="education-description">
+                        I got my first computer at 10 years old, it was MINE, an ACER 1 ram pc, I loved how that harry potter device works, and soon disassembled IT.
+                    </p>
+                </div>
+
+                <div class="education-item">
+                    <h3 class="education-title">Bachelor in Morocco</h3>
+                    <div class="education-institution">Sm B</div>
+                    <div class="education-date">
+                        <i data-feather="calendar"></i> 2024
+                    </div>
+                    <p class="education-description">
+                        Graduated with mention tres bien, and continued my studies in cpge mp after.
+                    </p>
+                </div>
+
+                <div class="education-item">
+                    <h3 class="education-title">IBM & Ec Council certified hacker</h3>
+                    <div class="education-institution">EHE and IBM Career Certificates</div>
+                    <div class="education-date">
+                        <i data-feather="calendar"></i> 2025
+                    </div>
+                    <p class="education-description">
+                        After years of learning, I attempted to get certified and got 2 core certifications, check my tryhackme and hack the box CTFs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2021 - 2025 Akeanti | Made with <i data-feather="heart" style="width: 12px; height: 12px; color: #ff6b6b;"></i> and JavaScript</p>
+        <p>Connect with me: <a href="https://github.com/akeanti" target="_blank">GitHub</a> | <a href="https://twitter.com/akeantie" target="_blank">Twitter</a> | <a href="https://www.instagram.com/akeantie/" target="_blank">Instagram</a></p>
+    </div>
+</main>
+
+<div class="theme-toggle">
+    <i data-feather="moon"></i>
+</div>
+
+<script>
+    feather.replace();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        createStarField();
+        createNebulas();
+        createShootingStars();
+        setupParallax();
+        setupCertificationFilter();
+        createParticleSystem();
+        setupThemeToggle();
+        setupMobileNav();
+        setupNavbarTooltips();
+        setupSkillBadges();
+        setupTiltEffect();
+        createGalaxyCore();
+    });
+
+    function createStarField() {
+        const starField = document.querySelector('.star-field');
+        const numberOfStars = 500;
+
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+
+            const size = Math.random() * 2.5 + 0.5;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+
+            star.style.opacity = Math.random() * 0.7;
+            star.style.animationDelay = `${Math.random() * 8}s`;
+
+            const colors = ['#ffffff', '#e6e6ff', '#f0f8ff', '#d3d3d3', '#f8f8ff'];
+            star.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+            starField.appendChild(star);
+        }
+    }
+
+    function createNebulas() {
+        const spaceBackground = document.querySelector('.space-background');
+        const nebulaColors = ['purple', 'blue', 'green', 'red', 'pink', 'cyan'];
+
+        for (let i = 0; i < 8; i++) {
+            const nebula = document.createElement('div');
+            nebula.className = `nebula ${nebulaColors[i % nebulaColors.length]}`;
+            nebula.style.left = `${Math.random() * 100}%`;
+            nebula.style.top = `${Math.random() * 100}%`;
+
+            const size = Math.random() * 300 + 100;
+            nebula.style.width = `${size}px`;
+            nebula.style.height = `${size}px`;
+
+            nebula.style.opacity = Math.random() * 0.3 + 0.1;
+            nebula.style.animationDuration = `${Math.random() * 60 + 30}s`;
+            nebula.style.animationDelay = `${Math.random() * 20}s`;
+
+            spaceBackground.appendChild(nebula);
+        }
+    }
+
+    function createGalaxyCore() {
+        const accretionDisk = document.querySelector('.accretion-disk');
+    }
+
+    function setupParallax() {
+        const elements = document.querySelectorAll('.nebula, .spiral-arm, .accretion-disk, .planet');
+
+        window.addEventListener('mousemove', (e) => {
+            const xPos = e.clientX / window.innerWidth;
+            const yPos = e.clientY / window.innerHeight;
+
+            elements.forEach((el, index) => {
+                const depth = index % 3 + 1;
+                const factorX = index % 2 === 0 ? 1 : -1;
+                const factorY = index % 3 === 0 ? 1 : -1;
+                const speed = 5 * depth;
+
+                el.style.transform = `translate(${xPos * speed * factorX}px, ${yPos * speed * factorY}px)`;
+            });
+        });
+    }
+
+    function createShootingStars() {
+        const spaceBackground = document.querySelector('.space-background');
+
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+
+            const startFromRight = Math.random() > 0.5;
+            if (startFromRight) {
+                shootingStar.style.left = '100%';
+                shootingStar.style.top = `${Math.random() * 100}%`;
+            } else {
+                shootingStar.style.left = `${Math.random() * 100}%`;
+                shootingStar.style.top = '0%';
+            }
+
+            const destX = (Math.random() * 100 - 50);
+            const destY = (Math.random() * 100);
+
+            const angle = Math.atan2(destY, destX) * 180 / Math.PI;
+
+            shootingStar.style.setProperty('--destX', `${destX}vw`);
+            shootingStar.style.setProperty('--destY', `${destY}vh`);
+            shootingStar.style.setProperty('--angle', `${angle}deg`);
+
+            const duration = Math.random() * 3 + 2;
+            shootingStar.style.animationDuration = `${duration}s`;
+
+            spaceBackground.appendChild(shootingStar);
+
+            setTimeout(() => {
+                shootingStar.remove();
+            }, duration * 1000);
+
+            const nextTime = Math.random() * 3000 + 2000;
+            setTimeout(createShootingStar, nextTime);
+        }
+
+        for (let i = 0; i < 3; i++) {
+            setTimeout(createShootingStar, i * 1000);
+        }
+    }
+
+    function setupNavbarTooltips() {
+        const navbarItems = document.querySelectorAll('.navbar__item');
+
+        navbarItems.forEach(item => {
+            const link = item.querySelector('.navbar__link');
+            const content = link.getAttribute('data-content');
+
+            link.addEventListener('mouseenter', () => {
+                item.style.transform = 'scale(1.15)';
+                item.style.transition = 'transform 0.3s ease';
+
+                const tooltip = document.createElement('div');
+                tooltip.className = 'navbar-tooltip';
+                tooltip.textContent = content;
+                tooltip.style.position = 'absolute';
+                tooltip.style.background = 'var(--tooltip-bg)';
+                tooltip.style.color = 'var(--text)';
+                tooltip.style.padding = '0.5rem 1rem';
+                tooltip.style.borderRadius = 'var(--borderRadius)';
+                tooltip.style.fontSize = '0.8rem';
+                tooltip.style.whiteSpace = 'nowrap';
+                tooltip.style.zIndex = '200';
+                tooltip.style.pointerEvents = 'none';
+                tooltip.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+                tooltip.style.backdropFilter = 'blur(4px)';
+                document.body.appendChild(tooltip);
+
+                const rect = item.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + window.scrollX}px`;
+                tooltip.style.top = `${rect.bottom + 8 + window.scrollY}px`;
+            });
+
+            link.addEventListener('mouseleave', () => {
+                item.style.transform = 'scale(1)';
+                const tooltips = document.querySelectorAll('.navbar-tooltip');
+                tooltips.forEach(tooltip => {
+                    tooltip.remove();
+                });
+            });
+        });
+    }
+
+    function setupCertificationFilter() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const certificationCards = document.querySelectorAll('.certification-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                certificationCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    }
+
+    function createParticleSystem() {
+        const particleSystem = document.querySelector('.particle-system');
+
+        for (let i = 0; i < 150; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.setProperty('--particleX', Math.random() * 80 - 40);
+            particle.style.setProperty('--particleY', Math.random() * 80 - 40);
+            particle.style.animationDuration = `${Math.random() * 8 + 4}s`;
+            particle.style.animationDelay = `${Math.random() * 4}s`;
+
+            particleSystem.appendChild(particle);
+        }
+    }
+
+    function setupThemeToggle() {
+        const themeToggle = document.querySelector('.theme-toggle');
+        let isDarkMode = true;
+
+        themeToggle.addEventListener('click', () => {
+            if (isDarkMode) {
+                document.documentElement.style.setProperty('--bg-color', '#f0f0f0');
+                document.documentElement.style.setProperty('--text', '#333333');
+                document.documentElement.style.setProperty('--text-secondary', '#666');
+                document.documentElement.style.setProperty('--card-bg', 'rgba(255, 255, 255, 0.8)');
+                document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.15)');
+                document.documentElement.style.setProperty('--glow', 'rgba(64, 111, 243, 0.1)');
+                document.documentElement.style.setProperty('--tooltip-bg', 'rgba(255, 255, 255, 0.95)');
+                document.documentElement.style.setProperty('--transparent-bg', 'rgba(0, 0, 0, 0.04)');
+                document.documentElement.style.setProperty('--shooting-star-color', 'rgba(64, 111, 243, 0.7)');
+
+                themeToggle.innerHTML = '';
+                const sunIcon = document.createElement('i');
+                sunIcon.setAttribute('data-feather', 'sun');
+                themeToggle.appendChild(sunIcon);
+                feather.replace();
+            } else {
+                document.documentElement.style.setProperty('--bg-color', '#0a0e17');
+                document.documentElement.style.setProperty('--text', '#e0e0e0');
+                document.documentElement.style.setProperty('--text-secondary', '#a0a0c0');
+                document.documentElement.style.setProperty('--card-bg', 'rgba(17, 22, 38, 0.6)');
+                document.documentElement.style.setProperty('--shadow-color', 'rgba(0, 0, 0, 0.25)');
+                document.documentElement.style.setProperty('--glow', 'rgba(64, 111, 243, 0.2)');
+                document.documentElement.style.setProperty('--tooltip-bg', 'rgba(10, 14, 23, 0.95)');
+                document.documentElement.style.setProperty('--transparent-bg', 'rgba(255, 255, 255, 0.04)');
+                document.documentElement.style.setProperty('--shooting-star-color', 'rgba(255, 255, 255, 0.9)');
+
+                themeToggle.innerHTML = '';
+                const moonIcon = document.createElement('i');
+                moonIcon.setAttribute('data-feather', 'moon');
+                themeToggle.appendChild(moonIcon);
+                feather.replace();
+            }
+            isDarkMode = !isDarkMode;
+        });
+    }
+
+    function setupMobileNav() {
+        const mobileToggle = document.querySelector('.mobile-nav-toggle');
+        const mobileMenu = document.querySelector('.mobile-navbar__menu');
+
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', () => {
+                mobileToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+        }
+    }
+
+    function setupSkillBadges() {
+        const skillBadges = document.querySelectorAll('.skill-badge');
+
+        skillBadges.forEach(badge => {
+            badge.addEventListener('click', () => {
+                skillBadges.forEach(b => b.classList.remove('active'));
+                badge.classList.add('active');
+
+                badge.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    badge.style.transform = 'scale(1)';
+                }, 300);
+            });
+        });
+    }
+
+    function setupTiltEffect() {
+        const certificationCards = document.querySelectorAll('.certification-card');
+
+        certificationCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateY = (x - centerX) / centerX * 5;
+                const rotateX = (centerY - y) / centerY * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+    }
+</script>
+</body>
+</html>

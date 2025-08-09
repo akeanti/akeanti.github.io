@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="Akeanti's Page">
+    <meta property="og:description" content="Akeanti, the webpage of a small tech lover and content creator. This is the most satisfying dynamic page you will ever see :)">
+    <meta property="og:image" content="https://raw.githubusercontent.com/akeanti/akeanti.github.io/main/pitures/akeanti.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Akeanti</title>
+    <link rel="icon" href="pitures/web.ico" type="image/x-icon">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .linktree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            padding-top: 80px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: var(--borderRadius);
+            box-shadow: 0 8px 25px var(--shadow-color);
+            width: 100%;
+            max-width: 750px;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: visible;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: var(--glow);
+            border-radius: calc(var(--borderRadius) + 8px);
+            z-index: -1;
+            opacity: 0.15;
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.15; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.15; }
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* Profile Picture Container */
+        .avatar-container {
+            margin: 0 auto 1.5rem;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent2));
+            padding: 5px;
+            box-shadow: 0 0 25px var(--glow);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Profile Picture Container */
+        .avatar-container {
+            margin: 0 auto 1.5rem;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent2));
+            padding: 5px;
+            box-shadow: 0 0 25px var(--glow);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Profile Image Styling */
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            border: 3px solid var(--card-bg);
+            box-sizing: border-box;
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f, #1a2a6c);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile responsive sizing */
+        @media (max-width: 768px) {
+            .avatar-container {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .profile-bio {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(64, 111, 243, 0.3);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link:hover i {
+            transform: scale(1.2);
+            color: white;
+        }
+
+        /* Links Container */
+        .links-container {
+            padding: 0 1.5rem 2rem;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            background: var(--transparent-bg);
+            color: var(--text);
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            border-radius: var(--borderRadius);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: translateZ(0);
+            backdrop-filter: blur(8px);
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--accent3), var(--accent2));
+            border-radius: calc(var(--borderRadius) + 2px);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .link-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px var(--glow);
+        }
+
+        .link-button:hover::before {
+            opacity: 1;
+        }
+
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(64, 111, 243, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .link-icon i {
+            font-size: 1.2rem;
+        }
+
+        .link-content {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-title i {
+            font-size: 0.9rem;
+        }
+
+        .link-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .link-button:hover .link-description {
+            opacity: 1;
+        }
+
+        .link-badge {
+            background: linear-gradient(45deg, var(--accent1), var(--primary));
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            width: 100%;
+            max-width: 750px;
+            margin-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-hover);
+        }
+
+        /* Particle System */
+        .particle-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 1.5px;
+            height: 1.5px;
+            background: white;
+            border-radius: 50%;
+            animation: particleMove linear infinite;
+        }
+
+        @keyframes particleMove {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--particleX), var(--particleY));
+                opacity: 0;
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: var(--card-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.3s ease;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+            color: var(--text);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .linktree-container {
+                padding-top: 60px;
+            }
+
+            .profile-card {
+                max-width: 100%;
+            }
+
+            .profile-name {
+                font-size: 1.8rem;
+            }
+
+            .profile-bio {
+                font-size: 1rem;
+            }
+
+            .link-button {
+                padding: 0.8rem;
+            }
+
+            .link-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .link-title {
+                font-size: 1rem;
+            }
+
+            .link-description {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="space-background">
+        <div class="star-field"></div>
+        <div class="spiral-arm spiral-arm-1"></div>
+        <div class="spiral-arm spiral-arm-2"></div>
+        <div class="accretion-disk"></div>
+        <div class="galaxy-core"></div>
+        <div class="planet planet-1" style="--orbit-radius: 150px;"></div>
+        <div class="planet planet-2" style="--orbit-radius: 220px;"></div>
+        <div class="planet planet-3" style="--orbit-radius: 290px;"></div>
+    </div>
+
+    <div class="particle-system"></div>
+
+    <nav class="mobile-navbar">
+        <div class="mobile-navbar__logo">
+            <i data-feather="star"></i>
+            <span>Akeanti</span>
+        </div>
+        <div class="mobile-nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="mobile-navbar__menu">
+            <li class="mobile-navbar__item">
+                <a href="index.html" class="mobile-navbar__link">
+                    <i data-feather="home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li class="mobile-navbar__item">
+                <a href="portfolio.html" class="mobile-navbar__link">
+                    <i data-feather="code"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li class="mobile-navbar__item">
+                <a href="education.html" class="mobile-navbar__link">
+                    <i data-feather="award"></i>
+                    <span>Certifications</span>
+                </a>
+            </li>
+            <li class="mobile-navbar__item">
+                <a href="linktree.html" class="mobile-navbar__link">
+                    <i data-feather="briefcase"></i>
+                    <span>My LinkTree</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <nav class="navbar">
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="index.html" class="navbar__link" data-content="Home"><i data-feather="home"></i></a>
+            </li>
+            <li class="navbar__item">
+                <a href="portfolio.html" class="navbar__link active" data-content="Projects"><i data-feather="code"></i></a>
+            </li>
+            <li class="navbar__item">
+                <a href="education.html" class="navbar__link" data-content="Certifications"><i data-feather="award"></i></a>
+            </li>
+            <li class="navbar__item">
+                <a href="linktree.html" class="navbar__link" data-content="My LinkTree"><i data-feather="briefcase"></i></a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="linktree-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <img src="pictures/02ff5d7f92171f593e39c55b99220d61.webp" alt="ake" class="profile-avatar">
+                </div>
+                <h1 class="profile-name">Akeanti</h1>
+                <p class="profile-bio">Developer | Hacker | Creator | Building the future one line of code at a time</p>
+
+                <div class="social-links">
+                    <a href="https://github.com/akeanti" class="social-link">
+                        <i data-feather="github"></i>
+                    </a>
+                    <a href="https://x.com/akeantie" class="social-link">
+                        <i data-feather="twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/akeantie/" class="social-link">
+                        <i data-feather="instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/elmehdi-essamit-559983372" class="social-link">
+                        <i data-feather="linkedin"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@akeanti" class="social-link">
+                        <i data-feather="youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="links-container">
+                <a href="https://akeanti.com/" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="briefcase"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">
+                            Portfolio Website
+                            <span class="link-badge">Featured</span>
+                        </div>
+                        <div class="link-description">Explore my projects and work experience</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/akeanti" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="github"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">GitHub Profile</div>
+                        <div class="link-description">View my open-source contributions and projects</div>
+                    </div>
+                </a>
+
+                <a href="https://tryhackme.com/p/akeanti" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="book"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">TryHackMe Profile</div>
+                        <div class="link-description">Check my cybersecurity and CTF status</div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/@akeanti" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="video"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">YouTube Channel</div>
+                        <div class="link-description">Watch tutorials and tech reviews</div>
+                    </div>
+                </a>
+
+                <a href="https://hackerone.com/akeanti?type=user" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="shopping-bag"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">HackerOne</div>
+                        <div class="link-description">Check my bug reports and book a pentest by me</div>
+                    </div>
+                </a>
+
+                <a href="https://bugcrowd.com/h/akeanti" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="calendar"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">Bug Crowd</div>
+                        <div class="link-description">Schedule a 1:1 session for project advice</div>
+                    </div>
+                </a>
+
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=akeanti@proton.me" class="link-button">
+                    <div class="link-icon">
+                        <i data-feather="mail"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">Contact Me</div>
+                        <div class="link-description">Get in touch for collaboration opportunities</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2021 - 2025 Akeanti | Made with <i data-feather="heart" style="width: 12px; height: 12px; color: #ff6b6b;"></i> and JavaScript</p>
+            <p>Connect with me: <a href="https://github.com/akeanti" target="_blank">GitHub</a> | <a href="https://twitter.com/akeantie" target="_blank">Twitter</a> | <a href="https://www.instagram.com/akeantie/" target="_blank">Instagram</a></p>
+        </div>
+    </main>
+
+    <div class="theme-toggle">
+        <i data-feather="moon"></i>
+    </div>
+
+    <script src="assets/scripts.js"></script>
+
+</body>
+</html>
