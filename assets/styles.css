@@ -2,7 +2,9 @@
     --borderRadius: 12px;
     --spacer: 0.6rem;
     --primary: #406ff3;
+    --primary-hover: #2a5be8;
     --text: #e0e0e0;
+    --text-secondary: #a0a0c0;
     --linkHeight: calc(var(--spacer) * 3);
     --timing: 200ms;
     --transition: var(--timing) ease all;
@@ -15,6 +17,14 @@
     --accent1: #ff6b6b;
     --accent2: #4ecdc4;
     --accent3: #45b7d1;
+    --shooting-star-color: rgba(255, 255, 255, 0.9);
+    --mobile-nav-height: 60px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -25,8 +35,10 @@ body {
     color: var(--text);
     overflow-x: hidden;
     position: relative;
+    min-height: 100vh;
 }
 
+/* Enhanced Space Background */
 .space-background {
     position: fixed;
     top: 0;
@@ -48,6 +60,14 @@ body {
     background: white;
     border-radius: 50%;
     animation: twinkle 2.5s infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.star:hover {
+    transform: scale(1.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: none;
 }
 
 @keyframes twinkle {
@@ -55,90 +75,228 @@ body {
     50% { opacity: 0.8; }
 }
 
+/* Enhanced Nebulas */
 .nebula {
     position: absolute;
     border-radius: 50%;
-    filter: blur(30px);
-    opacity: 0.5;
+    filter: blur(40px);
+    opacity: 0.4;
     animation: float 50s linear infinite;
+    z-index: 0;
+    transform-origin: center;
 }
 
-#nebula1 {
-    top: 15%;
-    left: 10%;
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle, #ff7675, transparent);
+.nebula.purple {
+    background: radial-gradient(circle, rgba(142, 68, 173, 0.7), transparent);
+    box-shadow: 0 0 100px rgba(142, 68, 173, 0.3);
 }
 
-#nebula2 {
-    bottom: 20%;
-    right: 15%;
-    width: 140px;
-    height: 140px;
-    background: radial-gradient(circle, #00b894, transparent);
+.nebula.blue {
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.7), transparent);
+    box-shadow: 0 0 100px rgba(52, 152, 219, 0.3);
 }
 
-.asteroid {
+.nebula.green {
+    background: radial-gradient(circle, rgba(46, 204, 113, 0.7), transparent);
+    box-shadow: 0 0 100px rgba(46, 204, 113, 0.3);
+}
+
+.nebula.red {
+    background: radial-gradient(circle, rgba(231, 76, 60, 0.7), transparent);
+    box-shadow: 0 0 100px rgba(231, 76, 60, 0.3);
+}
+
+.nebula.pink {
+    background: radial-gradient(circle, rgba(255, 107, 129, 0.7), transparent);
+    box-shadow: 0 0 100px rgba(255, 107, 129, 0.3);
+}
+
+.nebula.cyan {
+    background: radial-gradient(circle, rgba(26, 188, 156, 0.7), transparent);
+    box-shadow: 0 0 100px rgba(26, 188, 156, 0.3);
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(10px, 10px) rotate(180deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Galaxy Core with Spiral Arms */
+.galaxy-core {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    background: #333;
-    animation: rotate 50s linear infinite;
+    background: radial-gradient(circle, #000, #111, #222);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
 }
 
-.asteroid-trail {
+.accretion-disk {
     position: absolute;
-    width: 2px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.5);
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 100px;
     border-radius: 50%;
-    animation: trail 50s linear infinite;
-}
-
-@keyframes trail {
-    0% {
-        transform: translate(0, 0);
-        opacity: 0;
-    }
-    100% {
-        transform: translate(var(--trailX), var(--trailY));
-        opacity: 0;
-    }
-}
-
-#asteroid1 {
-    top: 40%;
-    right: 10%;
-    width: 35px;
-    height: 35px;
-}
-
-#asteroid2 {
-    bottom: 30%;
-    left: 5%;
-    width: 28px;
-    height: 28px;
-}
-
-.comet {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, transparent, #6c5ce7, transparent);
-    filter: blur(8px);
+    background: linear-gradient(90deg, transparent, #ff6b6b, #4ecdc4, #406ff3, transparent);
+    opacity: 0.7;
+    transform: translate(-50%, -50%) rotateX(80deg);
+    animation: rotateDisk 30s linear infinite;
     z-index: 1;
-    animation: cometFlight 25s linear infinite;
+    filter: blur(8px);
 }
 
-@keyframes cometFlight {
+@keyframes rotateDisk {
+    0% { transform: translate(-50%, -50%) rotateX(80deg) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotateX(80deg) rotate(360deg); }
+}
+
+.spiral-arm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    z-index: 0;
+    animation: rotateGalaxy 300s linear infinite;
+    transform-origin: center;
+}
+
+.spiral-arm-1 {
+    background: conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0%,
+            rgba(64, 111, 243, 0.2) 10%,
+            transparent 20%,
+            rgba(78, 205, 196, 0.2) 30%,
+            transparent 40%,
+            rgba(255, 107, 107, 0.2) 50%,
+            transparent 60%,
+            rgba(64, 111, 243, 0.2) 70%,
+            transparent 80%,
+            rgba(78, 205, 196, 0.2) 90%,
+            transparent 100%
+    );
+    filter: blur(15px);
+    animation-duration: 200s;
+}
+
+.spiral-arm-2 {
+    background: conic-gradient(
+            from 180deg at 50% 50%,
+            transparent 0%,
+            rgba(142, 68, 173, 0.2) 10%,
+            transparent 20%,
+            rgba(46, 204, 113, 0.2) 30%,
+            transparent 40%,
+            rgba(231, 76, 60, 0.2) 50%,
+            transparent 60%,
+            rgba(52, 152, 219, 0.2) 70%,
+            transparent 80%,
+            rgba(255, 107, 129, 0.2) 90%,
+            transparent 100%
+    );
+    filter: blur(20px);
+    width: 700px;
+    height: 700px;
+    animation-duration: 250s;
+}
+
+@keyframes rotateGalaxy {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Planets */
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 3;
+    animation: orbit linear infinite;
+    transform-origin: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.planet:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.planet-1 {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    box-shadow: 0 0 10px rgba(255, 154, 158, 0.7);
+    animation-duration: 20s;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -150px;
+}
+
+.planet-2 {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    box-shadow: 0 0 15px rgba(161, 196, 253, 0.7);
+    animation-duration: 35s;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -220px;
+}
+
+.planet-3 {
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+    box-shadow: 0 0 12px rgba(212, 252, 121, 0.7);
+    animation-duration: 50s;
+    top: 50%;
+    left: 50%;
+    margin-top: -12.5px;
+    margin-left: -290px;
+}
+
+@keyframes orbit {
+    0% { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
+}
+
+/* Enhanced Shooting Stars */
+.shooting-star {
+    position: absolute;
+    background: var(--shooting-star-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.7);
+    z-index: 5;
+    animation: shootingStar 4s linear forwards;
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--shooting-star-color) 100%);
+    transform-origin: left center;
+    animation: shootingTail 4s linear forwards;
+}
+
+@keyframes shootingStar {
     0% {
         transform: translate(0, 0);
-        opacity: 0;
-    }
-    10% {
         opacity: 1;
     }
-    90% {
+    80% {
         opacity: 1;
     }
     100% {
@@ -147,6 +305,21 @@ body {
     }
 }
 
+@keyframes shootingTail {
+    0% {
+        width: 0;
+        transform: translate(0, -50%) rotate(var(--angle));
+    }
+    20% {
+        width: 150px;
+    }
+    100% {
+        width: 300px;
+        transform: translate(0, -50%) rotate(var(--angle));
+    }
+}
+
+/* Navbar */
 .navbar {
     position: fixed;
     top: 50%;
@@ -164,6 +337,8 @@ body {
     align-items: center;
     gap: 0.8rem;
     transition: transform 0.3s ease;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .navbar:hover {
@@ -247,6 +422,7 @@ body {
     position: relative;
     overflow: visible;
     margin-bottom: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .profile-card::before {
@@ -261,12 +437,6 @@ body {
     z-index: -1;
     opacity: 0.15;
     animation: pulse 2.5s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 0.15; }
-    50% { opacity: 0.25; }
-    100% { opacity: 0.15; }
 }
 
 .profile-content {
@@ -287,25 +457,24 @@ body {
     align-items: center;
 }
 
-.profile-picture {
+.threejs-container {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: var(--borderRadius);
-    box-shadow: 0 4px 12px var(--shadow-color);
-    animation: float 4s ease-in-out infinite;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-@keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0); }
+#three-canvas {
+    width: 100%;
+    height: 100%;
 }
 
 .profile-title {
     color: var(--primary);
     margin: 0.4rem 0;
     font-size: 1.1rem;
+    font-weight: 400;
 }
 
 .profile-badges {
@@ -328,6 +497,7 @@ body {
     transition: transform 0.3s ease;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .badge::after {
@@ -358,6 +528,7 @@ body {
     margin: 0.8rem 0;
     font-size: 0.85rem;
     line-height: 1.5;
+    color: var(--text-secondary);
 }
 
 .achievements {
@@ -381,6 +552,7 @@ body {
 
 .achievement-card:hover {
     transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .achievement-icon {
@@ -390,18 +562,21 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+    background: rgba(64, 111, 243, 0.2);
+    border-radius: 50%;
 }
 
 .achievement-content h3 {
     margin-top: 0;
     color: var(--primary);
     font-size: 0.85rem;
+    font-weight: 600;
 }
 
 .achievement-content p {
     margin: 0.4rem 0 0;
     font-size: 0.75rem;
-    color: var(--text);
+    color: var(--text-secondary);
 }
 
 .profile-stats {
@@ -409,62 +584,24 @@ body {
     justify-content: space-around;
     padding: 0.8rem 1.5rem;
     background: rgba(0, 0, 0, 0.18);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stat {
     text-align: center;
+    padding: 0.5rem;
 }
 
 .stat-value {
     font-weight: bold;
     font-size: 1.1rem;
     color: var(--primary);
+    display: block;
 }
 
 .stat-label {
     font-size: 0.75rem;
-    color: var(--text);
-}
-
-.additional-info-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    width: 100%;
-    max-width: 750px;
-    padding: 0 1.5rem;
-}
-
-.info-card {
-    background: var(--card-bg);
-    border-radius: var(--borderRadius);
-    padding: 1.5rem;
-    flex: 1;
-    min-width: 200px;
-    box-shadow: 0 8px 25px var(--shadow-color);
-    backdrop-filter: blur(8px);
-}
-
-.info-card h2 {
-    color: var(--primary);
-    margin-top: 0;
-    margin-bottom: 1rem;
-}
-
-.info-card ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.info-card li {
-    margin-bottom: 0.8rem;
-    display: flex;
-    align-items: center;
-}
-
-.info-card i {
-    margin-right: 0.8rem;
-    color: var(--primary);
+    color: var(--text-secondary);
 }
 
 .particle-system {
@@ -523,6 +660,7 @@ body {
     box-shadow: 0 4px 25px var(--shadow-color);
     position: relative;
     animation: modalFadeIn 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @keyframes modalFadeIn {
@@ -562,6 +700,8 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 12px var(--shadow-color);
     transition: transform 0.3s ease;
+    z-index: 100;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .theme-toggle:hover {
@@ -573,37 +713,359 @@ body {
     color: var(--text);
 }
 
-        /* Skill Section */
-        .skill-section {
-            margin: 1.2rem 0;
-        }
+/* Skill Section */
+.skill-section {
+    margin: 1.2rem 0;
+}
 
-        .skill-title {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            font-size: 0.9rem;
-        }
+.skill-title {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
 
-        .skill-bars {
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
+.skill-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
 
-        .skill-bar {
-            background: var(--transparent-bg);
-            border-radius: var(--borderRadius);
-            padding: 0.4rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
+.skill-bar {
+    background: var(--transparent-bg);
+    border-radius: var(--borderRadius);
+    padding: 0.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-        .skill-progress {
-            height: 8px;
-            border-radius: 4px;
-            background: var(--glow);
-        }
+.skill-progress {
+    height: 8px;
+    border-radius: 4px;
+    background: var(--glow);
+    position: relative;
+    overflow: hidden;
+}
 
-        .skill-name {
-            font-size: 0.75rem;
-            margin-bottom: 0.3rem;
-        }
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--progress);
+    background: var(--primary);
+    animation: progressFill 1.5s ease-out forwards;
+}
+
+@keyframes progressFill {
+    from { width: 0; }
+}
+
+.skill-name {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.skill-percentage {
+    color: var(--text-secondary);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 750px;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--primary-hover);
+}
+
+.social-cards {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.discord-widget-container {
+    margin: 1rem 0;
+    width: 50%;
+    max-width: 300px;
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.discord-widget-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px var(--shadow-color), 0 0 15px var(--glow);
+}
+
+.discord-widget-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.discord-widget-container:hover img {
+    filter: brightness(1.05);
+}
+
+.discord-widget-container::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(120deg,
+    rgba(64, 111, 243, 0.15) 0%,
+    rgba(78, 205, 196, 0.1) 50%,
+    rgba(64, 111, 243, 0.15) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.discord-widget-container:hover::before {
+    opacity: 1;
+}
+
+.github-stats-container {
+    margin: 1rem 0;
+    width: 50%;
+    height: 100%;
+    max-width: 500px;
+    flex: 1;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.github-stats-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px var(--shadow-color), 0 0 15px var(--glow);
+}
+
+.github-stats-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+.github-stats-container:hover img {
+    filter: brightness(1.05);
+}
+
+.github-stats-container::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(120deg,
+    rgba(255, 107, 107, 0.15) 0%,
+    rgba(78, 205, 196, 0.1) 50%,
+    rgba(64, 111, 243, 0.15) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Mobile Navbar For Android nerds lol */
+.mobile-nav-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: var(--card-bg);
+    border-radius: var(--borderRadius);
+    z-index: 150;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+
+    /* Mobile Navbar Styles */
+    .mobile-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--mobile-nav-height);
+        background: var(--card-bg);
+        backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        z-index: 100;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .mobile-navbar__logo {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .mobile-navbar__logo i {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mobile-navbar__menu {
+        position: fixed;
+        top: var(--mobile-nav-height);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--mobile-nav-height));
+        background: rgba(10, 14, 23, 0.95);
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all 0.4s ease;
+        z-index: 99;
+    }
+
+    .mobile-navbar__menu.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .mobile-navbar__item {
+        margin: 0.8rem 0;
+    }
+
+    .mobile-navbar__link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem 1rem;
+        border-radius: var(--borderRadius);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-navbar__link:hover {
+        background: rgba(64, 111, 243, 0.2);
+    }
+
+    .mobile-navbar__link i {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mobile-navbar__link span {
+        font-size: 1rem;
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+    }
+
+    .profile-container {
+        margin-left: 0;
+        margin-top: var(--mobile-nav-height);
+        padding-top: 1rem;
+    }
+
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-image-container {
+        margin-bottom: 1rem;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+
+    .achievements {
+        flex-direction: column;
+    }
+
+    .achievement-card {
+        width: 100%;
+    }
+
+    .theme-toggle {
+        bottom: 5rem;
+    }
+
+    .galaxy-core,
+    .accretion-disk,
+    .spiral-arm {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-navbar {
+        display: none;
+    }
+}
