@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>akeanti</title>
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <meta property="og:title" content="akeanti">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://akeanti.xyz">
+    <meta property="og:image" content="pics/pfp.jpg">
+    <meta property="og:description" content="19yo CPGE Student, Maths Nerd & Linux Enthusiast. Welcome to my digital garden.">
+    <meta name="theme-color" content="#828282">
+
+    <style>
+        :root {
+            --bg-plaid: #fdf5e6;
+            --bar-color: #e6cdac;
+            --box-bg: #ffffff;
+            --text-main: #555;
+            --pink-accent: #ff69b4;
+            --orange-accent: #ffcc99;
+            --border-color: #dcbfa0;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-plaid);
+            background-image:
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.4) 50%, transparent 50%),
+                    linear-gradient(rgba(255, 255, 255, 0.4) 50%, transparent 50%);
+            background-size: 50px 50px;
+            font-family: 'Arial', sans-serif;
+            font-size: 11px;
+            color: #444;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 700px;
+            background: var(--bg-plaid);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .top-bar {
+            background: var(--bar-color);
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #fff;
+            font-weight: bold;
+        }
+
+        .search-box {
+            background: #fff;
+            padding: 2px 10px;
+            border: 1px solid #aaa;
+            font-weight: bold;
+            font-size: 11px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sub-bar {
+            background: var(--bar-color);
+            padding: 4px 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .link-bar {
+            background: #fff;
+            padding: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 11px;
+            border-bottom: 1px solid var(--bar-color);
+        }
+
+        .profile-section {
+            background: #fff;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .pfp {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid #eee;
+        }
+
+        .bio-text {
+            flex: 1;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+        .bio-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #d66a6a;
+            margin-bottom: 5px;
+        }
+        .highlight-text { background: #eee; padding: 0 2px; font-weight: bold; border: 1px solid #ccc; font-size: 9px; cursor: pointer; }
+
+        .likes-box {
+            width: 160px;
+            font-size: 9px;
+            line-height: 1.3;
+            border-left: 1px dotted #ccc;
+            padding-left: 5px;
+        }
+        .heart-icon { color: red; font-size: 10px; }
+
+        .music-bar {
+            background: var(--orange-accent);
+            color: #d66a6a;
+            padding: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .main-content {
+            background: #fff;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 10px;
+        }
+
+        .left-col h2 {
+            font-size: 16px; margin: 0 0 5px 0; color: #555;
+            border-bottom: 1px dashed #e6cdac; padding-bottom: 2px;
+        }
+        .socials-list {
+            font-size: 10px; margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .socials-list a {
+            text-decoration: none;
+            color: #d66a6a;
+            font-weight: bold;
+        }
+        .socials-list a:hover {
+            text-decoration: underline;
+            color: #ff69b4;
+        }
+
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 5px;
+            justify-content: center;
+        }
+        .button-grid img {
+            width: 88px;
+            height: 31px;
+            image-rendering: pixelated;
+            opacity: 0.9;
+        }
+        .button-grid img:hover {
+            opacity: 1;
+        }
+
+        .dni-list {
+            font-size: 9px; color: #888; border-top: 1px dotted #ccc; padding-top: 5px;
+        }
+
+        .recaptcha-box {
+            background: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            padding: 10px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .recaptcha-header {
+            background: #ffb6c1; color: white; text-align: center; font-weight: bold; padding: 2px;
+            margin-bottom: 5px; border-radius: 3px 3px 0 0;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+        .grid-pic {
+            width: 100%;
+            height: 85px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        u { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="top-bar">
+        <span>My Site | WebPage</span>
+        <div class="search-box">Search</div>
+        <span>Settings | Sign Up</span>
+    </div>
+
+    <img src="pics/banner.jpg" class="banner">
+
+    <div class="sub-bar">
+        <span><u style="margin-right:5px;">File</u> <u style="margin-right:5px;">View</u> <u>Edit</u></span>
+        <span>Blogs: Private Page</span>
+        <span>id: akeanti</span>
+    </div>
+
+    <div class="link-bar">
+        ♥ Home ♥ Maths Notes ♥ Cyber Lab ♥ Contact Me ♥
+    </div>
+
+    <div class="profile-section">
+        <img src="pics/pfp.jpg" ff class="pfp">
+
+        <div class="bio-text">
+            <div class="bio-title">akeanti 💕</div>
+            <b>Meow! <span style="color:#d66a6a;">I mean hi!</span></b><br>
+            I'm a 19 years old CPGE student & Maths Nerd.<br>
+            Linux enthusiast living in the terminal.<br>
+            <span class="highlight-text">MP</span> <span class="highlight-text">INTJ</span>
+        </div>
+
+        <div class="likes-box">
+            <span class="heart-icon">♪ (´▽`ʃƪ) (´▽`ʃƪ) ♬</span><br>
+            <span style="color:#d66a6a;">:P</span> ♡ linear algebra. gray cats. arch linux. nightcore. iced coffee. cybersecurity ctf. metroidvania games. socialism debates ♡<br>
+            <br>
+            <span style="color:#888;">:/  <b>proprietary software.</b> physics exams. cockroaches.</span>
+        </div>
+    </div>
+
+    <div class="music-bar">
+        <marquee scrollamount="4">
+            Now Playing: /dev/urandom noise ♫ /// SYSTEM STATUS: sleep deprivation at 99% /// ⚠ compiling kernel please wait... /// I use Linux btw /// current objective: survive maths class /// cats are liquid /// welcome to the void <3
+        </marquee>
+    </div>
+
+    <div class="main-content">
+
+        <div class="left-col">
+            <h2>Where to find me...!?</h2>
+            <div class="socials-list">
+                Here are my main socials! Feel free to dm for maths help or linux rants.<br>
+                ➔ <a href="https://github.com/akeanti"><b>GitHub</b></a> :: @akeanti (My code)<br>
+                ➔ <a href="https://bsky.app/profile/akeanti.bsky.social"><b>Bluesky</b></a> :: @akeanti.bsky.social<br>
+                ➔ <a href="https://x.com/akeantie"><b>X / Twt</b></a> :: @akeanti (Daily ramblings)<br>
+                ➔ <a href="https://wiki.archlinux.org/title/User:Akeanti"><b>Arch Wiki</b></a> :: User:Akeanti<br>
+                ➔ <a href="https://codeforces.com/profile/akeanti"><b>Codeforces</b></a> :: @akeanti<br>
+                ➔ <a href="https://tryhackme.com/p/akeanti"><b>TryHackMe</b></a> :: @akeanti<br>
+                ➔ <a href="https://steamcommunity.com/id/akeanti/"><b>Steam</b></a> :: id/akeanti (Gaming)<br>
+                ➔ <a href="mailto:contact@akeanti.com"><b>Email</b></a> :: contact@akeanti.xyz<br>
+
+                <i>"In a world of windows users, be a linux kernel."</i>
+            </div>
+
+            <div class="button-grid">
+                <a href="#"><img src="http://www.deadnet.se/88x31/paws.gif" alt="paw"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/gnu-linux.gif" alt="Linux"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/neovim.gif" alt="NeoVim"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/miku.gif" alt="Miku"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/tor.gif" alt="Tor"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/edpadico.gif" alt="ide"></a>
+                <a href="https://discord.gg/N4bSYy8YMR"><img src="http://www.deadnet.se/88x31/discordserver.gif" alt="Discord"></a>
+                <a href="#"><img src="https://cyber.dabamos.de/88x31/nowebp.gif" alt="No WebP"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/imissxp.gif" alt="xp"></a>
+                <a href="#"><img src="http://www.deadnet.se/88x31/romance-net-88x31.gif" alt="romance"></a>
+            </div>
+
+            <div class="dni-list">
+                • <b>DONT FOLLOW IF <u>you hate maths</u></b>. basic dni criteria. support open source. respect privacy. ure a windows fanboy who makes "linux is hard" jokes i Hate all of you.
+            </div>
+        </div>
+
+        <div class="right-col">
+            <div style="background:#ffb6c1; color:white; font-weight:bold; text-align:center; padding:3px; border-radius:3px 3px 0 0; font-size:10px;">
+                ➚ reCAPTCHA
+            </div>
+            <div class="recaptcha-box" style="border-radius: 0 0 3px 3px; margin-top:0;">
+                <div style="display:flex; align-items:center;">
+                    <input type="checkbox" checked style="width:20px; height:20px; accent-color:green; margin-right:10px;">
+                    <span style="font-size:10px;">I'm not a robot</span>
+                </div>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RecaptchaLogo.svg/250px-RecaptchaLogo.svg.png" style="height:25px; opacity:0.5;">
+            </div>
+
+            <div class="image-grid">
+                <img src="pics/akeanti%202.png" class="grid-pic">
+                <img src="pics/akeanti%202.jpg" class="grid-pic">
+                <img src="pics/akeanti%203.jpg" class="grid-pic">
+                <img src="pics/akeanti%204.jpg" class="grid-pic">
+                <img src="pics/akeanti%205.jpg" class="grid-pic">
+                <img src="pics/akeanti%206.png" class="grid-pic">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
