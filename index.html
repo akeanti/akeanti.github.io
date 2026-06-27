@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://akeanti.xyz">
     <meta property="og:image" content="https://media.discordapp.net/attachments/1389679118202703993/1473504434062622730/0TJ5tFs.png?ex=69967371&is=699521f1&hm=08e058a00deae60d6b1b0e399d26780cd158f78e9c6af37f08ef8a60498dc3c3&=&format=webp&quality=lossless&width=1066&height=1068">
-    <meta property="og:description" content="19yo CPGE Student, Maths Nerd & Linux Enthusiast. Welcome to my digital garden.">
+    <meta property="og:description" content="20yo CPGE Student, Maths Nerd & Linux Enthusiast. Welcome to my digital garden.">
     <meta name="theme-color" content="#828282">
 
     <style>
@@ -27,6 +27,11 @@
             --border-color: #dcbfa0;
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Custom Retro Cursor */
         body {
             margin: 0;
             padding: 20px;
@@ -35,21 +40,67 @@
                     linear-gradient(90deg, rgba(255, 255, 255, 0.4) 50%, transparent 50%),
                     linear-gradient(rgba(255, 255, 255, 0.4) 50%, transparent 50%);
             background-size: 50px 50px;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Verdana', 'Arial', sans-serif;
             font-size: 11px;
             color: #444;
             display: flex;
             justify-content: center;
-            cursor: auto;
+            transition: filter 0.5s ease;
+            cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
+        }
+
+        a, button, .sub-menu-link, .top-bar-link, .interactive-quote, input[type="checkbox"], .draggable-close {
+            cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur117.cur'), pointer !important;
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
+            linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 4px, 6px 100%;
+            z-index: 9998;
+            pointer-events: none;
+            display: none;
+            opacity: 0.8;
+        }
+
+        .crt-mode .crt-overlay { display: block; }
+
+        .konami-mode {
+            filter: invert(1) hue-rotate(180deg);
+            background-image:
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.4) 50%, transparent 50%),
+                    linear-gradient(rgba(0, 0, 0, 0.4) 50%, transparent 50%);
+        }
+
+        .spin-mode {
+            animation: spinPage 2s linear infinite;
+        }
+
+        @keyframes spinPage {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .blink {
+            animation: blink 1s step-end infinite;
+            color: red;
+            font-weight: bold;
         }
 
         img { max-width: 100%; height: auto; }
 
         .container {
-            width: 700px;
+            width: 850px;
             background: var(--bg-plaid);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border: 2px outset #fff;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
             position: relative;
             z-index: 1;
         }
@@ -60,16 +111,27 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #fff;
+            border-bottom: 2px solid #fff;
             font-weight: bold;
+            font-family: 'MS Sans Serif', Geneva, sans-serif;
         }
+
+        .top-bar-link { text-decoration: none; color: inherit; }
+        .top-bar-link:hover { color: var(--pink-accent); }
 
         .search-box {
             background: #fff;
             padding: 2px 10px;
-            border: 1px solid #aaa;
+            border: 2px inset #aaa;
             font-weight: bold;
             font-size: 11px;
+            font-family: inherit;
+            color: #444;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--pink-accent);
         }
 
         .banner {
@@ -77,6 +139,7 @@
             height: 180px;
             object-fit: cover;
             display: block;
+            border-bottom: 2px solid var(--border-color);
         }
 
         .sub-bar {
@@ -85,9 +148,10 @@
             display: flex;
             justify-content: space-between;
             font-size: 11px;
-            border-top: 1px solid #fff;
             border-bottom: 1px solid #fff;
         }
+
+        .sub-menu-link:hover { color: var(--pink-accent); }
 
         .link-bar {
             background: #fff;
@@ -109,7 +173,7 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            border: 2px solid #eee;
+            border: 2px outset #eee;
         }
 
         .bio-text {
@@ -117,22 +181,35 @@
             font-size: 10px;
             line-height: 1.4;
         }
+
         .bio-title {
             font-size: 14px;
             font-weight: bold;
             color: #d66a6a;
             margin-bottom: 5px;
+            display: inline-block;
         }
-        .highlight-text { background: #eee; padding: 0 2px; font-weight: bold; border: 1px solid #ccc; font-size: 9px; cursor: pointer; }
+
+        .bio-title:hover {
+            color: var(--pink-accent);
+        }
+
+        .highlight-text {
+            background: #eee;
+            padding: 0 2px;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            font-size: 9px;
+            cursor: help;
+        }
 
         .likes-box {
-            width: 160px;
+            width: 180px;
             font-size: 9px;
             line-height: 1.3;
             border-left: 1px dotted #ccc;
-            padding-left: 5px;
+            padding-left: 10px;
         }
-        .heart-icon { color: red; font-size: 10px; }
 
         .music-bar {
             background: var(--orange-accent);
@@ -142,35 +219,184 @@
             font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
-            border-top: 1px solid #fff;
-            border-bottom: 1px solid #fff;
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
         }
 
         .main-content {
-            background: #fff;
-            padding: 10px;
+            background: var(--box-bg);
+            padding: 15px;
             display: grid;
-            grid-template-columns: 1fr 180px;
-            gap: 10px;
+            grid-template-columns: 1fr 220px;
+            gap: 20px;
         }
 
-        .left-col h2 {
-            font-size: 16px; margin: 0 0 5px 0; color: #555;
-            border-bottom: 1px dashed #e6cdac; padding-bottom: 2px;
+        h2 {
+            font-size: 14px;
+            margin: 0 0 8px 0;
+            color: #444;
+            border-bottom: 1px dotted #e6cdac;
+            padding-bottom: 4px;
+            font-family: 'Trebuchet MS', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .socials-list {
-            font-size: 10px; margin-bottom: 10px;
-            line-height: 1.6;
+
+        .link-tree {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 20px;
         }
-        .socials-list a {
-            text-decoration: none;
-            color: #d66a6a;
+
+        .link-tree a, .link-tree button {
+            display: flex;
+            align-items: center;
+            background: #fafafa;
+            border: 1px solid #eee;
+            padding: 6px 8px;
             font-weight: bold;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.2s;
+            text-align: left;
+            width: 100%;
+            font-family: inherit;
+            font-size: inherit;
         }
-        .socials-list a:hover {
-            text-decoration: underline;
-            color: #ff69b4;
+
+        .link-tree a:hover, .link-tree a:focus, .link-tree button:hover {
+            background: #fdf5e6;
+            border-color: #dcbfa0;
+            color: #d66a6a;
+            padding-left: 12px;
+            outline: none;
         }
+
+        .pixel-icon {
+            display: inline-block;
+            margin-right: 8px;
+            image-rendering: pixelated;
+        }
+
+        .log-container {
+            background: #fafafa;
+            border: 2px inset #eee;
+            padding: 10px;
+            height: 250px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #dcbfa0 #fafafa;
+        }
+
+        .log-entry {
+            display: flex;
+            gap: 10px;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .log-entry:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .log-thumb {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #dcbfa0;
+            padding: 2px;
+            background: #fff;
+        }
+
+        .log-content {
+            flex: 1;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .log-content span.date { color: #d66a6a; font-weight: bold; }
+
+        .log-content span.tag {
+            background: #eee;
+            padding: 0 2px;
+            border: 1px solid #ddd;
+            font-family: 'Arial', sans-serif;
+            font-size: 9px;
+        }
+
+        .git-feed {
+            background: #fffaf0;
+            color: #555;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            padding: 10px;
+            border: 2px inset #e6cdac;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .git-feed .commit { color: #d66a6a; font-weight: bold; }
+        .git-feed .author { color: #ff69b4; }
+        .git-feed .msg { color: #888; }
+
+        .guestbook {
+            background: #fff0f5;
+            border: 1px dashed #ffb6c1;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .gb-form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ffb6c1;
+            padding-bottom: 10px;
+        }
+
+        .gb-form input, .gb-form textarea {
+            border: 1px solid #ccc;
+            padding: 4px;
+            font-size: 10px;
+            font-family: 'Arial', sans-serif;
+            width: 100%;
+        }
+
+        .gb-form button {
+            background: #ffb6c1;
+            border: 2px outset #d66a6a;
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+            font-size: 10px;
+            transition: background 0.2s;
+        }
+
+        .gb-form button:hover, .gb-form button:focus {
+            background: #d66a6a;
+            outline: none;
+        }
+
+        .gb-form button:active {
+            border: 2px inset #d66a6a;
+        }
+
+        .gb-entry {
+            font-size: 10px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            word-wrap: break-word;
+        }
+
+        .gb-entry b { color: #d66a6a; }
+        .gb-entry .timestamp { color: #999; font-size: 8px; margin-left: 5px; }
 
         .button-grid {
             display: flex;
@@ -178,38 +404,162 @@
             gap: 5px;
             margin-bottom: 10px;
             background: #fff;
-            border: 1px solid #eee;
+            border: 2px inset #eee;
             padding: 5px;
             justify-content: center;
         }
+
         .button-grid img {
             width: 88px;
             height: 31px;
             image-rendering: pixelated;
             opacity: 0.9;
+            transition: transform 0.1s;
         }
+
         .button-grid img:hover {
             opacity: 1;
+            transform: scale(1.05);
         }
 
         .dni-list {
-            font-size: 9px; color: #888; border-top: 1px dotted #ccc; padding-top: 5px;
+            font-size: 9px;
+            color: #888;
+            border-top: 1px dotted #ccc;
+            padding-top: 5px;
         }
+
+        .widget {
+            background: #fcfcfc;
+            border: 1px dashed #dcbfa0;
+            padding: 8px;
+            margin-bottom: 15px;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .time-widget {
+            text-align: center;
+            font-weight: bold;
+            color: #d66a6a;
+            background: #fffaf0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            border: 2px inset #e6cdac;
+        }
+
+        .neofetch-widget {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10px;
+            background: var(--bg-plaid);
+            color: var(--text-main);
+            border: 2px outset #fff;
+            position: relative;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-height: 350px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .draggable-header {
+            background: var(--bar-color);
+            color: var(--text-main);
+            padding: 2px 5px;
+            cursor: move !important;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            user-select: none;
+            border-bottom: 2px solid #fff;
+        }
+
+        .draggable-close {
+            color: #d66a6a;
+            border: 1px outset #fff;
+            background: #eee;
+            padding: 0 4px;
+            font-size: 9px;
+        }
+
+        .draggable-close:active { border: 1px inset #fff; }
+
+        .term-body {
+            padding: 5px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            flex: 1;
+        }
+
+        .neofetch-widget .arch-logo { color: #d66a6a; font-weight: bold; }
+        .neofetch-widget .info-key { color: #444; font-weight: bold; }
+
+        .stats-widget .stat-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .stats-widget .lang {
+            width: 45px;
+            font-weight: bold;
+            color: #d66a6a;
+        }
+
+        .stats-widget .bar-bg {
+            flex: 1;
+            background: #eee;
+            height: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .stats-widget .bar-fill {
+            height: 100%;
+            background: var(--pink-accent);
+        }
+
+        .music-player {
+            background: #eaeaea;
+            border: 2px outset #fff;
+            padding: 5px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .player-screen {
+            background: #fffaf0;
+            color: #d66a6a;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9px;
+            padding: 3px;
+            border: 2px inset #e6cdac;
+            margin-bottom: 5px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .player-controls button {
+            background: #dfdfdf;
+            border: 2px outset #fff;
+            font-size: 9px;
+            padding: 2px 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .player-controls button:active { border: 2px inset #fff; }
 
         .recaptcha-box {
             background: #f9f9f9;
             border: 1px solid #d3d3d3;
             padding: 10px;
             border-radius: 3px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        .recaptcha-header {
-            background: #ffb6c1; color: white; text-align: center; font-weight: bold; padding: 2px;
-            margin-bottom: 5px; border-radius: 3px 3px 0 0;
         }
 
         .image-grid {
@@ -217,81 +567,462 @@
             grid-template-columns: 1fr 1fr;
             gap: 2px;
         }
+
         .grid-pic {
             width: 100%;
             height: 85px;
             object-fit: cover;
             border: 1px solid #eee;
+            transition: opacity 0.2s;
+        }
+
+        .grid-pic:hover { opacity: 0.8; }
+
+        .webring-nav {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: bold;
+            background: #eee;
+            border: 1px solid #ccc;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .hit-counter {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .hit-counter .digits {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            padding: 2px;
+            border: 3px inset #555;
+            font-weight: bold;
+        }
+
+        .hit-counter .digits span {
+            border: 1px solid #333;
+            padding: 2px 4px;
+            background: #111;
+            margin: 0 1px;
         }
 
         a { text-decoration: none; color: inherit; }
         u { text-decoration: underline; }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--bar-color);
+            border: 1px solid #fff;
+            padding: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        .interactive-quote {
+            padding: 5px;
+            background: #eee;
+            border: 2px outset #fff;
+            margin-bottom: 15px;
+            text-align: center;
+            font-style: italic;
+            width: 100%;
+        }
+
+        .interactive-quote:active {
+            border: 2px inset #fff;
+            background: #e6cdac;
+        }
+
+        marquee { color: inherit; }
+
+        .is-dragging {
+            position: fixed !important;
+            z-index: 9999;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            width: 220px;
+        }
+
+        /* Cute Splash Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: var(--bg-plaid);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .cat-ascii {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre;
+            color: var(--pink-accent);
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+        }
+
+        .loading-text {
+            font-family: 'Verdana', sans-serif;
+            font-weight: bold;
+            color: var(--text-main);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* --- PRINT CSS: Akeanti Resume Mode --- */
+        @media screen {
+            .print-only { display: none; }
+        }
+        @media print {
+            @page { margin: 1cm 1.5cm; }
+            body {
+                background: white !important;
+                color: #222 !important;
+                font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-size: 10pt;
+                line-height: 1.4;
+            }
+            .container, .crt-overlay, #oneko, .notification, #loading-screen { display: none !important; }
+            .print-only {
+                display: block !important;
+                width: 100%;
+            }
+            .resume-header {
+                text-align: center;
+                border-bottom: 2px solid #333;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+            .resume-header h1 {
+                margin: 0; font-size: 24pt;
+                letter-spacing: 1.5px;
+                color: #000;
+            }
+            .resume-header p { margin: 3px 0; color: #555; font-size: 11pt; }
+
+            .links-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                margin-top: 10px;
+                font-size: 9pt;
+            }
+            .links-grid span {
+                background: #f8f9fa;
+                border: 1px solid #ddd;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-family: monospace;
+                color: #444;
+            }
+
+            .resume-section {
+                font-size: 12pt;
+                border-bottom: 1px solid #aaa;
+                margin-top: 15px;
+                padding-bottom: 2px;
+                font-weight: bold;
+                text-transform: uppercase;
+                color: #000;
+            }
+            .resume-item { margin-bottom: 10px; margin-top: 8px; }
+            .resume-item h3 { margin: 0 0 2px 0; font-size: 10.5pt; color: #111; }
+            .resume-item p { margin: 0; color: #333; }
+        }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="top-bar">
-        <span>My Site | WebPage</span>
-        <div class="search-box">Search</div>
-        <span>Settings | Sign Up</span>
+<!-- Cute Cat Splash Screen -->
+<div id="loading-screen">
+    <div class="cat-ascii">
+        /\_/\
+        ( o.o )
+        > ^ <
+    </div>
+    <div class="loading-text">Waking up the garden <span id="loading-dots">...</span></div>
+</div>
+
+<div class="crt-overlay"></div>
+
+<!-- PRINT ONLY VIEW: CLEAN RESUME -->
+<div id="resume-print" class="print-only">
+    <div class="resume-header">
+        <h1>AKEANTI</h1>
+        <p><strong>Étudiant CPGE MP | Développeur & Linux Enthusiast</strong></p>
+        <div class="links-grid">
+            <span>contact@akeanti.xyz</span>
+            <span>github.com/akeanti</span>
+            <span>codeforces.com/profile/akeanti</span>
+            <span>tryhackme.com/p/akeanti</span>
+            <span>app.hackthebox.com/users/akeanti</span>
+            <span>bsky.app/profile/akeanti.xyz</span>
+            <span>x.com/akeantie</span>
+            <span>wiki.archlinux.org/title/User:Akeanti</span>
+            <span>reddit.com/user/akeanti</span>
+            <span>Discord: akeanti</span>
+        </div>
     </div>
 
-    <img src="pics/banner.jpg" class="banner" width="700" height="180" alt="Banner">
+    <h2 class="resume-section">Formation</h2>
+    <div class="resume-item">
+        <h3>Classes Préparatoires aux Grandes Écoles (CPGE) - Filière MP</h3>
+        <p><em>2024 - Présent</em> | Mathématiques et Physique</p>
+    </div>
+    <div class="resume-item">
+        <h3>Baccalauréat Sciences Mathématiques</h3>
+        <p><em>Mention Très Bien</em></p>
+    </div>
 
-    <div class="sub-bar">
-        <span><u style="margin-right:5px;">File</u> <u style="margin-right:5px;">View</u> <u>Edit</u></span>
-        <span>Blogs: Private Page</span>
+    <h2 class="resume-section">Compétences Techniques</h2>
+    <div class="resume-item">
+        <p><strong>Langages :</strong> C++, Python, Bash, LaTeX, HTML/CSS/JS</p>
+        <p><strong>Système & Outils :</strong> Arch Linux, Git, Neovim, Scripting Shell, Tiling WMs (i3)</p>
+        <p><strong>Cybersécurité :</strong> CTFs, HackTheBox, Reverse Engineering basique</p>
+    </div>
+
+    <h2 class="resume-section">Projets Informatiques</h2>
+    <div class="resume-item">
+        <h3>Solveur d'Algèbre (C++)</h3>
+        <p>Outil d'assistance pour le calcul matriciel et la vérification d'exercices d'espaces vectoriels.</p>
+    </div>
+    <div class="resume-item">
+        <h3>Automatisation d'environnement Linux (Bash)</h3>
+        <p>Scripts de déploiement "dotfiles" pour reproduire instantanément un environnement de travail sur Arch.</p>
+    </div>
+</div>
+<!-- END PRINT ONLY VIEW -->
+
+<div class="container" role="document">
+    <header class="top-bar">
+        <span>[ <a href="/" class="top-bar-link">Home</a> :: <a href="#gbEntries" class="top-bar-link">About</a> ]</span>
+        <input type="text" class="search-box" id="siteSearch" placeholder="Search DuckDuckGo..." aria-label="Search" style="width:180px;">
+        <span>[ <a href="#" id="crtToggle" class="top-bar-link">CRT Mode</a> | <a href="#" id="themeToggle" class="top-bar-link">Theme</a> ]</span>
+    </header>
+
+    <img src="pics/banner.jpg" class="banner" width="850" height="180" alt="akeanti digital garden banner" loading="lazy" decoding="async" onerror="this.src='https://picsum.photos/seed/maths/850/180'">
+
+    <nav class="sub-bar" aria-label="Secondary Navigation">
+        <span>
+            <span class="sub-menu-link" onclick="window.print()"><u>F</u>ile (Print CV)</span>
+            <span class="sub-menu-link" onclick="document.documentElement.requestFullscreen().catch(()=>alert('Fullscreen mode is blocked by your browser.'))" style="margin: 0 5px;"><u>V</u>iew</span>
+            <span class="sub-menu-link" onclick="document.body.contentEditable = document.body.contentEditable === 'true' ? 'false' : 'true'; alert(document.body.contentEditable === 'true' ? 'Edit Mode Enabled! You can now hack the DOM.' : 'Edit Mode Disabled.');"><u>E</u>dit</span>
+        </span>
+        <span class="sub-menu-link" onclick="alert('Access Denied: You need SSH keys to view the private blog.')">Blogs: Private Page</span>
         <span>id: akeanti</span>
-    </div>
+    </nav>
 
-    <div class="link-bar">
-        ♥ Home ♥ Maths Notes ♥ Cyber Lab ♥ Contact Me ♥
-    </div>
+    <nav class="link-bar" aria-label="Primary Navigation">
+        [ <a href="#">Home</a> ] [ <a href="#">Maths Notes</a> ] [ <a href="#">Cyber Lab</a> ] [ <a href="#">Contact Me</a> ]
+    </nav>
 
-    <div class="profile-section">
-        <img src="pics/pfp.jpg" class="pfp" width="100" height="100" alt="pfp">
+    <section class="profile-section" aria-label="User Profile">
+        <img src="pics/pfp.jpg" class="pfp" width="100" height="100" alt="akeanti profile picture" loading="eager" onerror="this.src='https://picsum.photos/seed/cat/100/100'">
 
         <div class="bio-text">
-            <div class="bio-title">akeanti 💕</div>
+            <h1 class="bio-title" id="secretTitle" tabindex="0">akeanti <span style="font-size:12px;">&lt;3</span></h1><br>
             <b>Meow! <span style="color:#d66a6a;">I mean hi!</span></b><br>
-            I'm a 19 years old CPGE student & Maths Nerd.<br>
+            I'm a 20 years old CPGE student & Maths Nerd.<br>
             Linux enthusiast living in the terminal.<br>
-            <span class="highlight-text">MP</span> <span class="highlight-text">INTJ</span>
+            <span class="highlight-text" title="Mathématiques, Physique">MP</span>
+            <span class="highlight-text" title="Introverted, Intuitive, Thinking, Judging">INTJ</span>
         </div>
 
         <div class="likes-box">
-            <span class="heart-icon">♪ (´▽`ʃƪ) (´▽`ʃƪ) ♬</span><br>
-            <span style="color:#d66a6a;">:P</span> ♡ linear algebra. gray cats. arch linux. nightcore. iced coffee. cybersecurity ctf. metroidvania games. socialism debates ♡<br>
+            <span style="color:#d66a6a; font-weight:bold;">[ * ] LIKES:</span><br>
+            linear algebra. gray cats. arch linux. nightcore. iced coffee. cybersecurity ctf. metroidvania games. socialism debates.<br>
             <br>
-            <span style="color:#888;">:/  <b>proprietary software.</b> physics exams. cockroaches.</span>
+            <span style="color:#888;">[ x ] DISLIKES: <br><b>proprietary software.</b> physics exams. cockroaches.</span>
         </div>
-    </div>
+    </section>
 
-    <div class="music-bar">
+    <div class="music-bar" aria-hidden="true">
         <marquee scrollamount="4">
-            Now Playing: /dev/urandom noise ♫ /// SYSTEM STATUS: sleep deprivation at 99% /// ⚠ compiling kernel please wait... /// I use Linux btw /// current objective: survive maths class /// cats are liquid /// welcome to the void <3
+            Now Playing: /dev/urandom noise ♫ /// SYSTEM STATUS: sleep deprivation at 99% /// [⚠] compiling kernel please wait... /// I use Linux btw /// current objective: survive maths class /// cats are liquid /// welcome to the void &lt;3
         </marquee>
     </div>
 
-    <div class="main-content">
-        <div class="left-col">
+    <main class="main-content">
+        <article class="left-col">
             <h2>Where to find me...!?</h2>
-            <div class="socials-list">
-                Here are my main socials! Feel free to dm for maths help or linux rants.<br>
-                ➔ <a href="https://github.com/akeanti"><b>GitHub</b></a> :: @akeanti (My code)<br>
-                ➔ <a href="https://bsky.app/profile/akeanti.xyz"><b>Bluesky</b></a> :: @akeanti.xyz<br>
-                ➔ <a href="https://x.com/akeantie"><b>X / Twt</b></a> :: @akeantie (Daily ramblings)<br>
-                ➔ <a href="https://wiki.archlinux.org/title/User:Akeanti"><b>Arch Wiki</b></a> :: User:Akeanti<br>
-                ➔ <a href="https://codeforces.com/profile/akeanti"><b>Codeforces</b></a> :: @akeanti<br>
-                ➔ <a href="https://tryhackme.com/p/akeanti"><b>TryHackMe</b></a> :: @akeanti<br>
-                ➔ <a href="https://steamcommunity.com/id/akeanti/"><b>Steam</b></a> :: id/akeanti (Gaming)<br>
-                ➔ <a href="mailto:contact@akeanti.com"><b>Email</b></a> :: contact@akeanti.xyz<br>
+            <nav class="link-tree" aria-label="Link Tree">
+                <a href="https://github.com/akeanti">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#e6cdac" d="M1 3h5v1h9v9H1z"/><path fill="#dcbfa0" d="M2 5h12v6H2z"/>
+                    </svg>
+                    GitHub :: Repository & Source Codes
+                </a>
+                <a href="https://codeforces.com/profile/akeanti">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#ffd700" d="M4 2h8v2h2v3h-2v2h-1v1h-1v1h-2v3h4v2H3v-2h4v-3H5v-1H4V9H3V7H1V4h2V2h1z"/><path fill="#daa520" d="M6 4h4v6H6z"/>
+                    </svg>
+                    Codeforces :: Competitive Programming
+                </a>
+                <a href="https://tryhackme.com/p/akeanti">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#333" d="M2 3h12v10H2V3zm2 2v2h2V5H4zm4 0v2h2V5H8zm-2 4v2h4V9H6z"/><rect x="6" y="9" width="4" height="2" fill="#0f0"/>
+                    </svg>
+                    TryHackMe :: Cybersecurity Lab
+                </a>
+                <a href="https://app.hackthebox.com/users/akeanti">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#9fef00" d="M8 1l6 3v8l-6 3-6-3V4l6-3zm0 2L4 5v5l4 2 4-2V5L8 3z"/>
+                    </svg>
+                    HackTheBox :: Cyber Range
+                </a>
+                <a href="https://bsky.app/profile/akeanti.xyz">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#87ceeb" d="M2 4h4v2H2zm8 0h4v2h-4zM4 6h2v2H4zm6 0h2v2h-2zM2 8h4v2H2zm8 0h4v2h-4zM4 10h8v2H4z"/>
+                    </svg>
+                    Bluesky :: Main Feed
+                </a>
+                <a href="https://x.com/akeantie">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#444" d="M3 3l4 4-4 6h2l3-4.5 3 4.5h2l-4-6 4-4h-2l-3 4-3-4H3z"/>
+                    </svg>
+                    X / Twitter :: @akeantie (Daily ramblings)
+                </a>
+                <a href="https://wiki.archlinux.org/title/User:Akeanti">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#0f94d2" d="M8 1L1 15h2l2-3h6l2 3h2L8 1zm0 4l2 5H6l2-5z"/>
+                    </svg>
+                    Arch Wiki :: User:Akeanti
+                </a>
+                <a href="https://reddit.com/user/akeanti">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#ff4500" d="M8 2a2 2 0 00-2 2v1H4a2 2 0 00-2 2v4a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2V4a2 2 0 00-2-2zm-2 5h1v2H6V7zm3 0h1v2H9V7zm-2 4h2v1H7v-1z"/>
+                    </svg>
+                    Reddit :: r/unixporn, r/math
+                </a>
+                <button type="button" id="copyDiscordBtn" aria-label="Copy Discord Tag">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#7289da" d="M2 5c0-1 1-2 2-2h8c1 0 2 1 2 2v6c0 1-1 2-2 2H4c-1 0-2-1-2-2V5zm4 3a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
+                    </svg>
+                    Discord :: Click to Copy Tag
+                </button>
+                <a href="mailto:contact@akeanti.xyz">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#d66a6a" d="M2 4h12v8H2V4zm1 1v1l5 3 5-3V5H3zm0 2v4h10V7l-5 3-5-3z"/>
+                    </svg>
+                    Email :: contact@akeanti.xyz
+                </a>
+            </nav>
 
-                <i>"In a world of windows users, be a linux kernel."</i>
+            <h2>Webring</h2>
+            <div class="widget" style="margin-bottom: 25px;">
+                <div style="text-align: center; margin-bottom: 5px;">~ <b>CPGE & Linux Webring</b> ~</div>
+                <div class="webring-nav">
+                    <a href="#" onclick="alert('Navigating to previous ring member...')">&lt;&lt; Prev Site</a>
+                    <a href="#link-tree">[ List ]</a>
+                    <a href="#" id="randomWebring">[ Random ]</a>
+                    <a href="#" onclick="alert('Navigating to next ring member...')">Next Site &gt;&gt;</a>
+                </div>
             </div>
 
-            <div class="button-grid">
+            <h2>Activity Logs</h2>
+            <section class="log-container" aria-label="Activity Logs">
+                <div class="log-entry">
+                    <img src="pics/akeanti 2.png" class="log-thumb" alt="math notes" loading="lazy" onerror="this.src='https://picsum.photos/seed/calc/50/50'">
+                    <div class="log-content">
+                        <span class="date">[06-27]</span> <span class="tag">MATH</span><br>
+                        Survived colles de maths. The logic for espaces vectoriels normés is finally holding up. Rewrote my entire cheat sheet today. Exhausted but alive.
+                    </div>
+                </div>
+
+                <div class="log-entry">
+                    <img src="pics/akeanti 3.jpg" class="log-thumb" alt="terminal screenshot" loading="lazy" onerror="this.src='https://picsum.photos/seed/term/50/50'">
+                    <div class="log-content">
+                        <span class="date">[06-25]</span> <span class="tag">SEC</span><br>
+                        Rooted HackTheBox machine "Keeper". The privilege escalation vector via pacman was surprisingly fun. Wrote a quick python script to automate the initial shell.
+                    </div>
+                </div>
+
+                <div class="log-entry">
+                    <img src="pics/akeanti 4.jpg" class="log-thumb" alt="game screenshot" loading="lazy" onerror="this.src='https://picsum.photos/seed/game/50/50'">
+                    <div class="log-content">
+                        <span class="date">[06-23]</span> <span class="tag">GAME</span><br>
+                        Hollow Knight update: Defeated Nightmare King Grimm. My hands are literally still shaking. Best metroidvania combat system ever designed.
+                    </div>
+                </div>
+
+                <div class="log-entry">
+                    <img src="pics/akeanti 5.jpg" class="log-thumb" alt="arch linux logo" loading="lazy" onerror="this.src='https://picsum.photos/seed/arch/50/50'">
+                    <div class="log-content">
+                        <span class="date">[06-20]</span> <span class="tag">SYS</span><br>
+                        Ran pacman -Syu today and... nothing broke. A rare and beautiful blessing from the open source gods. I should back up my dotfiles just in case.
+                    </div>
+                </div>
+            </section>
+
+            <h2>Recent Commits</h2>
+            <div class="git-feed" aria-label="Git Commit Feed">
+                <span class="commit">commit 8f2a9c1</span> <span class="author">&lt;akeanti&gt;</span><br>
+                <span class="msg">fix: memory leak in algebre solver</span><br><br>
+
+                <span class="commit">commit 3b4d5e6</span> <span class="author">&lt;akeanti&gt;</span><br>
+                <span class="msg">docs: update topologie notes pdf</span><br><br>
+
+                <span class="commit">commit 1a2b3c4</span> <span class="author">&lt;akeanti&gt;</span><br>
+                <span class="msg">feat: automated dotfiles deployment script</span>
+            </div>
+
+            <h2>Writings & Notes</h2>
+            <nav class="link-tree" style="margin-bottom: 20px;" aria-label="Documents">
+                <a href="#">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#fff" stroke="#333" stroke-width="1" d="M3 2h7l4 4v8H3z"/><path fill="#ccc" d="M10 2v4h4"/>
+                    </svg>
+                    Topologie Notes (PDF) <span class="blink" style="margin-left: 5px;">[NEW!]</span>
+                </a>
+                <a href="#">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#fff" stroke="#333" stroke-width="1" d="M3 2h7l4 4v8H3z"/><path fill="#ccc" d="M10 2v4h4"/>
+                    </svg>
+                    Why I switched to i3wm
+                </a>
+                <a href="#">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#fff" stroke="#333" stroke-width="1" d="M3 2h7l4 4v8H3z"/><path fill="#ccc" d="M10 2v4h4"/>
+                    </svg>
+                    Reversing basic ELF binaries
+                </a>
+                <a href="#">
+                    <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+                        <path fill="#fff" stroke="#333" stroke-width="1" d="M3 2h7l4 4v8H3z"/><path fill="#ccc" d="M10 2v4h4"/>
+                    </svg>
+                    My CPGE survival guide
+                </a>
+            </nav>
+
+            <h2>Guestbook</h2>
+            <section class="guestbook" aria-label="Guestbook Form">
+                <div class="gb-form">
+                    <input type="text" placeholder="Name/Alias" id="gbName" aria-label="Guestbook Name">
+                    <textarea placeholder="Leave a message..." rows="2" id="gbMsg" aria-label="Guestbook Message"></textarea>
+                    <button id="gbSubmit" type="button">Sign Guestbook</button>
+                </div>
+                <div id="gbEntries" aria-live="polite"></div>
+            </section>
+
+            <nav class="button-grid" aria-label="Webring Badges">
                 <a href="https://akeanti.xyz/"><img src="dabamos/akeanti.gif" alt="akeanti" width="88" height="31" loading="lazy" decoding="async"></a>
                 <a href="https://github.com/torvalds/linux"><img src="dabamos/linux-p.gif" alt="Linux" width="88" height="31" loading="lazy" decoding="async"></a>
                 <a href="https://archive.org/details/windowx-xp-10"><img src="dabamos/freewareweb.gif" alt="free" width="88" height="31" loading="lazy" decoding="async"></a>
@@ -302,40 +1033,492 @@
                 <a href="https://countercurrents.org/2026/02/access-to-the-source-code-of-rafales-main-electronic-and-electronic-warfare-systems-and-a-reasonable-price-should-be-a-pre-condition-to-signing-the-rafale-deal/"><img src="dabamos/aviation1.gif" alt="aviation" width="88" height="31" loading="lazy" decoding="async"></a>
                 <a href="https://archlinux.org/download/"><img src="dabamos/arch.gif" alt="Arch" width="88" height="31" loading="lazy" decoding="async"></a>
                 <a href="https://man.freebsd.org/cgi/man.cgi?query=link&manpath=FreeBSD+12-current"><img src="dabamos/freebsd.gif" alt="frebsd" width="88" height="31" loading="lazy" decoding="async"></a>
-            </div>
+            </nav>
 
             <div class="dni-list">
-                • <b>DONT FOLLOW IF <u>you hate maths</u></b>. basic dni criteria. support open source. respect privacy. ure a windows fanboy who makes "linux is hard" jokes i Hate all of you.
+                [!] <b>DONT FOLLOW IF <u>you hate maths</u></b>. basic dni criteria. support open source. respect privacy. ure a windows fanboy who makes "linux is hard" jokes i Hate all of you.
             </div>
-        </div>
 
-        <div class="right-col">
-            <div style="background:#ffb6c1; color:white; font-weight:bold; text-align:center; padding:3px; border-radius:3px 3px 0 0; font-size:10px;">
-                ➚ reCAPTCHA
+            <div style="text-align:center; font-size:9px; margin-top:20px; color:#888; border-top: 1px solid #ddd; padding-top: 5px;">
+                <i>"In a world of windows users, be a linux kernel."</i><br>
+                Optimized for Netscape Navigator 4.0 | Best viewed in 800x600 resolution
             </div>
-            <div class="recaptcha-box" style="border-radius: 0 0 3px 3px; margin-top:0;">
+        </article>
+
+        <aside class="right-col">
+            <h2>Local Time</h2>
+            <div class="widget time-widget" id="liveClock" aria-live="off">
+                00:00:00 AM
+            </div>
+
+            <h2>Current Mood</h2>
+            <button class="interactive-quote" id="quoteBox" aria-label="Randomize Quote">
+                "Compiling... Please wait."
+            </button>
+
+            <h2>Status Widget</h2>
+            <div class="widget status-widget">
+                <b>Currently Studying:</b><br>
+                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Algèbre Linéaire<br>
+                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Topologie<br><br>
+                <b>Currently Playing:</b><br>
+                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Hollow Knight<br>
+                <span style="color:#d66a6a; font-family:monospace;">[*]</span> CTF Boxes
+            </div>
+
+            <h2>Code Stats (7 Days)</h2>
+            <div class="widget stats-widget" aria-label="Wakatime Coding Statistics">
+                <div class="stat-bar">
+                    <span class="lang">C++</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 58%"></div></div>
+                </div>
+                <div class="stat-bar">
+                    <span class="lang">Python</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 25%"></div></div>
+                </div>
+                <div class="stat-bar">
+                    <span class="lang">Bash</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 12%"></div></div>
+                </div>
+                <div class="stat-bar">
+                    <span class="lang">LaTeX</span>
+                    <div class="bar-bg"><div class="bar-fill" style="width: 5%"></div></div>
+                </div>
+                <div style="text-align:right; font-size:8px; color:#888; margin-top:5px;">Editor: Neovim</div>
+            </div>
+
+            <h2>Terminal</h2>
+            <div class="widget neofetch-widget" id="draggableWin" tabindex="0">
+                <div class="draggable-header" id="draggableHeader">
+                    <span>bash ~ i3</span>
+                    <span class="draggable-close" aria-label="Close" role="button">_ [] X</span>
+                </div>
+                <div class="term-body" id="term-body">
+                    <div id="term-output">
+                        <span class="arch-logo">
+                           /\<br>
+                          /  \<br>
+                         /____\<br>
+                        </span>
+                        <span class="info-key">OS:</span> Arch Linux x86_64<br>
+                        <span class="info-key">Host:</span> ThinkPad T480<br>
+                        <span class="info-key">Kernel:</span> 6.8.9-arch1-1<br>
+                        <span class="info-key">Uptime:</span> 14 days, 3 hours<br>
+                        <span class="info-key">Packages:</span> 1337 (pacman)<br>
+                        <span class="info-key">Shell:</span> bash 5.1<br>
+                        <span class="info-key">WM:</span> i3<br>
+                    </div>
+                    <div style="margin-top:5px; display:flex;">
+                        <span style="color:#0f0;">akeanti@arch</span>:<span style="color:#569cd6;">~</span>$
+                        <input type="text" id="term-input" autocomplete="off" spellcheck="false" style="background:transparent;border:none;color:var(--text-main);outline:none;font-family:inherit;font-size:inherit;width:100%;margin-left:5px;">
+                    </div>
+                </div>
+            </div>
+
+            <h2>Music Player</h2>
+            <div class="music-player" aria-label="Music Player">
+                <audio id="bg-audio" preload="none"></audio>
+
+                <div class="player-screen" id="music-screen-text">
+                    ▶ LOADED: SomaFM
+                </div>
+                <div class="player-controls">
+                    <button type="button" id="btn-prev" aria-label="Previous">|&lt;&lt;</button>
+                    <button type="button" id="btn-play" aria-label="Play">▶</button>
+                    <button type="button" id="btn-pause" aria-label="Pause">||</button>
+                    <button type="button" id="btn-stop" aria-label="Stop">[]</button>
+                    <button type="button" id="btn-next" aria-label="Next">&gt;&gt;|</button>
+                </div>
+            </div>
+
+            <div class="hit-counter">
+                <div style="font-size: 9px; margin-bottom: 2px;">YOU ARE VISITOR NO.</div>
+                <div class="digits">
+                    <span>0</span><span>8</span><span>2</span><span>0</span><span>4</span><span>8</span>
+                </div>
+            </div>
+
+            <div style="background:#ffb6c1; color:white; text-align:center; font-weight:bold; padding: 2px; margin-bottom: 0px; border-radius: 3px 3px 0 0; border: 1px solid #d3d3d3; border-bottom: none;" aria-hidden="true">
+                ➚ SECURITY CHECK
+            </div>
+            <div class="recaptcha-box" style="border-radius: 0 0 3px 3px; margin-top:0;" aria-label="Fake Recaptcha">
                 <div style="display:flex; align-items:center;">
-                    <input type="checkbox" checked style="width:20px; height:20px; accent-color:green; margin-right:10px;">
+                    <input type="checkbox" checked style="width:20px; height:20px; accent-color:green; margin-right:10px;" aria-label="I am not a robot">
                     <span style="font-size:10px;">I'm not a robot</span>
                 </div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RecaptchaLogo.svg/250px-RecaptchaLogo.svg.png" style="height:25px; opacity:0.5; width:auto;" alt="recaptcha">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RecaptchaLogo.svg/250px-RecaptchaLogo.svg.png" style="height:25px; opacity:0.5; width:auto;" alt="recaptcha logo">
             </div>
 
-            <div class="image-grid">
-                <img src="pics/akeanti%202.png" class="grid-pic" loading="lazy" decoding="async" alt="pic">
-                <img src="pics/akeanti%202.jpg" class="grid-pic" loading="lazy" decoding="async" alt="pic">
-                <img src="pics/akeanti%203.jpg" class="grid-pic" loading="lazy" decoding="async" alt="pic">
-                <img src="pics/akeanti%204.jpg" class="grid-pic" loading="lazy" decoding="async" alt="pic">
-                <img src="pics/akeanti%205.jpg" class="grid-pic" loading="lazy" decoding="async" alt="pic">
-                <img src="pics/akeanti%206.png" class="grid-pic" loading="lazy" decoding="async" alt="pic">
+            <h2>Gallery</h2>
+            <div class="image-grid" aria-label="Image Gallery">
+                <img src="pics/akeanti%202.png" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 1" onerror="this.src='https://picsum.photos/seed/1/85/85'">
+                <img src="pics/akeanti%202.jpg" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 2" onerror="this.src='https://picsum.photos/seed/2/85/85'">
+                <img src="pics/akeanti%203.jpg" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 3" onerror="this.src='https://picsum.photos/seed/3/85/85'">
+                <img src="pics/akeanti%204.jpg" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 4" onerror="this.src='https://picsum.photos/seed/4/85/85'">
+                <img src="pics/akeanti%205.jpg" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 5" onerror="this.src='https://picsum.photos/seed/5/85/85'">
+                <img src="pics/akeanti%206.png" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 6" onerror="this.src='https://picsum.photos/seed/6/85/85'">
             </div>
-        </div>
+        </aside>
 
-    </div>
+    </main>
 
 </div>
 
+<div class="notification" id="copyAlert" role="alert" aria-live="assertive">Discord Tag Copied! :3</div>
+
 <script>
+    const App = (() => {
+        const initClipboard = () => {
+            const btn = document.getElementById("copyDiscordBtn");
+            const alertBox = document.getElementById("copyAlert");
+            if (!btn || !alertBox) return;
+
+            btn.addEventListener("click", () => {
+                navigator.clipboard.writeText("akeanti").then(() => {
+                    alertBox.style.display = "block";
+                    setTimeout(() => alertBox.style.display = "none", 2000);
+                }).catch(err => {
+                    const temp = document.createElement("input");
+                    temp.value = "akeanti";
+                    document.body.appendChild(temp);
+                    temp.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(temp);
+                    alertBox.style.display = "block";
+                    setTimeout(() => alertBox.style.display = "none", 2000);
+                });
+            });
+        };
+
+        const initClock = () => {
+            const clockEl = document.getElementById('liveClock');
+            if (!clockEl) return;
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+            });
+            const update = () => clockEl.textContent = formatter.format(new Date());
+            update();
+            setInterval(update, 1000);
+        };
+
+        const initQuotes = () => {
+            const box = document.getElementById("quoteBox");
+            if (!box) return;
+            const quotes = [
+                '"Compiling... Please wait."',
+                '"Cats are liquids."',
+                '"I use Arch btw."',
+                '"Maths is just advanced counting."',
+                '"Sleep is a proprietary concept."',
+                '"Segmentation fault (core dumped)"',
+                '"Currently lost in a vector space."'
+            ];
+            box.addEventListener('click', () => {
+                box.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+            });
+        };
+
+        const initGuestbook = () => {
+            const nameInput = document.getElementById("gbName");
+            const msgInput = document.getElementById("gbMsg");
+            const btn = document.getElementById("gbSubmit");
+            const container = document.getElementById("gbEntries");
+            if (!nameInput || !msgInput || !btn || !container) return;
+
+            const STORAGE_KEY = 'akeanti_guestbook_v1';
+            const defaultEntries = [
+                { name: 'xX_arch_user_Xx', msg: 'nice dotfiles! what font is that in your terminal?', time: '06/27 14:32' },
+                { name: 'math_enjoyer', msg: 'good luck on the algebre exam o7', time: '06/26 09:15' },
+                { name: 'miku_fan99', msg: 'i love the aesthetic here ^_^', time: '06/25 22:11' }
+            ];
+
+            const loadEntries = () => {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : defaultEntries;
+            };
+
+            const saveEntries = (entries) => {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(entries.slice(0, 50)));
+            };
+
+            const renderEntries = () => {
+                const entries = loadEntries();
+                container.innerHTML = entries.map(e => `
+                    <div class="gb-entry">
+                        <b>${e.name.replace(/</g, "&lt;")}:</b> ${e.msg.replace(/</g, "&lt;")}
+                        <span class="timestamp">${e.time}</span>
+                    </div>
+                `).join('');
+            };
+
+            btn.addEventListener("click", () => {
+                const name = nameInput.value.trim();
+                const msg = msgInput.value.trim();
+                if (name && msg) {
+                    const entries = loadEntries();
+                    const now = new Date();
+                    const timeStr = `${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                    entries.unshift({ name, msg, time: timeStr });
+                    saveEntries(entries);
+                    renderEntries();
+                    nameInput.value = "";
+                    msgInput.value = "";
+                }
+            });
+
+            renderEntries();
+        };
+
+        const initDraggable = () => {
+            const win = document.getElementById("draggableWin");
+            const header = document.getElementById("draggableHeader");
+            if (!win || !header) return;
+
+            let isDragging = false;
+            let currentX;
+            let currentY;
+            let initialX;
+            let initialY;
+            let xOffset = 0;
+            let yOffset = 0;
+
+            const dragStart = (e) => {
+                if (e.target.classList.contains('draggable-close')) {
+                    win.style.display = 'none';
+                    return;
+                }
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+                if (e.target === header || e.target.parentNode === header) {
+                    isDragging = true;
+                    if (!win.classList.contains('is-dragging')) {
+                        const rect = win.getBoundingClientRect();
+                        win.style.left = rect.left + 'px';
+                        win.style.top = rect.top + 'px';
+                        win.classList.add('is-dragging');
+                        xOffset = 0;
+                        yOffset = 0;
+                        initialX = e.clientX;
+                        initialY = e.clientY;
+                    }
+                }
+            };
+
+            const dragEnd = () => {
+                initialX = currentX;
+                initialY = currentY;
+                isDragging = false;
+            };
+
+            const drag = (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                    xOffset = currentX;
+                    yOffset = currentY;
+                    win.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+                }
+            };
+
+            header.addEventListener("mousedown", dragStart, false);
+            document.addEventListener("mouseup", dragEnd, false);
+            document.addEventListener("mousemove", drag, false);
+        };
+
+        const initEasterEggs = () => {
+            const secretTitle = document.getElementById('secretTitle');
+            if (secretTitle) {
+                secretTitle.addEventListener('click', () => {
+                    document.body.classList.add('spin-mode');
+                    setTimeout(() => document.body.classList.remove('spin-mode'), 2000);
+                });
+            }
+
+            const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+            let konamiIndex = 0;
+            document.addEventListener('keydown', (e) => {
+                if (e.key === konamiCode[konamiIndex]) {
+                    konamiIndex++;
+                    if (konamiIndex === konamiCode.length) {
+                        document.body.classList.toggle('konami-mode');
+                        konamiIndex = 0;
+                    }
+                } else {
+                    konamiIndex = 0;
+                }
+            });
+
+            console.log("%c    ___    __ __ ______ ___    _   / /_(_)\n   /   |  / //_// ____//   |  / | / / __/\n  / /| | / ,<  / __/  / /| | /  |/ / /_  \n / ___ |/ /| |/ /___ / ___ |/ /|  / __/  \n/_/  |_/_/ |_/_____//_/  |_/_/ |_/_/     \n\n%cWelcome to the source. Clean code enthusiast detected.", "color: #ff69b4; font-weight: bold; font-family: monospace;", "color: #d66a6a; font-family: sans-serif;");
+        };
+
+        const initSearch = () => {
+            const search = document.getElementById('siteSearch');
+            if(search) {
+                search.addEventListener('keypress', (e) => {
+                    if(e.key === 'Enter' && search.value.trim() !== '') {
+                        window.open('https://duckduckgo.com/?q=site:akeanti.xyz+' + encodeURIComponent(search.value.trim()), '_blank');
+                        search.value = '';
+                    }
+                });
+            }
+        };
+
+        const initThemeToggles = () => {
+            const themeBtn = document.getElementById('themeToggle');
+            const crtBtn = document.getElementById('crtToggle');
+            if(themeBtn) {
+                themeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.classList.toggle('konami-mode');
+                });
+            }
+            if(crtBtn) {
+                crtBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.classList.toggle('crt-mode');
+                });
+            }
+        };
+
+        const initWebring = () => {
+            const randomBtn = document.getElementById('randomWebring');
+            if(randomBtn) {
+                const links = ["https://archlinux.org", "https://codeforces.com", "https://overleaf.com", "https://tryhackme.com"];
+                randomBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = links[Math.floor(Math.random() * links.length)];
+                });
+            }
+        };
+
+        const initMusicPlayer = () => {
+            const audio = document.getElementById('bg-audio');
+            const screen = document.getElementById('music-screen-text');
+            if(!audio) return;
+
+            const playlist = [
+                { title: "DEFCON Radio", url: "https://ice1.somafm.com/defcon-128-mp3" },
+                { title: "Groove Salad", url: "https://ice1.somafm.com/groovesalad-128-mp3" },
+                { title: "Secret Agent", url: "https://ice1.somafm.com/secretagent-128-mp3" }
+            ];
+
+            let current = 0;
+
+            const updateScreen = (text) => {
+                screen.innerHTML = `<marquee scrollamount="4">${text}</marquee>`;
+            };
+
+            const loadTrack = (idx) => {
+                audio.src = playlist[idx].url;
+                updateScreen(`▶ READY: ${playlist[idx].title} - SomaFM ♫`);
+            };
+
+            document.getElementById('btn-play').addEventListener('click', () => {
+                audio.play();
+                updateScreen(`▶ PLAYING: ${playlist[current].title} ♫`);
+            });
+            document.getElementById('btn-pause').addEventListener('click', () => {
+                audio.pause();
+                updateScreen(`⏸ PAUSED: ${playlist[current].title}`);
+            });
+            document.getElementById('btn-stop').addEventListener('click', () => {
+                audio.pause();
+                audio.currentTime = 0;
+                updateScreen(`⏹ STOPPED: ${playlist[current].title}`);
+            });
+            document.getElementById('btn-next').addEventListener('click', () => {
+                current = (current + 1) % playlist.length;
+                loadTrack(current);
+                audio.play();
+                updateScreen(`▶ PLAYING: ${playlist[current].title} ♫`);
+            });
+            document.getElementById('btn-prev').addEventListener('click', () => {
+                current = (current - 1 + playlist.length) % playlist.length;
+                loadTrack(current);
+                audio.play();
+                updateScreen(`▶ PLAYING: ${playlist[current].title} ♫`);
+            });
+
+            loadTrack(0);
+        };
+
+        const initInteractiveTerminal = () => {
+            const input = document.getElementById('term-input');
+            const output = document.getElementById('term-output');
+            const body = document.getElementById('term-body');
+            if(!input || !output) return;
+
+            const defaultHTML = output.innerHTML;
+
+            input.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter') {
+                    const cmd = input.value.trim();
+                    const safeCmd = cmd.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                    const prompt = `<br><span style="color:#0f0;">akeanti@arch</span>:<span style="color:#569cd6;">~</span>$ ${safeCmd}<br>`;
+
+                    if(cmd.toLowerCase() === 'clear') {
+                        output.innerHTML = '';
+                    } else if(cmd.toLowerCase() === 'neofetch') {
+                        output.innerHTML += prompt + defaultHTML;
+                    } else if(cmd.toLowerCase() === 'whoami') {
+                        output.innerHTML += prompt + 'akeanti<br>root user, maths wizard, cpge survivor.';
+                    } else if(cmd.toLowerCase() === 'date') {
+                        output.innerHTML += prompt + new Date().toString();
+                    } else if(cmd.toLowerCase() === 'help') {
+                        output.innerHTML += prompt + 'Available commands: clear, neofetch, whoami, date, help, sudo';
+                    } else if(cmd.toLowerCase().startsWith('sudo')) {
+                        output.innerHTML += prompt + 'akeanti is not in the sudoers file. This incident will be reported.';
+                    } else if(cmd !== '') {
+                        output.innerHTML += prompt + `bash: ${safeCmd}: command not found`;
+                    }
+
+                    input.value = '';
+                    body.scrollTop = body.scrollHeight;
+                }
+            });
+
+            body.addEventListener('click', () => input.focus());
+        };
+
+        const initLoadingScreen = () => {
+            const screen = document.getElementById('loading-screen');
+            const dots = document.getElementById('loading-dots');
+            if(!screen || !dots) return;
+
+            let count = 0;
+            const dotInterval = setInterval(() => {
+                count = (count + 1) % 4;
+                dots.textContent = '.'.repeat(count);
+            }, 300);
+
+            setTimeout(() => {
+                clearInterval(dotInterval);
+                screen.style.opacity = '0';
+                setTimeout(() => screen.style.display = 'none', 500);
+            }, 2500);
+        };
+
+        return {
+            init: () => {
+                initClipboard();
+                initClock();
+                initQuotes();
+                initGuestbook();
+                initDraggable();
+                initEasterEggs();
+                initSearch();
+                initThemeToggles();
+                initWebring();
+                initMusicPlayer();
+                initInteractiveTerminal();
+                initLoadingScreen();
+            }
+        };
+    })();
+
+    document.addEventListener('DOMContentLoaded', App.init);
+
     (function oneko() {
         const nekoEl = document.createElement("div");
         let nekoPosX = 32;
@@ -344,55 +1527,32 @@
         let mousePosY = 0;
         let frameCount = 0;
         let idleTime = 0;
-        let idleAnimation = null;
-        let idleAnimationFrame = 0;
-
         const speed = 2.5;
 
         const spriteSets = {
-            idle: [[-3, -3]],
-            alert: [[-7, -3]],
-            scratch: [[-5, 0], [-6, 0], [-7, 0]],
-            tired: [[-3, -2]],
-            sleeping: [[-2, 0], [-2, 1]],
-            N: [[-1, -2], [-1, -3]],
-            NE: [[0, -2], [0, -3]],
-            E: [[-3, 0], [-3, -1]],
-            SE: [[-5, -1], [-5, -2]],
-            S: [[-6, -3], [-7, -2]],
-            SW: [[-5, -3], [-6, -1]],
-            W: [[-4, -2], [-4, -3]],
+            idle: [[-3, -3]], alert: [[-7, -3]], scratch: [[-5, 0], [-6, 0], [-7, 0]],
+            tired: [[-3, -2]], sleeping: [[-2, 0], [-2, 1]], N: [[-1, -2], [-1, -3]],
+            NE: [[0, -2], [0, -3]], E: [[-3, 0], [-3, -1]], SE: [[-5, -1], [-5, -2]],
+            S: [[-6, -3], [-7, -2]], SW: [[-5, -3], [-6, -1]], W: [[-4, -2], [-4, -3]],
             NW: [[-1, 0], [-1, -1]],
         };
 
         function create() {
             nekoEl.id = "oneko";
-            nekoEl.style.width = "32px";
-            nekoEl.style.height = "32px";
-            nekoEl.style.position = "fixed";
-            nekoEl.style.pointerEvents = "none";
-            nekoEl.style.backgroundImage = "url('https://raw.githubusercontent.com/adryd325/oneko.js/master/oneko.gif')";
-            nekoEl.style.imageRendering = "pixelated";
-            nekoEl.style.left = "16px";
-            nekoEl.style.top = "16px";
-            nekoEl.style.zIndex = "9999";
-
-            document.body.appendChild(nekoEl);
-
-            document.addEventListener("mousemove", function (event) {
-                mousePosX = event.clientX;
-                mousePosY = event.clientY;
+            Object.assign(nekoEl.style, {
+                width: "32px", height: "32px", position: "fixed", pointerEvents: "none",
+                backgroundImage: "url('https://raw.githubusercontent.com/adryd325/oneko.js/master/oneko.gif')",
+                imageRendering: "pixelated", left: "16px", top: "16px", zIndex: "9999"
             });
-
+            document.body.appendChild(nekoEl);
+            document.addEventListener("mousemove", e => { mousePosX = e.clientX; mousePosY = e.clientY; });
             window.requestAnimationFrame(onAnimationFrame);
         }
 
         let lastFrameTime = 0;
-
         function onAnimationFrame(timestamp) {
             if (!lastFrameTime) lastFrameTime = timestamp;
             const deltaTime = timestamp - lastFrameTime;
-
             const diffX = nekoPosX - mousePosX;
             const diffY = nekoPosY - mousePosY;
             const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
@@ -401,43 +1561,32 @@
                 idleTime++;
                 if (deltaTime > 100) {
                     lastFrameTime = timestamp;
-                    if (idleTime > 10) {
-                        setSprite("idle", 0);
-                    } else {
-                        setSprite("alert", 0);
-                    }
+                    setSprite(idleTime > 10 ? "idle" : "alert", 0);
                 }
                 return window.requestAnimationFrame(onAnimationFrame);
             }
 
             idleTime = 0;
-
-
             nekoPosX -= (diffX / distance) * speed;
             nekoPosY -= (diffY / distance) * speed;
-
             nekoEl.style.left = `${nekoPosX - 16}px`;
             nekoEl.style.top = `${nekoPosY - 16}px`;
 
             if (deltaTime > 100) {
                 lastFrameTime = timestamp;
                 frameCount++;
-
                 const angle = Math.atan2(diffY, diffX);
-                let direction = "";
-
-                if (angle > -Math.PI / 8 && angle <= Math.PI / 8) direction = "W";
-                else if (angle > Math.PI / 8 && angle <= 3 * Math.PI / 8) direction = "NW";
-                else if (angle > 3 * Math.PI / 8 && angle <= 5 * Math.PI / 8) direction = "N";
-                else if (angle > 5 * Math.PI / 8 && angle <= 7 * Math.PI / 8) direction = "NE";
-                else if (angle > 7 * Math.PI / 8 || angle <= -7 * Math.PI / 8) direction = "E";
-                else if (angle > -7 * Math.PI / 8 && angle <= -5 * Math.PI / 8) direction = "SE";
-                else if (angle > -5 * Math.PI / 8 && angle <= -3 * Math.PI / 8) direction = "S";
-                else if (angle > -3 * Math.PI / 8 && angle <= -Math.PI / 8) direction = "SW";
-
-                setSprite(direction, frameCount);
+                let dir = "E";
+                if (angle > -Math.PI/8 && angle <= Math.PI/8) dir = "W";
+                else if (angle > Math.PI/8 && angle <= 3*Math.PI/8) dir = "NW";
+                else if (angle > 3*Math.PI/8 && angle <= 5*Math.PI/8) dir = "N";
+                else if (angle > 5*Math.PI/8 && angle <= 7*Math.PI/8) dir = "NE";
+                else if (angle > 7*Math.PI/8 || angle <= -7*Math.PI/8) dir = "E";
+                else if (angle > -7*Math.PI/8 && angle <= -5*Math.PI/8) dir = "SE";
+                else if (angle > -5*Math.PI/8 && angle <= -3*Math.PI/8) dir = "S";
+                else if (angle > -3*Math.PI/8 && angle <= -Math.PI/8) dir = "SW";
+                setSprite(dir, frameCount);
             }
-
             window.requestAnimationFrame(onAnimationFrame);
         }
 
