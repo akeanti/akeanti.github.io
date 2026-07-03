@@ -15,7 +15,7 @@
     <meta property="og:image" content="https://media.discordapp.net/attachments/1389679118202703993/1473504434062622730/0TJ5tFs.png?ex=69967371&is=699521f1&hm=08e058a00deae60d6b1b0e399d26780cd158f78e9c6af37f08ef8a60498dc3c3&=&format=webp&quality=lossless&width=1066&height=1068">
     <meta property="og:description" content="20yo CPGE Student, Maths Nerd & Linux Enthusiast. Welcome to my digital garden.">
     <meta name="theme-color" content="#828282">
-
+    
     <style>
         :root {
             --bg-plaid: #fdf5e6;
@@ -26,12 +26,9 @@
             --orange-accent: #ffcc99;
             --border-color: #dcbfa0;
         }
-
         * {
             box-sizing: border-box;
         }
-
-        /* Custom Retro Cursor */
         body {
             margin: 0;
             padding: 20px;
@@ -48,11 +45,9 @@
             transition: filter 0.5s ease;
             cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur116.cur'), auto;
         }
-
         a, button, .sub-menu-link, .top-bar-link, .interactive-quote, input[type="checkbox"], .draggable-close {
             cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur117.cur'), pointer !important;
         }
-
         .crt-overlay {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -64,38 +59,30 @@
             display: none;
             opacity: 0.8;
         }
-
         .crt-mode .crt-overlay { display: block; }
-
         .konami-mode {
             filter: invert(1) hue-rotate(180deg);
             background-image:
                     linear-gradient(90deg, rgba(0, 0, 0, 0.4) 50%, transparent 50%),
                     linear-gradient(rgba(0, 0, 0, 0.4) 50%, transparent 50%);
         }
-
         .spin-mode {
             animation: spinPage 2s linear infinite;
         }
-
         @keyframes spinPage {
             100% { transform: rotate(360deg); }
         }
-
         @keyframes blink {
             0% { opacity: 1; }
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
-
         .blink {
             animation: blink 1s step-end infinite;
             color: red;
             font-weight: bold;
         }
-
         img { max-width: 100%; height: auto; }
-
         .container {
             width: 850px;
             background: var(--bg-plaid);
@@ -104,7 +91,6 @@
             position: relative;
             z-index: 1;
         }
-
         .top-bar {
             background: var(--bar-color);
             padding: 5px 10px;
@@ -115,10 +101,8 @@
             font-weight: bold;
             font-family: 'MS Sans Serif', Geneva, sans-serif;
         }
-
         .top-bar-link { text-decoration: none; color: inherit; }
         .top-bar-link:hover { color: var(--pink-accent); }
-
         .search-box {
             background: #fff;
             padding: 2px 10px;
@@ -129,11 +113,9 @@
             color: #444;
             outline: none;
         }
-
         .search-box:focus {
             border-color: var(--pink-accent);
         }
-
         .banner {
             width: 100%;
             height: 180px;
@@ -141,7 +123,6 @@
             display: block;
             border-bottom: 2px solid var(--border-color);
         }
-
         .sub-bar {
             background: var(--bar-color);
             padding: 4px 10px;
@@ -150,9 +131,7 @@
             font-size: 11px;
             border-bottom: 1px solid #fff;
         }
-
         .sub-menu-link:hover { color: var(--pink-accent); }
-
         .link-bar {
             background: #fff;
             padding: 5px;
@@ -161,27 +140,23 @@
             font-size: 11px;
             border-bottom: 1px solid var(--bar-color);
         }
-
         .profile-section {
             background: #fff;
             padding: 10px;
             display: flex;
             gap: 10px;
         }
-
         .pfp {
             width: 100px;
             height: 100px;
             object-fit: cover;
             border: 2px outset #eee;
         }
-
         .bio-text {
             flex: 1;
             font-size: 10px;
             line-height: 1.4;
         }
-
         .bio-title {
             font-size: 14px;
             font-weight: bold;
@@ -189,11 +164,9 @@
             margin-bottom: 5px;
             display: inline-block;
         }
-
         .bio-title:hover {
             color: var(--pink-accent);
         }
-
         .highlight-text {
             background: #eee;
             padding: 0 2px;
@@ -202,7 +175,6 @@
             font-size: 9px;
             cursor: help;
         }
-
         .likes-box {
             width: 180px;
             font-size: 9px;
@@ -210,7 +182,6 @@
             border-left: 1px dotted #ccc;
             padding-left: 10px;
         }
-
         .music-bar {
             background: var(--orange-accent);
             color: #d66a6a;
@@ -222,7 +193,6 @@
             border-top: 2px solid #fff;
             border-bottom: 2px solid #fff;
         }
-
         .main-content {
             background: var(--box-bg);
             padding: 15px;
@@ -230,7 +200,6 @@
             grid-template-columns: 1fr 220px;
             gap: 20px;
         }
-
         h2 {
             font-size: 14px;
             margin: 0 0 8px 0;
@@ -241,14 +210,12 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         .link-tree {
             display: flex;
             flex-direction: column;
             gap: 5px;
             margin-bottom: 20px;
         }
-
         .link-tree a, .link-tree button {
             display: flex;
             align-items: center;
@@ -264,7 +231,6 @@
             font-family: inherit;
             font-size: inherit;
         }
-
         .link-tree a:hover, .link-tree a:focus, .link-tree button:hover {
             background: #fdf5e6;
             border-color: #dcbfa0;
@@ -272,13 +238,11 @@
             padding-left: 12px;
             outline: none;
         }
-
         .pixel-icon {
             display: inline-block;
             margin-right: 8px;
             image-rendering: pixelated;
         }
-
         .log-container {
             background: #fafafa;
             border: 2px inset #eee;
@@ -289,7 +253,6 @@
             scrollbar-width: thin;
             scrollbar-color: #dcbfa0 #fafafa;
         }
-
         .log-entry {
             display: flex;
             gap: 10px;
@@ -297,13 +260,11 @@
             padding-bottom: 10px;
             margin-bottom: 10px;
         }
-
         .log-entry:last-child {
             border-bottom: none;
             margin-bottom: 0;
             padding-bottom: 0;
         }
-
         .log-thumb {
             width: 50px;
             height: 50px;
@@ -312,16 +273,13 @@
             padding: 2px;
             background: #fff;
         }
-
         .log-content {
             flex: 1;
             font-family: 'Courier New', Courier, monospace;
             font-size: 10px;
             line-height: 1.4;
         }
-
         .log-content span.date { color: #d66a6a; font-weight: bold; }
-
         .log-content span.tag {
             background: #eee;
             padding: 0 2px;
@@ -329,7 +287,6 @@
             font-family: 'Arial', sans-serif;
             font-size: 9px;
         }
-
         .git-feed {
             background: #fffaf0;
             color: #555;
@@ -340,64 +297,63 @@
             margin-bottom: 20px;
             line-height: 1.5;
         }
-
         .git-feed .commit { color: #d66a6a; font-weight: bold; }
         .git-feed .author { color: #ff69b4; }
         .git-feed .msg { color: #888; }
-
-        .guestbook {
-            background: #fff0f5;
-            border: 1px dashed #ffb6c1;
-            padding: 10px;
-            margin-bottom: 20px;
-        }
-
-        .gb-form {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #ffb6c1;
-            padding-bottom: 10px;
-        }
-
-        .gb-form input, .gb-form textarea {
-            border: 1px solid #ccc;
-            padding: 4px;
+        .system-panel {
+            background: #fafafa;
+            border: 2px inset #dcbfa0;
+            padding: 8px;
+            margin-bottom: 15px;
             font-size: 10px;
-            font-family: 'Arial', sans-serif;
-            width: 100%;
+            line-height: 1.5;
+            font-family: 'Verdana', sans-serif;
+            position: relative;
         }
-
-        .gb-form button {
-            background: #ffb6c1;
-            border: 2px outset #d66a6a;
-            color: white;
+        .system-header {
+            background: var(--bar-color);
+            color: #555;
             font-weight: bold;
-            padding: 5px;
+            padding: 2px 6px;
+            border-bottom: 2px solid #fff;
+            margin: -8px -8px 8px -8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .data-key {
+            color: #d66a6a;
+            font-weight: bold;
+            display: inline-block;
+            width: 35px;
+        }
+        .data-val {
+            color: #444;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .terminal-panel {
+            background: #111;
+            border: 3px inset #555;
+            padding: 8px;
+            margin-bottom: 20px;
             font-size: 10px;
-            transition: background 0.2s;
+            line-height: 1.4;
+            font-family: 'Courier New', Courier, monospace;
+            color: #33ff33;
+            text-shadow: 0 0 2px #33ff33;
+            overflow: hidden;
+            position: relative;
         }
-
-        .gb-form button:hover, .gb-form button:focus {
-            background: #d66a6a;
-            outline: none;
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: rgba(51, 255, 51, 0.3);
+            animation: scan 3s linear infinite;
+            pointer-events: none;
         }
-
-        .gb-form button:active {
-            border: 2px inset #d66a6a;
+        @keyframes scan {
+            0% { top: -10px; }
+            100% { top: 100%; }
         }
-
-        .gb-entry {
-            font-size: 10px;
-            margin-bottom: 8px;
-            line-height: 1.3;
-            word-wrap: break-word;
-        }
-
-        .gb-entry b { color: #d66a6a; }
-        .gb-entry .timestamp { color: #999; font-size: 8px; margin-left: 5px; }
-
         .button-grid {
             display: flex;
             flex-wrap: wrap;
@@ -408,7 +364,6 @@
             padding: 5px;
             justify-content: center;
         }
-
         .button-grid img {
             width: 88px;
             height: 31px;
@@ -416,19 +371,16 @@
             opacity: 0.9;
             transition: transform 0.1s;
         }
-
         .button-grid img:hover {
             opacity: 1;
             transform: scale(1.05);
         }
-
         .dni-list {
             font-size: 9px;
             color: #888;
             border-top: 1px dotted #ccc;
             padding-top: 5px;
         }
-
         .widget {
             background: #fcfcfc;
             border: 1px dashed #dcbfa0;
@@ -437,7 +389,6 @@
             font-size: 10px;
             line-height: 1.4;
         }
-
         .time-widget {
             text-align: center;
             font-weight: bold;
@@ -446,8 +397,8 @@
             font-family: 'Courier New', Courier, monospace;
             font-size: 11px;
             border: 2px inset #e6cdac;
+            margin-bottom: 15px;
         }
-
         .neofetch-widget {
             font-family: 'Courier New', Courier, monospace;
             font-size: 10px;
@@ -461,7 +412,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .draggable-header {
             background: var(--bar-color);
             color: var(--text-main);
@@ -473,7 +423,6 @@
             user-select: none;
             border-bottom: 2px solid #fff;
         }
-
         .draggable-close {
             color: #d66a6a;
             border: 1px outset #fff;
@@ -481,43 +430,35 @@
             padding: 0 4px;
             font-size: 9px;
         }
-
         .draggable-close:active { border: 1px inset #fff; }
-
         .term-body {
             padding: 5px;
             overflow-y: auto;
             scrollbar-width: none;
             flex: 1;
         }
-
         .neofetch-widget .arch-logo { color: #d66a6a; font-weight: bold; }
         .neofetch-widget .info-key { color: #444; font-weight: bold; }
-
         .stats-widget .stat-bar {
             display: flex;
             align-items: center;
             margin-bottom: 4px;
         }
-
         .stats-widget .lang {
             width: 45px;
             font-weight: bold;
             color: #d66a6a;
         }
-
         .stats-widget .bar-bg {
             flex: 1;
             background: #eee;
             height: 8px;
             border: 1px solid #ccc;
         }
-
         .stats-widget .bar-fill {
             height: 100%;
             background: var(--pink-accent);
         }
-
         .music-player {
             background: #eaeaea;
             border: 2px outset #fff;
@@ -525,7 +466,6 @@
             text-align: center;
             margin-bottom: 15px;
         }
-
         .player-screen {
             background: #fffaf0;
             color: #d66a6a;
@@ -538,7 +478,6 @@
             overflow: hidden;
             white-space: nowrap;
         }
-
         .player-controls button {
             background: #dfdfdf;
             border: 2px outset #fff;
@@ -547,9 +486,7 @@
             font-weight: bold;
             color: #444;
         }
-
         .player-controls button:active { border: 2px inset #fff; }
-
         .recaptcha-box {
             background: #f9f9f9;
             border: 1px solid #d3d3d3;
@@ -561,13 +498,11 @@
             justify-content: space-between;
             box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
-
         .image-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2px;
         }
-
         .grid-pic {
             width: 100%;
             height: 85px;
@@ -575,9 +510,7 @@
             border: 1px solid #eee;
             transition: opacity 0.2s;
         }
-
         .grid-pic:hover { opacity: 0.8; }
-
         .webring-nav {
             display: flex;
             justify-content: space-between;
@@ -588,34 +521,15 @@
             padding: 5px;
             text-align: center;
         }
-
         .hit-counter {
             text-align: center;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            padding: 5px;
+            background: #fff;
+            border: 2px inset #e6cdac;
         }
-
-        .hit-counter .digits {
-            display: inline-block;
-            background: #000;
-            color: #fff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            padding: 2px;
-            border: 3px inset #555;
-            font-weight: bold;
-        }
-
-        .hit-counter .digits span {
-            border: 1px solid #333;
-            padding: 2px 4px;
-            background: #111;
-            margin: 0 1px;
-        }
-
         a { text-decoration: none; color: inherit; }
         u { text-decoration: underline; }
-
         .notification {
             position: fixed;
             bottom: 20px;
@@ -628,7 +542,6 @@
             z-index: 1000;
             font-weight: bold;
         }
-
         .interactive-quote {
             padding: 5px;
             background: #eee;
@@ -638,22 +551,17 @@
             font-style: italic;
             width: 100%;
         }
-
         .interactive-quote:active {
             border: 2px inset #fff;
             background: #e6cdac;
         }
-
         marquee { color: inherit; }
-
         .is-dragging {
             position: fixed !important;
             z-index: 9999;
             box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
             width: 220px;
         }
-
-        /* Cute Splash Screen */
         #loading-screen {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -665,7 +573,6 @@
             align-items: center;
             transition: opacity 0.5s ease;
         }
-
         .cat-ascii {
             font-family: 'Courier New', Courier, monospace;
             white-space: pre;
@@ -676,7 +583,6 @@
             margin-bottom: 20px;
             text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
         }
-
         .loading-text {
             font-family: 'Verdana', sans-serif;
             font-weight: bold;
@@ -684,8 +590,70 @@
             font-size: 12px;
             letter-spacing: 1px;
         }
-
-        /* --- PRINT CSS: Akeanti Resume Mode --- */
+        .declassified-vault {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 15px;
+            border: 2px inset #888;
+            margin-bottom: 20px;
+            height: 250px;
+            overflow-y: auto;
+            position: relative;
+        }
+        .vault-header {
+            color: #ffcc00;
+            font-weight: bold;
+            border-bottom: 1px dashed #ffcc00;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .vault-controls button {
+            background: #333;
+            color: #fff;
+            border: 1px solid #666;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 9px;
+            padding: 2px 5px;
+        }
+        .vault-controls button:hover { background: #555; }
+        .crypto-terminal {
+            background: #fdf5e6;
+            border: 2px inset #dcbfa0;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .crypto-input {
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ccc;
+            font-family: monospace;
+            font-size: 10px;
+            padding: 4px;
+            margin-bottom: 5px;
+        }
+        .crypto-btn {
+            background: var(--bar-color);
+            border: 1px outset #fff;
+            font-size: 9px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 3px 6px;
+        }
+        .crypto-btn:active { border-style: inset; }
+        .crypto-output {
+            margin-top: 5px;
+            background: #eee;
+            border: 1px solid #ccc;
+            padding: 4px;
+            font-family: monospace;
+            font-size: 10px;
+            min-height: 22px;
+            word-wrap: break-word;
+        }
         @media screen {
             .print-only { display: none; }
         }
@@ -715,7 +683,6 @@
                 color: #000;
             }
             .resume-header p { margin: 3px 0; color: #555; font-size: 11pt; }
-
             .links-grid {
                 display: flex;
                 flex-wrap: wrap;
@@ -732,7 +699,6 @@
                 font-family: monospace;
                 color: #444;
             }
-
             .resume-section {
                 font-size: 12pt;
                 border-bottom: 1px solid #aaa;
@@ -746,28 +712,70 @@
             .resume-item h3 { margin: 0 0 2px 0; font-size: 10.5pt; color: #111; }
             .resume-item p { margin: 0; color: #333; }
         }
-
+        .steam-widget {
+            background: var(--box-bg);
+            border: 2px inset #eee;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 10px;
+            font-family: 'Verdana', sans-serif;
+        }
+        .steam-top {
+            display: flex; gap: 15px; margin-bottom: 10px; border-bottom: 2px dashed #dcbfa0; padding-bottom: 10px;
+        }
+        .steam-avatar { width: 80px; height: 80px; border: 2px outset #eee; }
+        .steam-header-info { flex: 1; line-height: 1.4; }
+        .steam-name { font-size: 14px; color: #d66a6a; font-weight: bold; font-family: 'Trebuchet MS', sans-serif; }
+        .steam-status-lines { color: #555; margin-top: 5px; }
+        .steam-status-lines a { color: var(--pink-accent); text-decoration: underline; }
+        .steam-badge-area { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+        .steam-level-box { font-size: 12px; font-weight: bold; color: #444; }
+        .lvl-circle {
+            display: inline-block; width: 22px; height: 22px;
+            border-radius: 50%; border: 2px solid #d66a6a; background: #fffaf0;
+            text-align: center; line-height: 18px; color: #d66a6a; margin-left: 5px; font-size: 11px;
+        }
+        .steam-featured-badge {
+            display: flex; align-items: center; background: #fafafa; padding: 4px; gap: 5px;
+            border: 1px solid #ccc; width: 120px;
+        }
+        .badge-info { font-size: 9px; line-height: 1.2; color: #555; }
+        .steam-edit-btn {
+            background: #dfdfdf; border: 2px outset #fff; color: #444; padding: 3px 6px; cursor: pointer; font-size: 9px; font-weight: bold; margin-top: 2px;
+        }
+        .steam-edit-btn:active { border-style: inset; }
+        .steam-main-area { display: flex; gap: 15px; }
+        .steam-showcase { display: flex; gap: 5px; flex: 1; }
+        .showcase-main { width: calc(100% - 65px); object-fit: cover; border: 2px inset #eee; }
+        .showcase-side { display: flex; flex-direction: column; gap: 5px; width: 60px; }
+        .showcase-side img, .showcase-more { width: 60px; height: 60px; object-fit: cover; border: 2px inset #eee; }
+        .showcase-more { background: #fafafa; color: #d66a6a; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+        .showcase-more:hover { background: #fdf5e6; }
+        .steam-sidebar { width: 140px; border-left: 1px dotted #ccc; padding-left: 10px; }
+        .steam-online { color: #57cbde; font-size: 12px; font-weight: bold; margin-bottom: 8px; font-family: 'Trebuchet MS', sans-serif; }
+        .steam-stat-row { display: flex; justify-content: space-between; padding: 2px 0; color: #666; font-weight: bold; }
+        .stat-val { color: #444; }
+        .steam-badge-icons { display: flex; gap: 2px; margin: 5px 0 10px 0; }
+        .small-badge { width: 28px; height: 28px; background: #fafafa; border: 1px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
     </style>
 </head>
 <body>
 
-<!-- Cute Cat Splash Screen -->
 <div id="loading-screen">
     <div class="cat-ascii">
-        /\_/\
+         /\_/\
         ( o.o )
-        > ^ <
+         > ^ <
     </div>
     <div class="loading-text">Waking up the garden <span id="loading-dots">...</span></div>
 </div>
 
 <div class="crt-overlay"></div>
 
-<!-- PRINT ONLY VIEW: CLEAN RESUME -->
 <div id="resume-print" class="print-only">
     <div class="resume-header">
         <h1>AKEANTI</h1>
-        <p><strong>Étudiant CPGE MP | Développeur & Linux Enthusiast</strong></p>
+        <p><strong>CPGE MP Student | Developer & Linux Enthusiast</strong></p>
         <div class="links-grid">
             <span>contact@akeanti.xyz</span>
             <span>github.com/akeanti</span>
@@ -781,35 +789,31 @@
             <span>Discord: akeanti</span>
         </div>
     </div>
-
-    <h2 class="resume-section">Formation</h2>
+    <h2 class="resume-section">Education</h2>
     <div class="resume-item">
-        <h3>Classes Préparatoires aux Grandes Écoles (CPGE) - Filière MP</h3>
-        <p><em>2024 - Présent</em> | Mathématiques et Physique</p>
+        <h3>Preparatory Classes for Grandes Ecoles (CPGE) - MP Track</h3>
+        <p><em>2024 - Present</em> | Mathematics and Physics</p>
     </div>
     <div class="resume-item">
-        <h3>Baccalauréat Sciences Mathématiques</h3>
-        <p><em>Mention Très Bien</em></p>
+        <h3>Mathematical Sciences Baccalaureate</h3>
+        <p><em>Highest Honors</em></p>
     </div>
-
-    <h2 class="resume-section">Compétences Techniques</h2>
+    <h2 class="resume-section">Technical Skills</h2>
     <div class="resume-item">
-        <p><strong>Langages :</strong> C++, Python, Bash, LaTeX, HTML/CSS/JS</p>
-        <p><strong>Système & Outils :</strong> Arch Linux, Git, Neovim, Scripting Shell, Tiling WMs (i3)</p>
-        <p><strong>Cybersécurité :</strong> CTFs, HackTheBox, Reverse Engineering basique</p>
+        <p><strong>Languages:</strong> C++, Python, Bash, LaTeX, HTML/CSS/JS</p>
+        <p><strong>System & Tools:</strong> Arch Linux, Git, Neovim, Shell Scripting, Tiling WMs (i3)</p>
+        <p><strong>Cybersecurity:</strong> CTFs, HackTheBox, Basic Reverse Engineering</p>
     </div>
-
-    <h2 class="resume-section">Projets Informatiques</h2>
+    <h2 class="resume-section">Software Projects</h2>
     <div class="resume-item">
-        <h3>Solveur d'Algèbre (C++)</h3>
-        <p>Outil d'assistance pour le calcul matriciel et la vérification d'exercices d'espaces vectoriels.</p>
+        <h3>Linear Algebra Solver (C++)</h3>
+        <p>Assistance tool for matrix calculus and vector space exercise verification.</p>
     </div>
     <div class="resume-item">
-        <h3>Automatisation d'environnement Linux (Bash)</h3>
-        <p>Scripts de déploiement "dotfiles" pour reproduire instantanément un environnement de travail sur Arch.</p>
+        <h3>Linux Environment Automation (Bash)</h3>
+        <p>Dotfiles deployment scripts to instantly replicate a working environment on Arch Linux.</p>
     </div>
 </div>
-<!-- END PRINT ONLY VIEW -->
 
 <div class="container" role="document">
     <header class="top-bar">
@@ -831,21 +835,19 @@
     </nav>
 
     <nav class="link-bar" aria-label="Primary Navigation">
-        [ <a href="#">Home</a> ] [ <a href="#">Maths Notes</a> ] [ <a href="#">Cyber Lab</a> ] [ <a href="#">Contact Me</a> ]
+        [ <a href="#">Home</a> ] [ <a href="#">Math Notes</a> ] [ <a href="#">Cyber Lab</a> ] [ <a href="#">Contact Me</a> ]
     </nav>
 
     <section class="profile-section" aria-label="User Profile">
         <img src="pics/pfp.jpg" class="pfp" width="100" height="100" alt="akeanti profile picture" loading="eager" onerror="this.src='https://picsum.photos/seed/cat/100/100'">
-
         <div class="bio-text">
-            <h1 class="bio-title" id="secretTitle" tabindex="0">akeanti <span style="font-size:12px;">&lt;3</span></h1><br>
+            <h1 class="bio-title" id="secretTitle" tabindex="0">akeanti <span style="font-size:12px;"><3</span></h1><br>
             <b>Meow! <span style="color:#d66a6a;">I mean hi!</span></b><br>
             I'm a 20 years old CPGE student & Maths Nerd.<br>
             Linux enthusiast living in the terminal.<br>
-            <span class="highlight-text" title="Mathématiques, Physique">MP</span>
+            <span class="highlight-text" title="Mathematics, Physics">MP</span>
             <span class="highlight-text" title="Introverted, Intuitive, Thinking, Judging">INTJ</span>
         </div>
-
         <div class="likes-box">
             <span style="color:#d66a6a; font-weight:bold;">[ * ] LIKES:</span><br>
             linear algebra. gray cats. arch linux. nightcore. iced coffee. cybersecurity ctf. metroidvania games. socialism debates.<br>
@@ -856,12 +858,81 @@
 
     <div class="music-bar" aria-hidden="true">
         <marquee scrollamount="4">
-            Now Playing: /dev/urandom noise ♫ /// SYSTEM STATUS: sleep deprivation at 99% /// [⚠] compiling kernel please wait... /// I use Linux btw /// current objective: survive maths class /// cats are liquid /// welcome to the void &lt;3
+            Now Playing: /dev/urandom noise ♫ /// SYSTEM STATUS: sleep deprivation at 99% /// [⚠] compiling kernel please wait... /// I use Linux btw /// current objective: survive math class /// cats are liquid /// welcome to the void <3
         </marquee>
     </div>
 
     <main class="main-content">
         <article class="left-col">
+
+            <h2>Steam Profile</h2>
+            <div class="widget steam-widget">
+                <div class="steam-top">
+                    <img src="image_07c2ab.jpg" class="steam-avatar" alt="Steam Avatar" onerror="this.src='pics/pfp.jpg'">
+                    <div class="steam-header-info">
+                        <div class="steam-name">akeanti <span style="font-size: 10px; color: #888;">▼</span></div>
+                        <div class="steam-status-lines">
+                            ☕🦥🦦 <b>A Discourse on Winning and Losing</b> <a href="#">[www.airuniversity.af.edu]</a><br>
+                            💧🪬 ───── my website <a href="#">[akeanti.xyz]</a> ───── 🪬💧<br>
+                            🦇💀🪲⚔️🕊️🧿metroidvanias & 🐢🦖🦅grand strategy player
+                        </div>
+                    </div>
+                    <div class="steam-badge-area">
+                        <div class="steam-level-box">
+                            Level <span class="lvl-circle">51</span>
+                        </div>
+                        <div class="steam-featured-badge">
+                            <img src="https://community.cloudflare.steamstatic.com/public/images/badges/13_csgo/level05_54.png" alt="Blossom Badge" width="30" onerror="this.src='pics/akeanti 2.png'">
+                            <div class="badge-info">
+                                <b>Blossom</b><br>500 XP
+                            </div>
+                        </div>
+                        <button class="steam-edit-btn">Edit Profile</button>
+                    </div>
+                </div>
+                <div class="steam-main-area">
+                    <div class="steam-showcase">
+                        <img src="image_07c2ab.jpg" class="showcase-main" alt="Featured Artwork" onerror="this.src='pics/banner.jpg'">
+                        <div class="showcase-side">
+                            <img src="image_07c2ab.jpg" alt="side1" onerror="this.src='pics/akeanti 2.png'">
+                            <img src="image_07c2ab.jpg" alt="side2" onerror="this.src='pics/akeanti 3.jpg'">
+                            <img src="image_07c2ab.jpg" alt="side3" onerror="this.src='pics/akeanti 4.jpg'">
+                            <div class="showcase-more">+ 29</div>
+                        </div>
+                    </div>
+                    <div class="steam-sidebar">
+                        <div class="steam-online">Currently Online</div>
+                        <div class="steam-stat-row">Badges <span class="stat-val">108</span></div>
+                        <div class="steam-badge-icons">
+                            <div class="small-badge">🥇</div>
+                            <div class="small-badge">💮</div>
+                            <div class="small-badge">🪼</div>
+                            <div class="small-badge">🐟</div>
+                        </div>
+                        <div class="steam-stat-row">Games <span class="stat-val">215</span></div>
+                        <div class="steam-stat-row">Inventory</div>
+                        <div class="steam-stat-row">Screenshots <span class="stat-val">86</span></div>
+                        <div class="steam-stat-row">Videos <span class="stat-val">1</span></div>
+                        <div class="steam-stat-row">Workshop Items <span class="stat-val">1</span></div>
+                        <div class="steam-stat-row">Reviews <span class="stat-val">10</span></div>
+                        <div class="steam-stat-row">Guides</div>
+                        <div class="steam-stat-row">Artwork <span class="stat-val">33</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Declassified Vault</h2>
+            <div class="declassified-vault" aria-live="polite">
+                <div class="vault-header">
+                    <span id="vault-title">LOADING DATABASE...</span>
+                    <div class="vault-controls">
+                        <button type="button" id="btn-vault-prev"><</button>
+                        <button type="button" id="btn-vault-next">></button>
+                    </div>
+                </div>
+                <div id="vault-content" style="white-space: pre-wrap; font-size: 10px;"></div>
+            </div>
+
             <h2>Where to find me...!?</h2>
             <nav class="link-tree" aria-label="Link Tree">
                 <a href="https://github.com/akeanti">
@@ -898,9 +969,9 @@
                     <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
                         <path fill="#444" d="M3 3l4 4-4 6h2l3-4.5 3 4.5h2l-4-6 4-4h-2l-3 4-3-4H3z"/>
                     </svg>
-                    X / Twitter :: @akeantie (Daily ramblings)
+                    X :: @akeantii
                 </a>
-                <a href="https://wiki.archlinux.org/title/User:Akeanti">
+                <a href="https://wiki.archlinux.org/title/User:Akeantii">
                     <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
                         <path fill="#0f94d2" d="M8 1L1 15h2l2-3h6l2 3h2L8 1zm0 4l2 5H6l2-5z"/>
                     </svg>
@@ -930,10 +1001,10 @@
             <div class="widget" style="margin-bottom: 25px;">
                 <div style="text-align: center; margin-bottom: 5px;">~ <b>CPGE & Linux Webring</b> ~</div>
                 <div class="webring-nav">
-                    <a href="#" onclick="alert('Navigating to previous ring member...')">&lt;&lt; Prev Site</a>
+                    <a href="#" onclick="alert('Navigating to previous ring member...')"><< Prev Site</a>
                     <a href="#link-tree">[ List ]</a>
                     <a href="#" id="randomWebring">[ Random ]</a>
-                    <a href="#" onclick="alert('Navigating to next ring member...')">Next Site &gt;&gt;</a>
+                    <a href="#" onclick="alert('Navigating to next ring member...')">Next Site >></a>
                 </div>
             </div>
 
@@ -943,10 +1014,9 @@
                     <img src="pics/akeanti 2.png" class="log-thumb" alt="math notes" loading="lazy" onerror="this.src='https://picsum.photos/seed/calc/50/50'">
                     <div class="log-content">
                         <span class="date">[06-27]</span> <span class="tag">MATH</span><br>
-                        Survived colles de maths. The logic for espaces vectoriels normés is finally holding up. Rewrote my entire cheat sheet today. Exhausted but alive.
+                        Survived math orals. The logic for normed vector spaces is finally holding up. Rewrote my entire cheat sheet today. Exhausted but alive.
                     </div>
                 </div>
-
                 <div class="log-entry">
                     <img src="pics/akeanti 3.jpg" class="log-thumb" alt="terminal screenshot" loading="lazy" onerror="this.src='https://picsum.photos/seed/term/50/50'">
                     <div class="log-content">
@@ -954,7 +1024,6 @@
                         Rooted HackTheBox machine "Keeper". The privilege escalation vector via pacman was surprisingly fun. Wrote a quick python script to automate the initial shell.
                     </div>
                 </div>
-
                 <div class="log-entry">
                     <img src="pics/akeanti 4.jpg" class="log-thumb" alt="game screenshot" loading="lazy" onerror="this.src='https://picsum.photos/seed/game/50/50'">
                     <div class="log-content">
@@ -962,7 +1031,6 @@
                         Hollow Knight update: Defeated Nightmare King Grimm. My hands are literally still shaking. Best metroidvania combat system ever designed.
                     </div>
                 </div>
-
                 <div class="log-entry">
                     <img src="pics/akeanti 5.jpg" class="log-thumb" alt="arch linux logo" loading="lazy" onerror="this.src='https://picsum.photos/seed/arch/50/50'">
                     <div class="log-content">
@@ -974,14 +1042,23 @@
 
             <h2>Recent Commits</h2>
             <div class="git-feed" aria-label="Git Commit Feed">
-                <span class="commit">commit 8f2a9c1</span> <span class="author">&lt;akeanti&gt;</span><br>
-                <span class="msg">fix: memory leak in algebre solver</span><br><br>
+                <span class="commit">commit 8f2a9c1</span> <span class="author"><akeanti></span><br>
+                <span class="msg">fix: memory leak in algebra solver</span><br><br>
 
-                <span class="commit">commit 3b4d5e6</span> <span class="author">&lt;akeanti&gt;</span><br>
-                <span class="msg">docs: update topologie notes pdf</span><br><br>
+                <span class="commit">commit 3b4d5e6</span> <span class="author"><akeanti></span><br>
+                <span class="msg">docs: update topology notes pdf</span><br><br>
 
-                <span class="commit">commit 1a2b3c4</span> <span class="author">&lt;akeanti&gt;</span><br>
+                <span class="commit">commit 1a2b3c4</span> <span class="author"><akeanti></span><br>
                 <span class="msg">feat: automated dotfiles deployment script</span>
+            </div>
+
+            <h2>Aero-Radar Terminal (METAR)</h2>
+            <div class="terminal-panel" aria-live="polite">
+                <div class="scanline"></div>
+                <div id="metar-output">
+                    > INITIATING UPLINK CONNECTION...<br>
+                    > SCANNING STATION: GMFF (FEZ-SAISS)...
+                </div>
             </div>
 
             <h2>Writings & Notes</h2>
@@ -990,7 +1067,7 @@
                     <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
                         <path fill="#fff" stroke="#333" stroke-width="1" d="M3 2h7l4 4v8H3z"/><path fill="#ccc" d="M10 2v4h4"/>
                     </svg>
-                    Topologie Notes (PDF) <span class="blink" style="margin-left: 5px;">[NEW!]</span>
+                    Topology Notes (PDF) <span class="blink" style="margin-left: 5px;">[NEW!]</span>
                 </a>
                 <a href="#">
                     <svg class="pixel-icon" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
@@ -1012,16 +1089,6 @@
                 </a>
             </nav>
 
-            <h2>Guestbook</h2>
-            <section class="guestbook" aria-label="Guestbook Form">
-                <div class="gb-form">
-                    <input type="text" placeholder="Name/Alias" id="gbName" aria-label="Guestbook Name">
-                    <textarea placeholder="Leave a message..." rows="2" id="gbMsg" aria-label="Guestbook Message"></textarea>
-                    <button id="gbSubmit" type="button">Sign Guestbook</button>
-                </div>
-                <div id="gbEntries" aria-live="polite"></div>
-            </section>
-
             <nav class="button-grid" aria-label="Webring Badges">
                 <a href="https://akeanti.xyz/"><img src="dabamos/akeanti.gif" alt="akeanti" width="88" height="31" loading="lazy" decoding="async"></a>
                 <a href="https://github.com/torvalds/linux"><img src="dabamos/linux-p.gif" alt="Linux" width="88" height="31" loading="lazy" decoding="async"></a>
@@ -1036,9 +1103,8 @@
             </nav>
 
             <div class="dni-list">
-                [!] <b>DONT FOLLOW IF <u>you hate maths</u></b>. basic dni criteria. support open source. respect privacy. ure a windows fanboy who makes "linux is hard" jokes i Hate all of you.
+                [!] <b>DONT FOLLOW IF <u>you hate math</u></b>. basic dni criteria. support open source. respect privacy. ure a windows fanboy who makes "linux is hard" jokes i Hate all of you.
             </div>
-
             <div style="text-align:center; font-size:9px; margin-top:20px; color:#888; border-top: 1px solid #ddd; padding-top: 5px;">
                 <i>"In a world of windows users, be a linux kernel."</i><br>
                 Optimized for Netscape Navigator 4.0 | Best viewed in 800x600 resolution
@@ -1046,9 +1112,40 @@
         </article>
 
         <aside class="right-col">
+            <h2>Visitor Count</h2>
+            <div class="hit-counter">
+                <img src="https://hits.sh/akeanti.xyz.svg?style=for-the-badge&label=VISITORS&color=d66a6a" alt="Live Visitor Count" width="120" style="image-rendering: auto;">
+            </div>
+
             <h2>Local Time</h2>
-            <div class="widget time-widget" id="liveClock" aria-live="off">
+            <div class="time-widget" id="liveClock" aria-live="off">
                 00:00:00 AM
+            </div>
+
+            <h2>Network Intelligence</h2>
+            <div class="system-panel" id="sys-analysis" aria-live="polite">
+                <div class="system-header">
+                    <span>SYS_DIAGNOSTICS</span>
+                    <span>[X]</span>
+                </div>
+                <span class="data-key">IP</span> <span class="data-val" id="net-ip">SCANNING...</span><br>
+                <span class="data-key">ASN</span> <span class="data-val" id="net-asn">---</span><br>
+                <span class="data-key">ISP</span> <span class="data-val" id="net-isp">---</span><br>
+                <span class="data-key">LOC</span> <span class="data-val" id="net-loc">---</span><br>
+                <div style="border-top:1px dotted #ccc; margin-top:5px; padding-top:5px; text-align:center; color:green; font-weight:bold;">
+                    SECURE CONNECTION ESTABLISHED
+                </div>
+            </div>
+
+            <h2>Cryptographic Terminal</h2>
+            <div class="widget crypto-terminal">
+                <div style="font-weight:bold; color:#d66a6a; margin-bottom:5px;">BASE64 ENCODER</div>
+                <input type="text" id="crypto-in" class="crypto-input" placeholder="Enter string..." autocomplete="off">
+                <div style="display:flex; gap:5px;">
+                    <button class="crypto-btn" id="btn-encode">ENCODE</button>
+                    <button class="crypto-btn" id="btn-decode">DECODE</button>
+                </div>
+                <div class="crypto-output" id="crypto-out">READY.</div>
             </div>
 
             <h2>Current Mood</h2>
@@ -1059,8 +1156,8 @@
             <h2>Status Widget</h2>
             <div class="widget status-widget">
                 <b>Currently Studying:</b><br>
-                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Algèbre Linéaire<br>
-                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Topologie<br><br>
+                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Linear Algebra<br>
+                <span style="color:#d66a6a; font-family:monospace;">[*]</span> Topology<br><br>
                 <b>Currently Playing:</b><br>
                 <span style="color:#d66a6a; font-family:monospace;">[*]</span> Hollow Knight<br>
                 <span style="color:#d66a6a; font-family:monospace;">[*]</span> CTF Boxes
@@ -1118,23 +1215,15 @@
             <h2>Music Player</h2>
             <div class="music-player" aria-label="Music Player">
                 <audio id="bg-audio" preload="none"></audio>
-
                 <div class="player-screen" id="music-screen-text">
                     ▶ LOADED: SomaFM
                 </div>
                 <div class="player-controls">
-                    <button type="button" id="btn-prev" aria-label="Previous">|&lt;&lt;</button>
+                    <button type="button" id="btn-prev" aria-label="Previous">|<<</button>
                     <button type="button" id="btn-play" aria-label="Play">▶</button>
                     <button type="button" id="btn-pause" aria-label="Pause">||</button>
                     <button type="button" id="btn-stop" aria-label="Stop">[]</button>
-                    <button type="button" id="btn-next" aria-label="Next">&gt;&gt;|</button>
-                </div>
-            </div>
-
-            <div class="hit-counter">
-                <div style="font-size: 9px; margin-bottom: 2px;">YOU ARE VISITOR NO.</div>
-                <div class="digits">
-                    <span>0</span><span>8</span><span>2</span><span>0</span><span>4</span><span>8</span>
+                    <button type="button" id="btn-next" aria-label="Next">>>|</button>
                 </div>
             </div>
 
@@ -1159,9 +1248,7 @@
                 <img src="pics/akeanti%206.png" class="grid-pic" loading="lazy" decoding="async" alt="gallery image 6" onerror="this.src='https://picsum.photos/seed/6/85/85'">
             </div>
         </aside>
-
     </main>
-
 </div>
 
 <div class="notification" id="copyAlert" role="alert" aria-live="assertive">Discord Tag Copied! :3</div>
@@ -1172,7 +1259,6 @@
             const btn = document.getElementById("copyDiscordBtn");
             const alertBox = document.getElementById("copyAlert");
             if (!btn || !alertBox) return;
-
             btn.addEventListener("click", () => {
                 navigator.clipboard.writeText("akeanti").then(() => {
                     alertBox.style.display = "block";
@@ -1189,7 +1275,6 @@
                 });
             });
         };
-
         const initClock = () => {
             const clockEl = document.getElementById('liveClock');
             if (!clockEl) return;
@@ -1200,7 +1285,6 @@
             update();
             setInterval(update, 1000);
         };
-
         const initQuotes = () => {
             const box = document.getElementById("quoteBox");
             if (!box) return;
@@ -1208,7 +1292,7 @@
                 '"Compiling... Please wait."',
                 '"Cats are liquids."',
                 '"I use Arch btw."',
-                '"Maths is just advanced counting."',
+                '"Math is just advanced counting."',
                 '"Sleep is a proprietary concept."',
                 '"Segmentation fault (core dumped)"',
                 '"Currently lost in a vector space."'
@@ -1217,63 +1301,58 @@
                 box.textContent = quotes[Math.floor(Math.random() * quotes.length)];
             });
         };
-
-        const initGuestbook = () => {
-            const nameInput = document.getElementById("gbName");
-            const msgInput = document.getElementById("gbMsg");
-            const btn = document.getElementById("gbSubmit");
-            const container = document.getElementById("gbEntries");
-            if (!nameInput || !msgInput || !btn || !container) return;
-
-            const STORAGE_KEY = 'akeanti_guestbook_v1';
-            const defaultEntries = [
-                { name: 'xX_arch_user_Xx', msg: 'nice dotfiles! what font is that in your terminal?', time: '06/27 14:32' },
-                { name: 'math_enjoyer', msg: 'good luck on the algebre exam o7', time: '06/26 09:15' },
-                { name: 'miku_fan99', msg: 'i love the aesthetic here ^_^', time: '06/25 22:11' }
-            ];
-
-            const loadEntries = () => {
-                const saved = localStorage.getItem(STORAGE_KEY);
-                return saved ? JSON.parse(saved) : defaultEntries;
-            };
-
-            const saveEntries = (entries) => {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(entries.slice(0, 50)));
-            };
-
-            const renderEntries = () => {
-                const entries = loadEntries();
-                container.innerHTML = entries.map(e => `
-                    <div class="gb-entry">
-                        <b>${e.name.replace(/</g, "&lt;")}:</b> ${e.msg.replace(/</g, "&lt;")}
-                        <span class="timestamp">${e.time}</span>
-                    </div>
-                `).join('');
-            };
-
-            btn.addEventListener("click", () => {
-                const name = nameInput.value.trim();
-                const msg = msgInput.value.trim();
-                if (name && msg) {
-                    const entries = loadEntries();
-                    const now = new Date();
-                    const timeStr = `${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-                    entries.unshift({ name, msg, time: timeStr });
-                    saveEntries(entries);
-                    renderEntries();
-                    nameInput.value = "";
-                    msgInput.value = "";
+        const initMetarRadar = async () => {
+            const output = document.getElementById('metar-output');
+            if (!output) return;
+            try {
+                const res = await fetch('https://aviationweather.gov/api/data/metar?ids=GMFF&format=json');
+                const data = await res.json();
+                if(data && data.length > 0) {
+                    const m = data[0];
+                    output.innerHTML = `
+                        > STATION: ${m.icaoId} (FEZ-SAISS)<br>
+                        > ZULU TIME: ${m.obsTime}<br>
+                        > TEMP: ${m.temp} C | DEWP: ${m.dewp} C<br>
+                        > WIND: ${m.wdir}° at ${m.wspd} KT<br>
+                        > ALTIMETER: ${(m.altim * 33.8639).toFixed(2)} hPa<br>
+                        > RAW METAR:<br>
+                        <span style="color:#aaffaa; font-size:9px;">${m.rawOb}</span>
+                    `;
+                } else {
+                    throw new Error("No data");
                 }
-            });
-
-            renderEntries();
+            } catch(e) {
+                output.innerHTML = `> STATION: GMFF<br>> STATUS: <span style="color:red;">OFFLINE / JAMMED</span><br>> ATTEMPTING RECONNECTION...`;
+            }
         };
-
+        const initSysAnalysis = async () => {
+            const ipEl = document.getElementById('net-ip');
+            const asnEl = document.getElementById('net-asn');
+            const ispEl = document.getElementById('net-isp');
+            const locEl = document.getElementById('net-loc');
+            if (!ipEl) return;
+            try {
+                const res = await fetch('https://ipwhois.app/json/');
+                const data = await res.json();
+                if(data.success) {
+                    ipEl.textContent = data.ip;
+                    asnEl.textContent = data.asn;
+                    ispEl.textContent = data.isp.substring(0, 20);
+                    locEl.textContent = `${data.city}, ${data.country_code}`;
+                } else {
+                    throw new Error("API Limit");
+                }
+            } catch(e) {
+                ipEl.textContent = "127.0.0.1";
+                asnEl.textContent = "LOCAL";
+                ispEl.textContent = "LOCALHOST";
+                locEl.textContent = "UNKNOWN";
+            }
+        };
         const initDraggable = () => {
             const win = document.getElementById("draggableWin");
             const header = document.getElementById("draggableHeader");
             if (!win || !header) return;
-
             let isDragging = false;
             let currentX;
             let currentY;
@@ -1281,7 +1360,6 @@
             let initialY;
             let xOffset = 0;
             let yOffset = 0;
-
             const dragStart = (e) => {
                 if (e.target.classList.contains('draggable-close')) {
                     win.style.display = 'none';
@@ -1303,13 +1381,11 @@
                     }
                 }
             };
-
             const dragEnd = () => {
                 initialX = currentX;
                 initialY = currentY;
                 isDragging = false;
             };
-
             const drag = (e) => {
                 if (isDragging) {
                     e.preventDefault();
@@ -1320,12 +1396,10 @@
                     win.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
                 }
             };
-
             header.addEventListener("mousedown", dragStart, false);
             document.addEventListener("mouseup", dragEnd, false);
             document.addEventListener("mousemove", drag, false);
         };
-
         const initEasterEggs = () => {
             const secretTitle = document.getElementById('secretTitle');
             if (secretTitle) {
@@ -1334,7 +1408,6 @@
                     setTimeout(() => document.body.classList.remove('spin-mode'), 2000);
                 });
             }
-
             const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
             let konamiIndex = 0;
             document.addEventListener('keydown', (e) => {
@@ -1348,10 +1421,7 @@
                     konamiIndex = 0;
                 }
             });
-
-            console.log("%c    ___    __ __ ______ ___    _   / /_(_)\n   /   |  / //_// ____//   |  / | / / __/\n  / /| | / ,<  / __/  / /| | /  |/ / /_  \n / ___ |/ /| |/ /___ / ___ |/ /|  / __/  \n/_/  |_/_/ |_/_____//_/  |_/_/ |_/_/     \n\n%cWelcome to the source. Clean code enthusiast detected.", "color: #ff69b4; font-weight: bold; font-family: monospace;", "color: #d66a6a; font-family: sans-serif;");
         };
-
         const initSearch = () => {
             const search = document.getElementById('siteSearch');
             if(search) {
@@ -1363,7 +1433,6 @@
                 });
             }
         };
-
         const initThemeToggles = () => {
             const themeBtn = document.getElementById('themeToggle');
             const crtBtn = document.getElementById('crtToggle');
@@ -1380,7 +1449,6 @@
                 });
             }
         };
-
         const initWebring = () => {
             const randomBtn = document.getElementById('randomWebring');
             if(randomBtn) {
@@ -1391,29 +1459,23 @@
                 });
             }
         };
-
         const initMusicPlayer = () => {
             const audio = document.getElementById('bg-audio');
             const screen = document.getElementById('music-screen-text');
             if(!audio) return;
-
             const playlist = [
                 { title: "DEFCON Radio", url: "https://ice1.somafm.com/defcon-128-mp3" },
                 { title: "Groove Salad", url: "https://ice1.somafm.com/groovesalad-128-mp3" },
                 { title: "Secret Agent", url: "https://ice1.somafm.com/secretagent-128-mp3" }
             ];
-
             let current = 0;
-
             const updateScreen = (text) => {
                 screen.innerHTML = `<marquee scrollamount="4">${text}</marquee>`;
             };
-
             const loadTrack = (idx) => {
                 audio.src = playlist[idx].url;
                 updateScreen(`▶ READY: ${playlist[idx].title} - SomaFM ♫`);
             };
-
             document.getElementById('btn-play').addEventListener('click', () => {
                 audio.play();
                 updateScreen(`▶ PLAYING: ${playlist[current].title} ♫`);
@@ -1439,30 +1501,25 @@
                 audio.play();
                 updateScreen(`▶ PLAYING: ${playlist[current].title} ♫`);
             });
-
             loadTrack(0);
         };
-
         const initInteractiveTerminal = () => {
             const input = document.getElementById('term-input');
             const output = document.getElementById('term-output');
             const body = document.getElementById('term-body');
             if(!input || !output) return;
-
             const defaultHTML = output.innerHTML;
-
             input.addEventListener('keypress', (e) => {
                 if(e.key === 'Enter') {
                     const cmd = input.value.trim();
-                    const safeCmd = cmd.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+                    const safeCmd = cmd.replace(/</g, "<").replace(/>/g, ">");
                     const prompt = `<br><span style="color:#0f0;">akeanti@arch</span>:<span style="color:#569cd6;">~</span>$ ${safeCmd}<br>`;
-
                     if(cmd.toLowerCase() === 'clear') {
                         output.innerHTML = '';
                     } else if(cmd.toLowerCase() === 'neofetch') {
                         output.innerHTML += prompt + defaultHTML;
                     } else if(cmd.toLowerCase() === 'whoami') {
-                        output.innerHTML += prompt + 'akeanti<br>root user, maths wizard, cpge survivor.';
+                        output.innerHTML += prompt + 'akeanti<br>root user, math wizard, cpge survivor.';
                     } else if(cmd.toLowerCase() === 'date') {
                         output.innerHTML += prompt + new Date().toString();
                     } else if(cmd.toLowerCase() === 'help') {
@@ -1472,39 +1529,90 @@
                     } else if(cmd !== '') {
                         output.innerHTML += prompt + `bash: ${safeCmd}: command not found`;
                     }
-
                     input.value = '';
                     body.scrollTop = body.scrollHeight;
                 }
             });
-
             body.addEventListener('click', () => input.focus());
         };
-
         const initLoadingScreen = () => {
             const screen = document.getElementById('loading-screen');
             const dots = document.getElementById('loading-dots');
             if(!screen || !dots) return;
-
             let count = 0;
             const dotInterval = setInterval(() => {
                 count = (count + 1) % 4;
                 dots.textContent = '.'.repeat(count);
             }, 300);
-
             setTimeout(() => {
                 clearInterval(dotInterval);
                 screen.style.opacity = '0';
                 setTimeout(() => screen.style.display = 'none', 500);
             }, 2500);
         };
-
+        const initDeclassifiedVault = () => {
+            const title = document.getElementById('vault-title');
+            const content = document.getElementById('vault-content');
+            const btnPrev = document.getElementById('btn-vault-prev');
+            const btnNext = document.getElementById('btn-vault-next');
+            if(!title || !content) return;
+            const records = [
+                {
+                    title: "FILE 01: SR-71 BLACKBIRD",
+                    data: "  _--_\\--__\n /    \\____\\_____\n|      __----___---\\\n \\_--_/__--_/\n\nSPEED: Mach 3.2+ (2,200 mph)\nALTITUDE: 85,000 ft\nMISSION: Strategic Reconnaissance\nSTATUS: DECLASSIFIED\nNOTE: Titanium skin withstands temps exceeding 1000F."
+                },
+                {
+                    title: "FILE 02: RADAR RANGE EQUATION",
+                    data: "P_r = (P_t * G^2 * λ^2 * σ) / ((4π)^3 * R^4)\n\nWhere:\nP_r = Received Power\nP_t = Transmitted Power\nG   = Antenna Gain\nλ   = Wavelength\nσ   = Radar Cross Section (RCS)\nR   = Range to target\n\nNOTE: Power scales inversely with the 4th power of range."
+                },
+                {
+                    title: "FILE 03: F-117 NIGHTHAWK",
+                    data: "       /\\\n      /  \\\n     /____\\\n    /      \\\n   /________\\\n\nRCS: ~0.001 m^2 (Size of a golf ball)\nDESIGN: Faceted surfaces to scatter radar waves away from receiver.\nCOATING: Radar-Absorbent Material (RAM).\nSTATUS: RETIRED (PUBLIC DOMAIN)"
+                }
+            ];
+            let idx = 0;
+            const render = () => {
+                title.textContent = records[idx].title;
+                content.textContent = records[idx].data;
+            };
+            btnPrev.addEventListener('click', () => {
+                idx = (idx - 1 + records.length) % records.length;
+                render();
+            });
+            btnNext.addEventListener('click', () => {
+                idx = (idx + 1) % records.length;
+                render();
+            });
+            render();
+        };
+        const initCryptoTerminal = () => {
+            const input = document.getElementById('crypto-in');
+            const output = document.getElementById('crypto-out');
+            const encodeBtn = document.getElementById('btn-encode');
+            const decodeBtn = document.getElementById('btn-decode');
+            if(!input || !output) return;
+            encodeBtn.addEventListener('click', () => {
+                try {
+                    output.textContent = btoa(input.value);
+                } catch(e) {
+                    output.textContent = "ERR: INVALID CHARACTERS";
+                }
+            });
+            decodeBtn.addEventListener('click', () => {
+                try {
+                    output.textContent = atob(input.value);
+                } catch(e) {
+                    output.textContent = "ERR: MALFORMED BASE64";
+                }
+            });
+        };
         return {
             init: () => {
                 initClipboard();
                 initClock();
                 initQuotes();
-                initGuestbook();
+                initMetarRadar();
+                initSysAnalysis();
                 initDraggable();
                 initEasterEggs();
                 initSearch();
@@ -1513,12 +1621,12 @@
                 initMusicPlayer();
                 initInteractiveTerminal();
                 initLoadingScreen();
+                initDeclassifiedVault();
+                initCryptoTerminal();
             }
         };
     })();
-
     document.addEventListener('DOMContentLoaded', App.init);
-
     (function oneko() {
         const nekoEl = document.createElement("div");
         let nekoPosX = 32;
@@ -1528,7 +1636,6 @@
         let frameCount = 0;
         let idleTime = 0;
         const speed = 2.5;
-
         const spriteSets = {
             idle: [[-3, -3]], alert: [[-7, -3]], scratch: [[-5, 0], [-6, 0], [-7, 0]],
             tired: [[-3, -2]], sleeping: [[-2, 0], [-2, 1]], N: [[-1, -2], [-1, -3]],
@@ -1536,7 +1643,6 @@
             S: [[-6, -3], [-7, -2]], SW: [[-5, -3], [-6, -1]], W: [[-4, -2], [-4, -3]],
             NW: [[-1, 0], [-1, -1]],
         };
-
         function create() {
             nekoEl.id = "oneko";
             Object.assign(nekoEl.style, {
@@ -1548,7 +1654,6 @@
             document.addEventListener("mousemove", e => { mousePosX = e.clientX; mousePosY = e.clientY; });
             window.requestAnimationFrame(onAnimationFrame);
         }
-
         let lastFrameTime = 0;
         function onAnimationFrame(timestamp) {
             if (!lastFrameTime) lastFrameTime = timestamp;
@@ -1556,7 +1661,6 @@
             const diffX = nekoPosX - mousePosX;
             const diffY = nekoPosY - mousePosY;
             const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
-
             if (distance < 10) {
                 idleTime++;
                 if (deltaTime > 100) {
@@ -1565,13 +1669,11 @@
                 }
                 return window.requestAnimationFrame(onAnimationFrame);
             }
-
             idleTime = 0;
             nekoPosX -= (diffX / distance) * speed;
             nekoPosY -= (diffY / distance) * speed;
             nekoEl.style.left = `${nekoPosX - 16}px`;
             nekoEl.style.top = `${nekoPosY - 16}px`;
-
             if (deltaTime > 100) {
                 lastFrameTime = timestamp;
                 frameCount++;
@@ -1589,15 +1691,12 @@
             }
             window.requestAnimationFrame(onAnimationFrame);
         }
-
         function setSprite(name, frame) {
             const sprite = spriteSets[name][frame % spriteSets[name].length];
             nekoEl.style.backgroundPosition = `${sprite[0] * 32}px ${sprite[1] * 32}px`;
         }
-
         create();
     })();
 </script>
-
 </body>
 </html>
